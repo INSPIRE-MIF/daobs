@@ -12,7 +12,9 @@ cp /readonlyrest.yml /usr/share/elasticsearch/config/readonlyrest.yml
 
 # Replace node name and discovery hosts
 sed "s#NODE_NAME#$NODE_NAME#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
+sed "s#NODE_MASTER#$NODE_MASTER#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
 sed "s#MINIMUM_MASTER_NODE#$MINIMUM_MASTER_NODE#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
+sed "s#NODE_DATA#$NODE_DATA#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
 #sed "s#debug#info#g" -i /usr/share/elasticsearch/config/log4j2.properties
 
 if [ -z "$DISCOVERY_ZEN" ]

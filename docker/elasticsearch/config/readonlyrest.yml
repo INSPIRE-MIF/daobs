@@ -88,7 +88,7 @@ readonlyrest:
   users:
 
   - username: kibana_rw
-    auth_key: admin:admin
+    auth_key: changeme:changeme
     groups: ["kibana_rw"]
 
 #  - username: kibana_ro

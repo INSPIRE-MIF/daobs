@@ -8,6 +8,9 @@ transport.host: 0.0.0.0
 http.host: 0.0.0.0
 
 node.name: NODE_NAME
+node.data: NODE_DATA
+node.master: NODE_MASTER
+
 network.host: ${es.network.host}
 
 #network.bind_host: 0

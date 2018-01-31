@@ -1,6 +1,11 @@
 #!/bin/sh
 # generate self signed ssl cert only if all cert files are empty or nonexistent
 
+set -e
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 mkdir -p /etc/nginx/private/
 mkdir -p /etc/nginx/certs/
 
@@ -20,7 +25,10 @@ if [ -z "${SSL_CERTS_DIR}" ] || [ -z "${SSL_PUB}" ] || [ -z "${SSL_KEY_DIR}" ] |
   rm -rf /certs
 
 else
-    echo "Skipping SSL certificate generation"
+    echo "SSL Variables are set: Skipping SSL certificate generation"
+
+    if [ ! -f "/tmp/priv.key" ]; then echo -e "${RED}Make sure that the env variables 'SSL_KEY_DIR/SSL_PRIV' are pointing to a valid private key${NC}"; fi
+    if [ ! -f "/tmp/cert.crt" ]; then echo -e "${RED}Make sure that the env variables 'SSL_CERTS_DIR/SSL_PUB' are pointing to a valid public certificate${NC}"; fi
 
     cp /tmp/priv.key /etc/nginx/private/
     cp /tmp/cert.crt /etc/nginx/certs/

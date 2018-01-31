@@ -8,6 +8,9 @@ transport.host: 0.0.0.0
 http.host: 0.0.0.0
 
 node.name: NODE_NAME
+node.data: NODE_DATA
+node.master: NODE_MASTER
+
 network.host: 192.168.1.10
 
 #network.bind_host: 0
@@ -15,7 +18,7 @@ network.host: 192.168.1.10
 # minimum_master_nodes need to be explicitly set when bound on a public IP
 # set to 1 to allow single node clusters
 # Details: https://github.com/elastic/elasticsearch/pull/17288
-discovery.zen.minimum_master_nodes: 2
+discovery.zen.minimum_master_nodes: MINIMUM_MASTER_NODE
 # Keep the following comment uncommented in ES slave nodes
 #discovery.zen.ping.unicast.hosts: DISCOVERY_ZEN
 
