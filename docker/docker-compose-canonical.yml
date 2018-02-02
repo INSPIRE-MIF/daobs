@@ -18,9 +18,11 @@ services:
       - NODE_NAME=elasticsearch
       - MINIMUM_MASTER_NODE=2
       - NODE_DATA=true
-      - NODE_MASTER=true            
+      - NODE_MASTER=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=YES
+      - USERNAME=changeme # n.b.: needs to match the credentials on kibana
+      - PASSWORD=changeme # n.b.: needs to match the credentials on kibana
     restart: always
 
   elasticsearch-node1:
@@ -62,19 +64,19 @@ services:
     restart: always
 
   cerebro:
-    image: snuids/cerebro:v0.7.1
+    image: inspiremif/cerebro:latest
     depends_on:
       - "elasticsearch"
-    volumes:
-      - ./cerebro/config/application.conf:/opt/cerebro/conf/application.conf
+    environment:
+      - SECRET=changeme
     restart: always
     container_name: sandbox-cerebro
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:5.6.5
-    volumes:
-      - ${PWD}/kibana/wait-for-it.sh:/wait-for-it.sh
-      - ${PWD}/kibana/docker-entry.sh:/docker-entry.sh
+    image: inspiremif/kibana:latest
+    environment:
+      - "ELASTICSEARCH_USERNAME=changeme"
+      - "ELASTICSEARCH_PASSWORD=changeme"
     depends_on:
       - "elasticsearch"
     restart: always

@@ -661,7 +661,9 @@
         <data.dir>/daobs-data-dir/datadir</data.dir>
         <es.host>elasticsearch</es.host>
         <es.discovery.zen.minimum_master_nodes>MINIMUM_MASTER_NODE</es.discovery.zen.minimum_master_nodes>
-        <es.single-node.discovery></es.single-node.discovery>
+        <es.single-node.discovery><![CDATA[
+node.data: NODE_DATA
+node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
       </properties>
@@ -682,7 +684,9 @@
         <data.dir>/daobs-data-dir/datadir</data.dir>
         <es.host>elasticsearch</es.host>
         <es.discovery.zen.minimum_master_nodes>MINIMUM_MASTER_NODE</es.discovery.zen.minimum_master_nodes>
-        <es.single-node.discovery></es.single-node.discovery>
+        <es.single-node.discovery><![CDATA[
+node.data: NODE_DATA
+node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
       </properties>
@@ -701,7 +705,9 @@
         <data.dir>/daobs-data-dir/datadir</data.dir>
         <es.host>elasticsearch</es.host>
         <es.discovery.zen.minimum_master_nodes>MINIMUM_MASTER_NODE</es.discovery.zen.minimum_master_nodes>
-        <es.single-node.discovery></es.single-node.discovery>
+        <es.single-node.discovery><![CDATA[
+node.data: NODE_DATA
+node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
       </properties>
