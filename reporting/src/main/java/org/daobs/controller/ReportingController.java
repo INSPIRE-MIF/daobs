@@ -573,7 +573,7 @@ public class ReportingController {
       throws IOException {
     IndicatorCalculatorImpl indicatorCalculator = null;
     try {
-      indicatorCalculator = generateReporting(request, reporting, scopeId, "+scope:" + scope
+      indicatorCalculator = generateReporting(request, reporting, scopeId, "+scope:\"" + scope + "\""
         + (StringUtils.isEmpty(fq) ? "" : " " + fq.trim()), true, date);
     } catch (FileNotFoundException exception) {
       throw new ResourceNotFoundException(String.format(

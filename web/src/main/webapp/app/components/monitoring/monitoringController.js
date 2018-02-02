@@ -307,7 +307,7 @@
       function getMatchingRecord() {
         var fq =
           ($scope.filter ? $scope.filter : '') +
-          ($scope.scope ? ' +scope:' + $scope.scope.label : '');
+          ($scope.scope ? ' +scope:"' + $scope.scope.label + '"' : '');
         $scope.filterCount = null;
         $scope.filterError = null;
         $scope.fq = encodeURIComponent(fq);
