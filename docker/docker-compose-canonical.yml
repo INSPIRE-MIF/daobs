@@ -64,11 +64,11 @@ services:
     restart: always
 
   cerebro:
-    image: snuids/cerebro:v0.7.1
+    image: inspiremif/cerebro:latest
     depends_on:
       - "elasticsearch"
-    volumes:
-      - ./cerebro/config/application.conf:/opt/cerebro/conf/application.conf
+    environment:
+      - SECRET=changeme
     restart: always
     container_name: sandbox-cerebro
 
