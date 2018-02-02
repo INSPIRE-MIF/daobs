@@ -17,6 +17,9 @@ sed "s#MINIMUM_MASTER_NODE#$MINIMUM_MASTER_NODE#g" -i /usr/share/elasticsearch/c
 sed "s#NODE_DATA#$NODE_DATA#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
 #sed "s#debug#info#g" -i /usr/share/elasticsearch/config/log4j2.properties
 
+sed "s#USERNAME#$USERNAME#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
+sed "s#PASSWORD#$PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
+
 if [ -z "$DISCOVERY_ZEN" ]
 then
    echo "DISCOVERY_ZEN is unset. This is master node."

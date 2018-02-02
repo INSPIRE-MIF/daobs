@@ -19,3 +19,13 @@ services:
     build:
       context: ./elasticsearch
     image: inspiremif/elasticsearch:latest
+
+  kibana:
+    build:
+      context: ./kibana
+    image: inspiremif/kibana:latest
+
+  cerebro:
+    build:
+      context: ./cerebro
+    image: inspiremif/cerebro:latest

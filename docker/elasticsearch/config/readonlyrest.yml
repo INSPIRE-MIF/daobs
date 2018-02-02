@@ -95,7 +95,7 @@ readonlyrest:
 #    auth_key: visitor:visitor
 #    groups: ["kibana_ro"]
 
-  - username: kibana_server
+  - username: USERNAME
     # auth_key is good for testing, but replace it with `auth_key_sha256`!
-    auth_key: kibana_server:password
+    auth_key: USERNAME:PASSWORD
     groups: ["kibana_srv"]
