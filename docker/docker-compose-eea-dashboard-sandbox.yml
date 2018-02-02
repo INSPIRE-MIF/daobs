@@ -36,8 +36,9 @@ services:
     container_name: sandbox-cerebro
 
   kibana:
-    volumes:
-      - ${PWD}/kibana/config/kibana-dashboard.yml:/usr/share/kibana/config/kibana.yml
+    environment:
+      - "REGIONMAP_LAYERS_URL=dashboard"
+      - "SERVER_BASEPATH=dashboard"
     networks:
       - network-dashboard-sandbox
     container_name: sandbox-kibana
@@ -45,7 +46,7 @@ services:
   nginx:
     ports:
       - "81:80"
-      - "444:443"    
+      - "444:443"
     networks:
       - network-dashboard-sandbox
     container_name: sandbox-nginx

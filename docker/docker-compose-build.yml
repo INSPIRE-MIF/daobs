@@ -19,3 +19,8 @@ services:
     build:
       context: ./elasticsearch
     image: inspiremif/elasticsearch:latest
+
+  kibana:
+    build:
+      context: ./kibana
+    image: inspiremif/kibana:latest
