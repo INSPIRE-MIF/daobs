@@ -36,9 +36,6 @@ services:
     container_name: sandbox-cerebro
 
   kibana:
-    environment:
-      - "REGIONMAP_LAYERS_URL=dashboard"
-      - "SERVER_BASEPATH=dashboard"
     networks:
       - network-dashboard-sandbox
     container_name: sandbox-kibana

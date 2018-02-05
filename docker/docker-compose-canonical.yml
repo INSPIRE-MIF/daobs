@@ -86,19 +86,16 @@ services:
 
   nginx:
     hostname: nginx
-    image: nginx:stable-alpine
+    image: inspiremif/nginx:latest
     volumes:
-      - ${SSL_CERTS_DIR}/${SSL_PUB}:/tmp/cert.crt
-      - ${SSL_KEY_DIR}/${SSL_PRIV}:/tmp/priv.key
-      - ./nginx/nginx-ssl.conf:/nginx.conf
-      - ./nginx/entry-point.sh:/entry-point.sh
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/pki/tls/certs/server-eionet.crt:/tmp/cert.crt:ro
+      - /etc/pki/tls/private/server-eionet.key:/tmp/priv.key:ro
     depends_on:
       - "dashboard"
     environment:
-        - SSL_CERTS_DIR
-        - SSL_PUB
-        - SSL_KEY_DIR
-        - SSL_PRIV
+      - "GENERATESSL=NO"
+      - "CERTIFICATESUBJ=/C=DK/ST=Copenhagen/L=Copenhagen/O=EEA/OU=IT Department/CN=inspire-dashboard.eea"
     restart: always
     command: ["sh", "./entry-point.sh"]
 

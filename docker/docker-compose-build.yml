@@ -25,6 +25,11 @@ services:
       context: ./kibana
     image: inspiremif/kibana:latest
 
+  nginx:
+    build:
+      context: ./nginx
+    image: inspiremif/nginx:latest
+
   cerebro:
     build:
       context: ./cerebro

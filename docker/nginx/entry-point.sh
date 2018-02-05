@@ -9,8 +9,9 @@ NC='\033[0m' # No Color
 mkdir -p /etc/nginx/private/
 mkdir -p /etc/nginx/certs/
 
-if [ -z "${SSL_CERTS_DIR}" ] || [ -z "${SSL_PUB}" ] || [ -z "${SSL_KEY_DIR}" ] || [ -z "${SSL_PRIV}" ]; then
 
+echo $GENERATESSL
+if [ -z "${GENERATESSL}" ] || [ "${GENERATESSL}" != "YES" ]; then
   echo "Generating self-signed SSL certificates"
 
   apk update && apk add --no-cache openssl
@@ -18,7 +19,7 @@ if [ -z "${SSL_CERTS_DIR}" ] || [ -z "${SSL_PUB}" ] || [ -z "${SSL_KEY_DIR}" ] |
   mkdir -p /certs
 
   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /certs/priv.key -out /certs/cert.crt \
-  -subj "/C=DK/ST=Copenhagen/L=Copenhagen/O=EEA/OU=IT Department/CN=inspire-dashboard.eea"
+  -subj  "$CERTIFICATESUBJ"
 
   cp /certs/priv.key /etc/nginx/private/
   cp /certs/cert.crt /etc/nginx/certs/
