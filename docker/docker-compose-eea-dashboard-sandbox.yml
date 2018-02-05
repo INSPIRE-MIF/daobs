@@ -51,6 +51,9 @@ services:
       - network-dashboard-sandbox
     container_name: sandbox-nginx
 
+  sysctl:
+    container_name: sandbox-sysctl
+
 volumes:
     esdata-sandbox:
        driver: local

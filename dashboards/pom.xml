@@ -110,7 +110,7 @@
               <target>
                 <echo>Rename kibana config for this webapp in docker build context.</echo>
                 <move file="${project.basedir}/../docker/kibana/config/kibana.yml"
-                      tofile="${project.basedir}/../docker/kibana/config/kibana-${war.name}.yml"/>
+                      tofile="${project.basedir}/../docker/kibana/config/kibana.yml"/>
               </target>
             </configuration>
           </execution>

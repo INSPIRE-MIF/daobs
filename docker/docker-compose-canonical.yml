@@ -99,3 +99,11 @@ services:
         - SSL_PRIV
     restart: always
     command: ["sh", "./entry-point.sh"]
+
+  sysctl:
+    network_mode: none
+    image: rawmind/alpine-sysctl:0.1
+    privileged: true
+    environment:
+      - "SYSCTL_KEY=vm.max_map_count"
+      - "SYSCTL_VALUE=262144"
