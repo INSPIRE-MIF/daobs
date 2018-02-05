@@ -667,7 +667,7 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <kb.host>kibana</kb.host>
         <kb.es.rw.username>USERNAME</kb.es.rw.username>
         <kb.es.rw.password>PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>USERNAME</kb.es.serverusername>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
         <kb.es.serverpassword>PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>
@@ -694,7 +694,7 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <kb.host>kibana</kb.host>
         <kb.es.rw.username>USERNAME</kb.es.rw.username>
         <kb.es.rw.password>PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>USERNAME</kb.es.serverusername>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
         <kb.es.serverpassword>PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>
@@ -719,7 +719,7 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <kb.host>kibana</kb.host>
         <kb.es.rw.username>USERNAME</kb.es.rw.username>
         <kb.es.rw.password>PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>USERNAME</kb.es.serverusername>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
         <kb.es.serverpassword>PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>
