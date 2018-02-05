@@ -98,8 +98,8 @@ Or just use the provided convenience scripts [run_dashboard_sandbox.sh](https://
 
 Then open the applications with:
 
-* https://localhost:81/dashboard
-* https://localhost/official
+* https://localhost:81
+* https://localhost
 
 Then for the official node, change the default account in user.properties in the dashboard-official volume and change it also for the kibana_rw user in readonlyrest.yml.
 
