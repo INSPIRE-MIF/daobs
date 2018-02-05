@@ -87,15 +87,15 @@ readonlyrest:
 
   users:
 
-  - username: kibana_rw
-    auth_key: changeme:changeme
+  - username: USERNAME
+    auth_key: USERNAME:PASSWORD
     groups: ["kibana_rw"]
 
 #  - username: kibana_ro
 #    auth_key: visitor:visitor
 #    groups: ["kibana_ro"]
 
-  - username: USERNAME
+  - username: kibana_server
     # auth_key is good for testing, but replace it with `auth_key_sha256`!
-    auth_key: USERNAME:PASSWORD
+    auth_key: kibana_server:PASSWORD
     groups: ["kibana_srv"]

@@ -8,8 +8,6 @@ transport.host: 0.0.0.0
 http.host: 0.0.0.0
 
 node.name: NODE_NAME
-node.data: NODE_DATA
-node.master: NODE_MASTER
 
 network.host: 192.168.1.10
 
@@ -26,6 +24,7 @@ discovery.zen.minimum_master_nodes: MINIMUM_MASTER_NODE
 ## Use single node discovery in order to disable production mode and avoid bootstrap checks
 ## see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
 #
-
+node.data: NODE_DATA
+node.master: NODE_MASTER
 
 

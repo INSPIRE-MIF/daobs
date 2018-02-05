@@ -1,14 +1,14 @@
 server.name: kibana
 server.host: "0"
 
-server.basePath: "/SERVER_BASEPATH/dashboard"
+server.basePath: "/official/dashboard"
 
 kibana.index: ".dashboards"
 
 regionmap:
   layers:
      - name: "EU countries"
-       url: "/REGIONMAP_LAYERS_URL/dashboard/assets/data/europe.geojson"
+       url: "/official/assets/data/europe.geojson"
        attribution: "NaturalEarth"
        fields:
           - name: "NAME"
@@ -31,5 +31,5 @@ server.ssl.certificate: /etc/pki/tls/certs/server.crt
 server.ssl.key: /etc/pki/tls/private/server.key
 #elasticsearch.ssl.certificateAuthorities: [ "/path/to/your/ca/cacert.pem" ]
 
-elasticsearch.username: ELASTICSEARCH_USERNAME
-elasticsearch.password: ELASTICSEARCH_PASSWORD
+elasticsearch.username: USERNAME
+elasticsearch.password: PASSWORD
