@@ -51,6 +51,9 @@ services:
       - network-dashboard-official
     container_name: official-nginx
 
+  sysctl:
+    container_name: official-sysctl
+
 volumes:
     esdata-official:
        driver: local
