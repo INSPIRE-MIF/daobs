@@ -14,3 +14,6 @@ RUN chown kibana /kibana.yml
 RUN chown kibana /usr/share/kibana/config/kibana.yml
 
 USER kibana
+
+RUN /usr/share/kibana/bin/kibana-plugin remove x-pack
+
