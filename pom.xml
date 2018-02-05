@@ -679,7 +679,7 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <war.name>official</war.name>
         <webapp.context>/</webapp.context>
         <webapp.rootUrl>/</webapp.rootUrl>
-        <webapp.url>https://inspire-dashboard.eea.europa.eu/official</webapp.url>
+        <webapp.url>https://inspire-dashboard.eea.europa.eu</webapp.url>
         <webapp.username>changeme</webapp.username>
         <webapp.password>changeme</webapp.password>
         <authentication.mode>ba</authentication.mode>
@@ -706,7 +706,7 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <war.name>dashboard</war.name>
         <webapp.context>/</webapp.context>
         <webapp.rootUrl>/</webapp.rootUrl>
-        <webapp.url>https://inspire-dashboard.eea.europa.eu/dashboard</webapp.url>
+        <webapp.url>https://inspire-dashboard.eea.europa.eu</webapp.url>
         <authentication.mode>ldap</authentication.mode>
         <etf.installation.path>/var/local/etf</etf.installation.path>
         <data.dir>/daobs-data-dir/datadir</data.dir>
