@@ -677,8 +677,8 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
       <id>eea-inspire-official</id>
       <properties>
         <war.name>official</war.name>
-        <webapp.context>/official</webapp.context>
-        <webapp.rootUrl>/official/</webapp.rootUrl>
+        <webapp.context>/</webapp.context>
+        <webapp.rootUrl>/</webapp.rootUrl>
         <webapp.url>https://inspire-dashboard.eea.europa.eu/official</webapp.url>
         <webapp.username>changeme</webapp.username>
         <webapp.password>changeme</webapp.password>
@@ -704,8 +704,8 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
       <id>eea-inspire-dashboard</id>
       <properties>
         <war.name>dashboard</war.name>
-        <webapp.context>/dashboard</webapp.context>
-        <webapp.rootUrl>/dashboard/</webapp.rootUrl>
+        <webapp.context>/</webapp.context>
+        <webapp.rootUrl>/</webapp.rootUrl>
         <webapp.url>https://inspire-dashboard.eea.europa.eu/dashboard</webapp.url>
         <authentication.mode>ldap</authentication.mode>
         <etf.installation.path>/var/local/etf</etf.installation.path>

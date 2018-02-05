@@ -35,6 +35,12 @@ else
 
 fi
 
+echo "Replacing dashboard url"
+
+cp /nginx.conf /etc/nginx/nginx.conf
+sed "s#DASHBOARD_URL#$DASHBOARD_URL#g" -i /etc/nginx/nginx.conf
+
+
 echo "Starting nginx"
 
 nginx -g "daemon off;"

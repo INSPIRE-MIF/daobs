@@ -90,7 +90,7 @@ services:
     volumes:
       - ${SSL_CERTS_DIR}/${SSL_PUB}:/tmp/cert.crt
       - ${SSL_KEY_DIR}/${SSL_PRIV}:/tmp/priv.key
-      - ./nginx/nginx-ssl.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx-ssl.conf:/nginx.conf
       - ./nginx/entry-point.sh:/entry-point.sh
     depends_on:
       - "dashboard"

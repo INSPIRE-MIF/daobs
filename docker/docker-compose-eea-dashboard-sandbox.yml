@@ -47,6 +47,8 @@ services:
     ports:
       - "81:80"
       - "444:443"
+    environment:
+      - DASHBOARD_URL=http://dashboard:8080
     networks:
       - network-dashboard-sandbox
     container_name: sandbox-nginx

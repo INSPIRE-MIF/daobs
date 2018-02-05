@@ -1,14 +1,14 @@
 server.name: kibana
 server.host: "0"
 
-server.basePath: "/official/dashboard"
+#server.basePath: "/dashboard"
 
 kibana.index: ".dashboards"
 
 regionmap:
   layers:
      - name: "EU countries"
-       url: "/official/assets/data/europe.geojson"
+       url: "/assets/data/europe.geojson"
        attribution: "NaturalEarth"
        fields:
           - name: "NAME"

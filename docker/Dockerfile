@@ -105,7 +105,9 @@ RUN set -e \
 RUN echo ${INSTALL_DASHBOARD_PATH} && mkdir -p ${INSTALL_DASHBOARD_PATH}
 RUN echo ${INSTALL_ETF_PATH} && mkdir -p ${INSTALL_ETF_PATH}
 
-COPY ./${WEBAPP_NAME}.war ${CATALINA_HOME}/webapps/${WEBAPP_NAME}.war
+RUN rm -rf ${CATALINA_HOME}/webapps/*
+
+COPY ./${WEBAPP_NAME}.war ${CATALINA_HOME}/webapps/ROOT.war
 COPY ./ETF ${INSTALL_ETF_PATH}/
 COPY ./datadir ${INSTALL_DASHBOARD_PATH}/datadir/
 RUN chmod +x ${INSTALL_ETF_PATH}/ant
