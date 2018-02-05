@@ -75,8 +75,8 @@ services:
   kibana:
     image: inspiremif/kibana:latest
     environment:
-      - "ELASTICSEARCH_USERNAME=changeme"
-      - "ELASTICSEARCH_PASSWORD=changeme"
+      - USERNAME=changeme # must match credentials on es
+      - PASSWORD=changeme # must match credentials on es
     depends_on:
       - "elasticsearch"
     restart: always
