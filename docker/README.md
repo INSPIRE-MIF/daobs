@@ -64,16 +64,16 @@ cd ..
 
 
 # Start composition
-sudo sysctl -w vm.max_map_count=262144
 docker-compose -p dashboard-sandbox -f docker-compose-canonical.yml -f docker-compose-eea-dashboard-sandbox.yml up
 docker-compose -p dashboard-official -f docker-compose-canonical.yml -f docker-compose-eea-dashboard-official.yml up
 
 
 # publish images
-docker push inspiremif/elasticsearch:latest
-docker push inspiremif/daobs-eea-dashboard-sandbox:latest
-docker push inspiremif/daobs-eea-dashboard-official:latest
-
+docker push inspiremif/daobs-eea-dashboard-sandbox
+docker push inspiremif/daobs-eea-dashboard-official
+docker push inspiremif/elasticsearch
+docker push inspiremif/kibana
+docker push inspiremif/cerebro
 
 ```
 If you just want to build the images locally, you can use the [provided convenience script](https://github.com/INSPIRE-MIF/daobs/blob/2.0.x/docker/build_images.sh):
