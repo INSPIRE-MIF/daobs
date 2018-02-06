@@ -87,14 +87,14 @@ Or just use the provided convenience scripts [run_dashboard_sandbox.sh](https://
 
 Then open the applications with:
 
-* https://localhost:81
+* https://localhost:444
 * https://localhost
 
 The two orchestrations can be run, side-by-side in the same machine, as they have different namespaces for container, volumes and networks names.
 
 Advanced Configuration
 ----------------------
-Nginx is running on port 80|81 (it uses different ports in the official and sandbox applications, in order to enable both of them to bind to the localhost). It can be configured as a proxy, using `nginx/nginx.conf`. The current configuration forwards all root requests on port 80|81 to the dashboard containers:
+Nginx is running on port 443|444 (it uses different ports in the official and sandbox applications, in order to enable both of them to bind to the localhost). It can be configured as a proxy, using `nginx/nginx.conf`. The current configuration forwards all root requests on port 80|81 to the dashboard containers:
 
 ```
 location / {

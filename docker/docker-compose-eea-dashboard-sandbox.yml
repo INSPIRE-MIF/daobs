@@ -42,7 +42,7 @@ services:
 
   nginx:
     ports:
-      - "81:80"
+      #- "81:80"
       - "444:443"
     environment:
       - DASHBOARD_URL=http://dashboard:8080
