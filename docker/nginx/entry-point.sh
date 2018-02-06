@@ -11,7 +11,7 @@ mkdir -p /etc/nginx/certs/
 
 
 echo $GENERATESSL
-if [ -z "${GENERATESSL}" ] || [ "${GENERATESSL}" != "YES" ]; then
+if [ -z "${GENERATESSL}" ] || [ "${GENERATESSL}" != "NO" ]; then
   echo "Generating self-signed SSL certificates"
 
   apk update && apk add --no-cache openssl
@@ -28,8 +28,8 @@ if [ -z "${GENERATESSL}" ] || [ "${GENERATESSL}" != "YES" ]; then
 else
     echo "SSL Variables are set: Skipping SSL certificate generation"
 
-    if [ ! -f "/tmp/priv.key" ]; then echo -e "${RED}Make sure that the env variables 'SSL_KEY_DIR/SSL_PRIV' are pointing to a valid private key${NC}"; fi
-    if [ ! -f "/tmp/cert.crt" ]; then echo -e "${RED}Make sure that the env variables 'SSL_CERTS_DIR/SSL_PUB' are pointing to a valid public certificate${NC}"; fi
+    if [ ! -f "/tmp/priv.key" ]; then echo -e "${RED}Make sure that you are pointing to a valid private key${NC}"; fi
+    if [ ! -f "/tmp/cert.crt" ]; then echo -e "${RED}Make sure that you are pointing to a valid public certificate${NC}"; fi
 
     cp /tmp/priv.key /etc/nginx/private/
     cp /tmp/cert.crt /etc/nginx/certs/

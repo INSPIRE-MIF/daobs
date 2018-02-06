@@ -6,6 +6,7 @@ services:
       - "kibana"
     environment:
       - PASSWORD=changeme # n.b.: needs to match the credentials on kibana
+      - ADMINPASSWORD=changeme
     restart: always
     command: ["bash", "/wait-for-it.sh", "kibana:5601", "-t", "0", "--", "/docker-entry.sh"]
 

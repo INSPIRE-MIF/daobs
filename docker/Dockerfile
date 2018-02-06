@@ -109,6 +109,7 @@ RUN rm -rf ${CATALINA_HOME}/webapps/*
 
 COPY ./${WEBAPP_NAME}.war ${CATALINA_HOME}/webapps/ROOT.war
 COPY ./ETF ${INSTALL_ETF_PATH}/
+COPY ./datadir/users.properties /users.properties
 COPY ./datadir ${INSTALL_DASHBOARD_PATH}/datadir/
 RUN chmod +x ${INSTALL_ETF_PATH}/ant
 RUN chmod +x ${INSTALL_ETF_PATH}/bin/apache-ant-1.8.2/bin/ant

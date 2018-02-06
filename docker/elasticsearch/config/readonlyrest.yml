@@ -92,7 +92,7 @@ readonlyrest:
     groups: ["kibana_rw"]
 
 #  - username: kibana_ro
-#    auth_key: visitor:visitor
+#    auth_key: visitor:dXQTptnvrCBrrNnGj
 #    groups: ["kibana_ro"]
 
   - username: kibana_server

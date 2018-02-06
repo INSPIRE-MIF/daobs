@@ -1,5 +1,9 @@
 #/bin/bash
 
+# Replace admin password
+cp /users.properties /daobs-data-dir/datadir/users.properties;
+sed "s#ADMINPASSWORD#$ADMINPASSWORD#g" -i /daobs-data-dir/datadir/users.properties
+
 cd /daobs-data-dir/datadir/;
 
 # TODO: only do that if index does not exist.

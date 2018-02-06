@@ -680,8 +680,9 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <webapp.context>/</webapp.context>
         <webapp.rootUrl>/</webapp.rootUrl>
         <webapp.url>https://inspire-dashboard.eea.europa.eu</webapp.url>
-        <webapp.username>changeme</webapp.username>
-        <webapp.password>changeme</webapp.password>
+        <webapp.username>admin</webapp.username>
+        <webapp.password>ADMINPASSWORD</webapp.password>
+        <webapp.visitor.password>dXQTptnvrCBrrNnGj</webapp.visitor.password>
         <authentication.mode>ba</authentication.mode>
         <etf.installation.path>/var/local/etf</etf.installation.path>
         <data.dir>/daobs-data-dir/datadir</data.dir>
@@ -707,6 +708,9 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <webapp.context>/</webapp.context>
         <webapp.rootUrl>/</webapp.rootUrl>
         <webapp.url>https://inspire-dashboard.eea.europa.eu</webapp.url>
+        <webapp.username>admin</webapp.username>
+        <webapp.password>ADMINPASSWORD</webapp.password>
+        <webapp.visitor.password>dXQTptnvrCBrrNnGj</webapp.visitor.password>
         <authentication.mode>ldap</authentication.mode>
         <etf.installation.path>/var/local/etf</etf.installation.path>
         <data.dir>/daobs-data-dir/datadir</data.dir>
