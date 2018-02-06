@@ -32,4 +32,4 @@ server.ssl.key: /etc/pki/tls/private/server.key
 #elasticsearch.ssl.certificateAuthorities: [ "/path/to/your/ca/cacert.pem" ]
 
 elasticsearch.username: kibana_server
-elasticsearch.password: PASSWORD
+elasticsearch.password: KIBANA_SRV_PASSWORD

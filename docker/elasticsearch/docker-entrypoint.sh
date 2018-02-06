@@ -17,8 +17,9 @@ sed "s#MINIMUM_MASTER_NODE#$MINIMUM_MASTER_NODE#g" -i /usr/share/elasticsearch/c
 sed "s#NODE_DATA#$NODE_DATA#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
 #sed "s#debug#info#g" -i /usr/share/elasticsearch/config/log4j2.properties
 
-sed "s#USERNAME#$USERNAME#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
-sed "s#PASSWORD#$PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
+sed "s#KIBANA_RW_USER#$KIBANA_RW_USER#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
+sed "s#KIBANA_RW_PASSWORD#$KIBANA_RW_PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
+sed "s#KIBANA_SRV_PASSWORD#$KIBANA_SRV_PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
 
 if [ -z "$DISCOVERY_ZEN" ]
 then
@@ -57,7 +58,7 @@ then
 
   rm -rf /tmp/ssl
   mkdir -p /tmp/ssl
-  keytool -genkey -keyalg RSA -noprompt -alias $SERVERNAME -dname "CN=$SERVERNAME,OU=IDM,O=EEA,L=IDM1,C=DK" -keystore /tmp/ssl/self.jks -storepass $KIBANA_RW_PASSWORD -keypass $KIBANA_RW_PASSWORD
+  keytool -genkey -keyalg RSA -noprompt -alias $SERVERNAME -dname "CN=$SERVERNAME,OU=IDM,O=EEA,L=IDM1,C=DK" -keystore /tmp/ssl/self.jks -storepass $KIBANA_SRV_PASSWORD -keypass $KIBANA_RW_PASSWORD
   keytool -keystore  /tmp/ssl/self.jks -alias $SERVERNAME -export -file  /tmp/ssl/self.cert
 
   chmod 400 /tmp/ssl/*
