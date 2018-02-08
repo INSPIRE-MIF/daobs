@@ -343,7 +343,7 @@ public class CswHarvester {
       log.info("numberOfRecordsMatched " + numberOfRecordsMatched + ".");
       log.info("maxRecords " + maxRecords + ".");
       log.info("numberOfPages " + pages.size() + ".");
-      log.info("remainingRecords " + remainingRecords + ".");
+      log.info("numberOfRecordsInLastPage " + remainingRecords + ".");
       return pages;
     }
 
