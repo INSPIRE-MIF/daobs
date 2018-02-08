@@ -28,6 +28,7 @@
                 xmlns:gco="http://www.isotc211.org/2005/gco"
                 xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0"
                 xmlns:gn="http://www.fao.org/geonetwork"
+                xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
                 xmlns:daobs="http://daobs.org"
                 xmlns:saxon="http://saxon.sf.net/"
                 extension-element-prefixes="saxon"
@@ -92,13 +93,13 @@
                 mode="extract-uuid"/>
 
   <xsl:template match="/">
-    <!-- Add a Solr document -->
+    <!-- Add a document -->
     <add>
       <!-- For any ISO19139 records in the input XML document
       Some records from IS do not have record identifier. Ignore them.
       -->
       <xsl:variable name="records"
-                    select="//(gmi:MI_Metadata|gmd:MD_Metadata|mdb:MD_Metadata)"/>
+                    select="//csw:SearchResults/(gmi:MI_Metadata|gmd:MD_Metadata|mdb:MD_Metadata)"/>
 
       <!-- Check number of records returned and reported -->
       <xsl:message>## DEBUG: <xsl:value-of select="normalize-space($harvester/daobs:url)"/>.</xsl:message>
@@ -129,7 +130,7 @@
 
         <xsl:choose>
           <xsl:when test="normalize-space($identifier) = ''">
-            <xsl:message>WARNING: Record with null UUID found.</xsl:message>
+            <xsl:message>WARNING: Record with null UUID found. Document will not be indexed.</xsl:message>
             <xsl:message><xsl:copy-of select="."/></xsl:message>
           </xsl:when>
           <xsl:otherwise>
