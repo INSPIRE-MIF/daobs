@@ -357,7 +357,7 @@
           <cm:multicast parallelProcessing="false"
                         strategyRef="nullBodyStrategy">
             <!-- XSD validation-->
-            <cm:to uri="direct:validation-xsd"/>
+            <!--<cm:to uri="direct:validation-xsd"/>-->
 
             <!-- INSPIRE validation -->
             <cm:to uri="direct:validation-inspire"/>
