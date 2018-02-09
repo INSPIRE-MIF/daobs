@@ -84,7 +84,7 @@
           <a class="btn btn-link"
              role="button"
              target="daobsDocuments"
-             data-ng-href="dashboard/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now%2Fy,mode:quick,to:now%2Fy))&_a=(columns:!(indicatorName,indicatorValue,scope),index:indicators,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'%2BdocumentType:indicator%20%2Bscope:%22{{m._source.scope}}%22%20%2BreportingDate:%22{{m._source.reportingDate}}%22')),sort:!(indicatorName,asc))&embed=true">
+             data-ng-href="dashboard/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-5y,mode:quick,to:now%2Fy))&_a=(columns:!(indicatorName,indicatorValue,scope),index:indicators,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'%2BdocumentType:indicator%20%2Bscope:%22{{m._source.scope}}%22%20%2BreportingDate:%22{{m._source.reportingDate}}%22')),sort:!(indicatorName,asc))&embed=true">
             <i class="fa fa-eye"></i>&nbsp;
             <span data-translate="">viewRecords</span>
           </a><br/>
