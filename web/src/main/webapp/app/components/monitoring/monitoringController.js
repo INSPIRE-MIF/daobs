@@ -98,7 +98,7 @@
           function () {
             $timeout(function () {
               init();
-            }, 100);
+            }, 1000);
           }
         );
       };
@@ -349,7 +349,7 @@
           $location.hash('ds-report-results');
           $anchorScroll();
         });
-        
+
       };
 
       // Create report type
@@ -363,7 +363,7 @@
             '</title>'+
             '<author>DAOBS Team</author>'+
             '<url></url></identification><variables/><indicators/></reporting>';
-        var config = { headers: 
+        var config = { headers:
           {
             'Content-Type': 'application/xml',
             'Accept': '*/*'
@@ -394,7 +394,7 @@
       }
 
 
-      
+
 
       // Preview report
       $scope.preview = function () {
