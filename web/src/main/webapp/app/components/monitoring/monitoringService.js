@@ -50,6 +50,9 @@
                 },
                 "sort": [
                   {
+                    "scope": {
+                      "order": "asc"
+                    },
                     "reportingDate": {
                       "order": "desc"
                     }
