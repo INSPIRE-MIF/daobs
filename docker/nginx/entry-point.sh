@@ -36,10 +36,11 @@ else
 
 fi
 
-echo "Replacing dashboard url"
+echo "Replacing dashboard & es url"
 
 cp /nginx.conf /etc/nginx/nginx.conf
 sed "s#DASHBOARD_URL#$DASHBOARD_URL#g" -i /etc/nginx/nginx.conf
+sed "s#ES_URL#$ES_URL#g" -i /etc/nginx/nginx.conf
 
 
 echo "Starting nginx"
