@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 

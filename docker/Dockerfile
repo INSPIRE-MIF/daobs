@@ -126,5 +126,7 @@ RUN chmod +x /docker-entry.sh
 COPY setenv.sh $CATALINA_HOME/bin/setenv.sh
 RUN chmod +x $CATALINA_HOME/bin/setenv.sh
 
+ADD ./VERSION .
+
 EXPOSE 8080
 WORKDIR $CATALINA_HOME
