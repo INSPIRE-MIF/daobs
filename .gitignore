@@ -23,4 +23,4 @@ dashboards/kibana-*
 docker/*.war
 docker/ETF
 docker/datadir
-docker/elasticsearch/readonlyrest*
+#docker/elasticsearch/readonlyrest*
