@@ -25,8 +25,6 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=YES
       - KIBANA_SRV_PASSWORD=changeme
-      - KIBANA_RW_USER=changeme
-      - KIBANA_RW_PASSWORD=changeme
     restart: always
 
   elasticsearch-node1:
