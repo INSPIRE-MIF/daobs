@@ -27,13 +27,15 @@ docker tag inspiremif/nginx:latest inspiremif/nginx:$version
 docker tag inspiremif/cerebro:latest inspiremif/cerebro:$version
 
 # push it
-#docker push inspiremif/daobs-eea-dashboard-sandbox:latest
-#docker push inspiremif/daobs-eea-dashboard-sandbox:$version
-#inspiremif/elasticsearch:latest
-#inspiremif/elasticsearch:$version
-#inspiremif/kibana:latest
-#inspiremif/kibana:$version
-#inspiremif/nginx:latest
-#inspiremif/nginx:$version
-#inspiremif/cerebro:latest
-#inspiremif/cerebro:$version
+docker push inspiremif/daobs-eea-dashboard-sandbox:latest
+docker push inspiremif/daobs-eea-dashboard-sandbox:$version
+docker push inspiremif/daobs-eea-dashboard-official:latest
+docker push inspiremif/daobs-eea-dashboard-official:$version
+docker push inspiremif/elasticsearch:latest
+docker push inspiremif/elasticsearch:$version
+docker push inspiremif/kibana:latest
+docker push inspiremif/kibana:$version
+docker push inspiremif/nginx:latest
+docker push inspiremif/nginx:$version
+docker push inspiremif/cerebro:latest
+docker push inspiremif/cerebro:$version
