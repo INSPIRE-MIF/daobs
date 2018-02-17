@@ -1065,7 +1065,7 @@ public class ReportingController {
       try {
         spatialDataSets = EsRequestBean.query(index,
           SPATIALDATASETS_QUERY_URL,
-          fq, rows);
+          fq + " +resourceType:(dataset or series)", rows);
         model.addObject("spatialDataSets", spatialDataSets);
       } catch (Exception ex) {
         ex.printStackTrace();
@@ -1076,7 +1076,7 @@ public class ReportingController {
       try {
         spatialDataServices = EsRequestBean.query(index,
           SPATIALDATASERVICE_QUERY_URL,
-          fq, rows);
+          fq + " +resourceType:service", rows);
         model.addObject("spatialDataServices", spatialDataServices);
       } catch (Exception ex) {
         ex.printStackTrace();

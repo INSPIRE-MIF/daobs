@@ -49,6 +49,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -180,6 +181,23 @@ public class EsRequestBean {
   public static Node searchResponseToNode(SearchHits hits) {
     Document xmlDoc = new DocumentImpl();
     Element response = xmlDoc.createElement("result");
+    List<String> booleanFields = new ArrayList<>();
+    booleanFields.add("isAboveThreshold");
+    booleanFields.add("inspireConformResource");
+
+    List<String> arrayFields = new ArrayList<>();
+    arrayFields.add("inspireTheme");
+    arrayFields.add("serviceType");
+    arrayFields.add("recordOperatedByType");
+    arrayFields.add("recordOperatedByTypeview");
+    arrayFields.add("recordOperatedByTypedownload");
+    arrayFields.add("link");
+    arrayFields.add("linkUrl");
+    arrayFields.add("custodianOrgForResource");
+    arrayFields.add("ownerOrgForResource");
+    arrayFields.add("pointOfContactOrgForResource");
+    arrayFields.add("OrgForResource");
+    arrayFields.add("inspireConformResource");
     for (SearchHit h : hits.getHits()) {
       Node doc = xmlDoc.createElement("doc");
       Iterator<String> iterator = h.getSource().keySet().iterator();
@@ -187,16 +205,25 @@ public class EsRequestBean {
         String key = iterator.next();
         Object values = h.getSource().get(key);
 
-        boolean isArray = false;
-        Element field = xmlDoc.createElement(isArray ? "arr" : "str");
+        boolean isArray = arrayFields.contains(key);
+        boolean isBoolean = booleanFields.contains(key);
+        Element field = xmlDoc.createElement(isArray ? "arr" : (isBoolean ?  "bool" : "str"));
 
         field.setAttribute("name", key);
         if (isArray) {
-          //          for (Object v : values.getValues()) {
-          //            Element arrayElement = xmlDoc.createElement("str");
-          //            arrayElement.setTextContent(v.toString());
-          //            field.appendChild(arrayElement);
-          //          }
+          if (values instanceof ArrayList) {
+            Iterator<String> valuesIterator = ((ArrayList<String>) values).iterator();
+            while (valuesIterator.hasNext()) {
+              String va = valuesIterator.next();
+              Element arrayElement = xmlDoc.createElement(isBoolean ?  "bool" : "str");
+              arrayElement.setTextContent(va);
+              field.appendChild(arrayElement);
+            }
+          } else {
+            Element arrayElement = xmlDoc.createElement(isBoolean ?  "bool" : "str");
+            arrayElement.setTextContent(values.toString());
+            field.appendChild(arrayElement);
+          }
         } else {
           field.setTextContent(values.toString());
         }

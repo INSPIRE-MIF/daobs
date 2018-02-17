@@ -446,7 +446,7 @@
         <!--<xsl:message><xsl:copy-of select="$spatialDataServices"/></xsl:message>-->
         <RowData>
           <xsl:apply-templates mode="SpatialDataServiceFactory"
-                               select="$spatialDataServices/result/doc"/>
+                               select="$spatialDataServices//doc"/>
 
           <xsl:choose>
             <xsl:when test="$datasetMode = 'asManyDatasetsAsInspireThemes'">
