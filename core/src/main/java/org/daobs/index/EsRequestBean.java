@@ -354,7 +354,7 @@ public class EsRequestBean {
       Iterator<AnalyzeResponse.AnalyzeToken> iterator = tokens.iterator();
       while (iterator.hasNext()) {
         AnalyzeResponse.AnalyzeToken token = iterator.next();
-        if (token.getType().equals("SYNONYM")) {
+        if (token.getType().equals("SYNONYM") || token.getType().equals("word")) {
           return token.getTerm();
         }
       }
