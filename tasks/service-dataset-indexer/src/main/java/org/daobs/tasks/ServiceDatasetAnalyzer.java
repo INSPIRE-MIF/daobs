@@ -95,7 +95,8 @@ public class ServiceDatasetAnalyzer {
     Map<String, DatasetsOperatedByTypes> datasetsOperatedByTypes =
         new HashMap<String, DatasetsOperatedByTypes>();
 
-    System.out.println(String.format("Analyzing service/dataset relation for %s ...", documentFilter));
+    System.out.println(String.format(
+        "Analyzing service/dataset relation for %s ...", documentFilter));
 
     // Search all matching services
     try {
@@ -120,7 +121,7 @@ public class ServiceDatasetAnalyzer {
         final String serviceId = service.getId();
 
         System.out.println(String.format(
-          "  Analyzing service %s.", serviceId));
+            "  Analyzing service %s.", serviceId));
 
         // For each datasets associated with the service
         // collect the INSPIRE themes from the datasets
@@ -138,16 +139,16 @@ public class ServiceDatasetAnalyzer {
         }
 
         System.out.println(String.format(
-          "  INSPIRE themes from service %s are %s.",
-          serviceId, allInspireThemes.toString()));
+            "  INSPIRE themes from service %s are %s.",
+            serviceId, allInspireThemes.toString()));
 
         // Then add those from the datasets
         final Object datasetsObj = service.getSource().get("recordOperateOn");
         // No dataset related to that service
         if (datasetsObj == null) {
           System.out.println(String.format(
-            "  No dataset associated to service %s. Nothing to do.",
-            serviceId));
+              "  No dataset associated to service %s. Nothing to do.",
+              serviceId));
         } else {
 
           List<String> datasets = new ArrayList<>();
@@ -157,19 +158,19 @@ public class ServiceDatasetAnalyzer {
             datasets.addAll((ArrayList) datasetsObj);
           }
           final String queryDatasets =
-            String.format(
-              "+metadataIdentifier:(\"%s\")",
-              Joiner.on("\" or \"").join(datasets));
+              String.format(
+                "+metadataIdentifier:(\"%s\")",
+                Joiner.on("\" or \"").join(datasets));
 
           System.out.println(String.format(
-            "  Related datasets for %s are %s.",
-            serviceId, datasets));
+              "  Related datasets for %s are %s.",
+              serviceId, datasets));
 
           SearchResponse listOfdatasets =
-            EsRequestBean.search(index, dsFields, queryDatasets, ROWS);
+              EsRequestBean.search(index, dsFields, queryDatasets, ROWS);
 
           final Iterator<SearchHit> dsHitIterator =
-            listOfdatasets.getHits().iterator();
+              listOfdatasets.getHits().iterator();
 
           while (dsHitIterator.hasNext()) {
             final SearchHit dataset = dsHitIterator.next();
@@ -184,8 +185,8 @@ public class ServiceDatasetAnalyzer {
           }
 
           System.out.println(String.format(
-            "  INSPIRE themes from service %s and all related datasets are %s.",
-            serviceId, allInspireThemes.toString()));
+              "  INSPIRE themes from service %s and all related datasets are %s.",
+              serviceId, allInspireThemes.toString()));
 
 
           // For each services, check all related datasets
@@ -206,10 +207,10 @@ public class ServiceDatasetAnalyzer {
               }
               allServiceTypes.forEach(e -> {
                 datasetOperatedBy(
-                  datasetsOperatedByTypes,
-                  datasetUuid,
-                  (String) e,
-                  serviceId);
+                    datasetsOperatedByTypes,
+                    datasetUuid,
+                    (String) e,
+                    serviceId);
               });
             }
           }
@@ -217,13 +218,13 @@ public class ServiceDatasetAnalyzer {
 
           // Update the service field INSPIRE themes.
           XContentBuilder source = jsonBuilder().startObject()
-            .array("inspireTheme", allInspireThemes.toArray())
-            .endObject();
+              .array("inspireTheme", allInspireThemes.toArray())
+              .endObject();
           UpdateResponse response = EsRequestBean.update(index, serviceId, source);
 
           System.out.println(String.format(
-            "  Updated service %s INSPIRE theme %s.",
-            serviceId, response.toString()));
+              "  Updated service %s INSPIRE theme %s.",
+              serviceId, response.toString()));
         }
       }
 
@@ -233,19 +234,19 @@ public class ServiceDatasetAnalyzer {
         String uuid = datasetsUuidIterator.next();
 
         System.out.println(String.format(
-          "  Updating dataset %s with service types %s operated by %s.",
-          uuid,
-          datasetsOperatedByTypes.get(uuid).serviceTypes.toString(),
-          datasetsOperatedByTypes.get(uuid).serviceList.keySet().toString()));
+            "  Updating dataset %s with service types %s operated by %s.",
+            uuid,
+            datasetsOperatedByTypes.get(uuid).serviceTypes.toString(),
+            datasetsOperatedByTypes.get(uuid).serviceList.keySet().toString()));
 
         // Update query
         XContentBuilder source = jsonBuilder().startObject()
-          .array(
-            "recordOperatedByType",
-            datasetsOperatedByTypes.get(uuid).serviceTypes.toArray())
-          .array(
-            "recordOperatedBy",
-            datasetsOperatedByTypes.get(uuid).serviceList.keySet().toArray());
+            .array(
+              "recordOperatedByType",
+              datasetsOperatedByTypes.get(uuid).serviceTypes.toArray())
+            .array(
+              "recordOperatedBy",
+              datasetsOperatedByTypes.get(uuid).serviceList.keySet().toArray());
         Set<String> viewService = new HashSet<>();
         Set<String> downloadService = new HashSet<>();
         datasetsOperatedByTypes.get(uuid).serviceList.keySet().forEach(e -> {
@@ -260,23 +261,23 @@ public class ServiceDatasetAnalyzer {
           source.array("recordOperatedByTypeview", viewService);
 
           System.out.println(String.format(
-            "  Dataset %s is operated by view services %s.",
-            uuid, viewService.toString()));
+              "  Dataset %s is operated by view services %s.",
+              uuid, viewService.toString()));
         }
         if (downloadService.size() > 0) {
           source.array("recordOperatedByTypedownload", downloadService);
 
           System.out.println(String.format(
-            "  Dataset %s is operated by download services %s.",
-            uuid, downloadService.toString()));
+              "  Dataset %s is operated by download services %s.",
+              uuid, downloadService.toString()));
         }
         source.endObject();
         try {
           UpdateResponse response = EsRequestBean.update(index, uuid, source);
 
           System.out.println(String.format(
-            "  Updated dataset %s service info. Response %s.",
-            uuid, response.toString()));
+              "  Updated dataset %s service info. Response %s.",
+              uuid, response.toString()));
         } catch (Exception updateException) {
           updateException.printStackTrace();
         }
