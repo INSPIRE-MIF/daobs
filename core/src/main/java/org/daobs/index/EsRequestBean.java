@@ -253,13 +253,13 @@ public class EsRequestBean {
           if (values instanceof ArrayList) {
             Iterator<String> valuesIterator = ((ArrayList<String>) values).iterator();
             while (valuesIterator.hasNext()) {
-              Object o = valuesIterator.next();
-              if (o instanceof String) {
+              Object obj = valuesIterator.next();
+              if (obj instanceof String) {
                 Element arrayElement = xmlDoc.createElement(isBoolean ? "bool" : "str");
-                arrayElement.setTextContent((String) o);
+                arrayElement.setTextContent((String) obj);
                 field.appendChild(arrayElement);
-              } else if (o instanceof ArrayList) {
-                ((ArrayList) o).forEach(e -> {
+              } else if (obj instanceof ArrayList) {
+                ((ArrayList) obj).forEach(e -> {
                   Element arrayElement = xmlDoc.createElement(isBoolean ? "bool" : "str");
                   arrayElement.setTextContent((String) e);
                   field.appendChild(arrayElement);
