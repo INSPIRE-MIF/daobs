@@ -36,7 +36,6 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHitField;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -91,6 +90,8 @@ public class ServiceDatasetAnalyzer {
       @Header("documentFilter") String documentFilter,
       Exchange exchange) {
 
+    // TODO: improve. Document filter may contain JSON escaped chars
+    documentFilter = documentFilter.replace("\\", "");
     Map<String, DatasetsOperatedByTypes> datasetsOperatedByTypes =
         new HashMap<String, DatasetsOperatedByTypes>();
 
