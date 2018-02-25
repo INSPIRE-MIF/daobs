@@ -131,6 +131,7 @@
       $scope.date = null;
       $scope.scopeId = null;
       $scope.time = null;
+      $scope.disableReportConfiguration = cfg.disableReportConfiguration;
 
       var buildDate = function(n, o) {
         if (o !== n) {

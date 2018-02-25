@@ -495,7 +495,7 @@
 
     <!-- root.dir set by directory-maven-plugin -->
     <data.dir>${root.dir}/web/target/${war.name}/WEB-INF/datadir</data.dir>
-
+    <app.disableReportConfiguration>true</app.disableReportConfiguration>
     <dashboard.default>#/dashboards?_g=()</dashboard.default>
 
     <log.dir>/tmp</log.dir>

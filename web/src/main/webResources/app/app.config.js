@@ -30,6 +30,7 @@
     'version': '${buildNumber}',
     'name': '${app.name}',
     'defaultDashboard': '${dashboard.default}',
+    'disableReportConfiguration': ${app.disableReportConfiguration},
     'SERVICES': {
       root: context,
       esdashboardCore: context + 'es/${es.index.dashboards}',
