@@ -44,7 +44,6 @@
     </layout>
   </appender>
 
-
   <logger name="org.daobs.harvester.CswHarvester">
     <level value="WARN"/>
   </logger>
@@ -53,8 +52,12 @@
     <level value="WARN"/>
   </logger>
 
+  <logger name="org.daobs.tasks.ServiceDatasetAnalyzer">
+    <level value="DEBUG"/>
+  </logger>
+
   <logger name="org.daobs.task.ValidationChecker">
-    <level value="WARN"/>
+    <level value="INFO"/>
   </logger>
 
   <logger name="org.daobs.task.DBValidationChecker">
@@ -106,6 +109,6 @@
   <root>
     <level value="WARN"/>
     <appender-ref ref="console"/>
-    <!--<appender-ref ref="file" />-->
+    <appender-ref ref="file" />
   </root>
 </log4j:configuration>

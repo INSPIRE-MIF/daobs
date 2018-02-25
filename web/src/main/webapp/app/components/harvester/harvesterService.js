@@ -84,6 +84,17 @@
             });
             return deferred.promise;
           },
+          serviceLinker: function (h, all) {
+            var query = '+harvesterUuid:' + h.uuid + ' +documentType:metadata +resourceType:service';
+
+            var deferred = $q.defer();
+            $http.get(cfg.SERVICES.serviceLinker, {params: {fq: query}}).success(function (data) {
+              deferred.resolve(data);
+            }).error(function (response) {
+              deferred.reject(response);
+            });
+            return deferred.promise;
+          },
           inspireValidation: function (h) {
             var query = '+harvesterUuid:' + h.uuid + ' +documentType:metadata';
 

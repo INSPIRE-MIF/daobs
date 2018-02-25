@@ -36,6 +36,7 @@
   "viewRules": "Consulter les indicateurs",
   "chooseReportType": "Sélectionner un type de rapport",
   "removeReportType": "Supprimer le type de rapport",
+  "restartServiceLinker": "Analyze dataset & service links",
   "customFilter": "Filtre",
   "customScope": "Report identifier",
   "customScopeHelp": "This field allows to define a custom report identifiers which will be used as a scope once indicator are loaded. This is useful to make distinction between reports made with custom filters (eg. computing indicators for a specific organization).",

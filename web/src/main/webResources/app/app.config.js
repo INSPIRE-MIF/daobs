@@ -46,6 +46,7 @@
       dashboardBaseURL: context + 'dashboard/app/kibana?',
       dashboardApiBulkGet: context + 'dashboard/api/saved_objects/bulk_get',
       eftValidation: api + 'validate/etf',
+      serviceLinker: api + 'validate/linkrecord',
       inspireValidation: api + 'validate/inspire'
     }
   });

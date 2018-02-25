@@ -31,6 +31,8 @@ import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.fieldstats.FieldStatsResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateRequestBuilder;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.NamedXContentRegistry;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -47,8 +49,6 @@ import org.w3c.dom.Node;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -74,7 +74,7 @@ public class EsRequestBean {
   private Logger logger = Logger.getLogger("org.daobs.index");
 
   /**
-   * Create an index if not exisiting.
+   * Create an index if not existing.
    *
    */
   public static boolean createIndexIfNotExist(String indexName, String mappingFile) {
@@ -147,7 +147,7 @@ public class EsRequestBean {
 
 
   /**
-   * Query index over HTTP.
+   * Query index over HTTP and return node.
    */
   public static Node query(String collection, String[] fields,
                            String query, int rows) throws Exception {
@@ -173,6 +173,45 @@ public class EsRequestBean {
     EsClientBean client = EsClientBean.get();
     return query(client.getDefaultIndex(), fields, query, rows);
   }
+
+  /**
+   * Query index and return SearchResponse.
+   */
+  public static SearchResponse search(String collection, String[] fields,
+                                     String query, int rows) throws Exception {
+    EsClientBean client = EsClientBean.get();
+    // TODO: Use the scroll API for large set
+    SearchRequestBuilder srb = client.getClient().prepareSearch(collection)
+        .setQuery(QueryBuilders.queryStringQuery(query));
+
+    if (fields != null) {
+      srb.setFetchSource(fields, null);
+    }
+
+    return srb
+        .setFrom(0)
+        .setSize(rows)
+        .execute().actionGet();
+  }
+
+  /**
+   * Update a document.
+   */
+  public static UpdateResponse update(String collection,
+                                      String id,
+                                      XContentBuilder source
+                                      ) throws Exception {
+    EsClientBean client = EsClientBean.get();
+    UpdateRequestBuilder urb = client.getClient().prepareUpdate()
+        .setIndex(collection)
+        .setType(collection)
+        .setId(id)
+        .setDoc(source);
+
+    return urb.execute().actionGet();
+  }
+
+
 
   /**
    * Convert search response to node.
@@ -214,10 +253,18 @@ public class EsRequestBean {
           if (values instanceof ArrayList) {
             Iterator<String> valuesIterator = ((ArrayList<String>) values).iterator();
             while (valuesIterator.hasNext()) {
-              String va = valuesIterator.next();
-              Element arrayElement = xmlDoc.createElement(isBoolean ?  "bool" : "str");
-              arrayElement.setTextContent(va);
-              field.appendChild(arrayElement);
+              Object o = valuesIterator.next();
+              if (o instanceof String) {
+                Element arrayElement = xmlDoc.createElement(isBoolean ? "bool" : "str");
+                arrayElement.setTextContent((String) o);
+                field.appendChild(arrayElement);
+              } else if (o instanceof ArrayList) {
+                ((ArrayList) o).forEach(e -> {
+                  Element arrayElement = xmlDoc.createElement(isBoolean ? "bool" : "str");
+                  arrayElement.setTextContent((String) e);
+                  field.appendChild(arrayElement);
+                });
+              }
             }
           } else {
             Element arrayElement = xmlDoc.createElement(isBoolean ?  "bool" : "str");
