@@ -149,7 +149,7 @@
       -->
       <xsl:for-each select="gmd:dateStamp/*[text() != '' and position() = 1]">
         <xsl:choose>
-          <xsl:when test="matches(., '^\d{4}(-\d{2})?(-\d{2})?((T\d{2}(:\d{2})?(:\d{2})?)+(\+.*)?)?$')">
+          <xsl:when test="matches(., '^\d{4}(-\d{2})?(-\d{2})?((T\d{2}(:\d{2})?(:\d{2}(.\d+)?)?)+(\+.*)?)?$')">
             <dateStamp>
               <xsl:variable name="date"
                             select="if (name() = 'gco:Date' and string-length(.) = 4)
@@ -170,8 +170,10 @@
             </dateStamp>
           </xsl:when>
           <xsl:otherwise>
-            <!-- Some invalid date in DE. -->
-            <xsl:message>WARNING: <xsl:value-of select="$identifier"/> / Wrong date time format <xsl:value-of select="."/>. Default to empty.</xsl:message>
+            <!-- Some invalid date in DE, FI. -->
+            <xsl:variable name="msg">WARNING: <xsl:value-of select="$identifier"/> / Wrong date time format <xsl:value-of select="."/>. Default to empty.</xsl:variable>
+            <xsl:message><xsl:value-of select="$msg"/></xsl:message>
+            <error><xsl:value-of select="$msg"/></error>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
@@ -257,9 +259,18 @@
                           as="xs:string?"/>
             <xsl:variable name="date"
                           select="string(gmd:date[1]/gco:Date|gmd:date[1]/gco:DateTime)"/>
-            <xsl:element name="{$dateType}DateForResource">
-              <xsl:value-of select="$date"/>
-            </xsl:element>
+
+            <xsl:choose>
+              <xsl:when test="matches(., '^\d{4}(-\d{2})?(-\d{2})?((T\d{2}(:\d{2})?(:\d{2}(.\d+)?)?)+(\+.*)?)?$')">
+                <xsl:element name="{$dateType}DateForResource">
+                  <xsl:value-of select="$date"/>
+                </xsl:element>
+              </xsl:when>
+              <xsl:otherwise>
+                <error>WARNING: Date <xsl:value-of select="$dateType"/> with value '<xsl:value-of select="$date"/>' was not a valid date format.</error>
+              </xsl:otherwise>
+            </xsl:choose>
+
             <xsl:element name="{$dateType}YearForResource">
               <xsl:value-of select="substring($date, 0, 5)"/>
             </xsl:element>
@@ -557,12 +568,14 @@
           </xsl:for-each>
 
           <!-- TODO: index bounding polygon -->
-          <xsl:for-each select=".//gmd:EX_GeographicBoundingBox[
+          <xsl:variable name="bboxes"
+                        select=".//gmd:EX_GeographicBoundingBox[
                                 ./gmd:westBoundLongitude/gco:Decimal castable as xs:decimal and
                                 ./gmd:eastBoundLongitude/gco:Decimal castable as xs:decimal and
                                 ./gmd:northBoundLatitude/gco:Decimal castable as xs:decimal and
                                 ./gmd:southBoundLatitude/gco:Decimal castable as xs:decimal
-                                ]">
+                                ]"/>
+          <xsl:for-each select="$bboxes">
             <xsl:variable name="format" select="'#0.000000'"></xsl:variable>
 
             <xsl:variable name="w"
@@ -608,20 +621,32 @@
                     <location><xsl:value-of select="concat($s, ',', $w)"/></location>
                   </xsl:when>
                   <xsl:otherwise>
-                    <geom>
-                      <xsl:text>{"type": "polygon",</xsl:text>
-                      <xsl:text>"coordinates": [</xsl:text>
-                      <xsl:value-of select="concat('[', $w, ',', $s, ']')"/>
-                      <xsl:text>,</xsl:text>
-                      <xsl:value-of select="concat('[', $e, ',', $s, ']')"/>
-                      <xsl:text>,</xsl:text>
-                      <xsl:value-of select="concat('[', $e, ',', $n, ']')"/>
-                      <xsl:text>,</xsl:text>
-                      <xsl:value-of select="concat('[', $w, ',', $n, ']')"/>
-                      <xsl:text>,</xsl:text>
-                      <xsl:value-of select="concat('[', $w, ',', $s, ']')"/>
-                      <xsl:text>]}</xsl:text>
-                    </geom>
+
+                    <!-- TODO: avoid to build an array of geom.
+                    Elastic will fails on this with org.elasticsearch.index.mapper.MapperParsingException: failed to parse [geom]
+                    and a multipolygon should be created instead probably.
+-->
+                    <!--<xsl:message>  - pos: <xsl:value-of select="position()"/> </xsl:message>
+                    <xsl:if test="position() = 1">
+                      <xsl:variable name="geom">
+                        <xsl:text>{"type": "polygon",</xsl:text>
+                        <xsl:text>"coordinates": [</xsl:text>
+                        <xsl:value-of select="concat('[', $w, ',', $s, ']')"/>
+                        <xsl:text>,</xsl:text>
+                        <xsl:value-of select="concat('[', $e, ',', $s, ']')"/>
+                        <xsl:text>,</xsl:text>
+                        <xsl:value-of select="concat('[', $e, ',', $n, ']')"/>
+                        <xsl:text>,</xsl:text>
+                        <xsl:value-of select="concat('[', $w, ',', $n, ']')"/>
+                        <xsl:text>,</xsl:text>
+                        <xsl:value-of select="concat('[', $w, ',', $s, ']')"/>
+                        <xsl:text>]}</xsl:text>
+                      </xsl:variable>
+                      <xsl:message>geom: <xsl:value-of select="$geom"/> </xsl:message>
+                      <geom>
+                        <xsl:value-of select="$geom"/>
+                      </geom>
+                    </xsl:if>-->
 
                     <location><xsl:value-of select="concat(
                                               (number($s) + number($n)) div 2,

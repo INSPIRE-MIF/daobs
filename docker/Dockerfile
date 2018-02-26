@@ -105,8 +105,11 @@ RUN set -e \
 RUN echo ${INSTALL_DASHBOARD_PATH} && mkdir -p ${INSTALL_DASHBOARD_PATH}
 RUN echo ${INSTALL_ETF_PATH} && mkdir -p ${INSTALL_ETF_PATH}
 
-COPY ./${WEBAPP_NAME}.war ${CATALINA_HOME}/webapps/${WEBAPP_NAME}.war
+RUN rm -rf ${CATALINA_HOME}/webapps/*
+
+COPY ./${WEBAPP_NAME}.war ${CATALINA_HOME}/webapps/ROOT.war
 COPY ./ETF ${INSTALL_ETF_PATH}/
+COPY ./datadir/users.properties /users.properties
 COPY ./datadir ${INSTALL_DASHBOARD_PATH}/datadir/
 RUN chmod +x ${INSTALL_ETF_PATH}/ant
 RUN chmod +x ${INSTALL_ETF_PATH}/bin/apache-ant-1.8.2/bin/ant
@@ -122,6 +125,8 @@ RUN chmod +x /docker-entry.sh
 
 COPY setenv.sh $CATALINA_HOME/bin/setenv.sh
 RUN chmod +x $CATALINA_HOME/bin/setenv.sh
+
+ADD ./VERSION .
 
 EXPOSE 8080
 WORKDIR $CATALINA_HOME

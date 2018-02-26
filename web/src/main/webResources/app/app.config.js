@@ -30,6 +30,7 @@
     'version': '${buildNumber}',
     'name': '${app.name}',
     'defaultDashboard': '${dashboard.default}',
+    'disableReportConfiguration': ${app.disableReportConfiguration},
     'SERVICES': {
       root: context,
       esdashboardCore: context + 'es/${es.index.dashboards}',
@@ -46,6 +47,7 @@
       dashboardBaseURL: context + 'dashboard/app/kibana?',
       dashboardApiBulkGet: context + 'dashboard/api/saved_objects/bulk_get',
       eftValidation: api + 'validate/etf',
+      serviceLinker: api + 'validate/linkrecord',
       inspireValidation: api + 'validate/inspire'
     }
   });

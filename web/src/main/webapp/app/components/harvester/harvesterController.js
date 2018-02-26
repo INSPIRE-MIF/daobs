@@ -398,6 +398,16 @@
             response.error.msg);
         });
       };
+      $scope.serviceLinker = function (h, all) {
+        harvesterService.serviceLinker(h, all).then(function (response) {
+          Notification.success($scope.translations.serviceLinkerStarted);
+          init();
+        }, function (response) {
+          Notification.error(
+            $scope.translations.errorStartingServiceLinker + ' ' +
+            response.error.msg);
+        });
+      };
       $scope.inspireValidation = function (h, all) {
         harvesterService.inspireValidation(h).then(function (response) {
           Notification.success($scope.translations.inspireValidationStarted);

@@ -55,7 +55,7 @@ readonlyrest:
     groups: ["kibana_rw"]
     # This is required to drop index pattern
     actions: ["indices:data/*", "indices:admin/*", "indices:monitor/*"]
-#    kibana_access: rw
+    kibana_access: rw
     kibana_index: .dashboards
     verbosity: error
 
@@ -87,15 +87,15 @@ readonlyrest:
 
   users:
 
-  - username: USERNAME
-    auth_key: USERNAME:PASSWORD
+  - username: admin
+    auth_key: admin:KIBANA_SRV_PASSWORD
     groups: ["kibana_rw"]
 
-#  - username: kibana_ro
-#    auth_key: visitor:visitor
-#    groups: ["kibana_ro"]
+  - username: kibana_ro
+    auth_key: visitor:dXQTptnvrCBrrNnGj
+    groups: ["kibana_ro"]
 
   - username: kibana_server
     # auth_key is good for testing, but replace it with `auth_key_sha256`!
-    auth_key: kibana_server:PASSWORD
+    auth_key: kibana_server:KIBANA_SRV_PASSWORD
     groups: ["kibana_srv"]

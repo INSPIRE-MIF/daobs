@@ -497,6 +497,8 @@
     <data.dir>${root.dir}/web/target/${war.name}/WEB-INF/datadir</data.dir>
     <config.properties.path>file:${data.dir}/config.properties</config.properties.path>
 
+    <app.disableReportConfiguration>false</app.disableReportConfiguration>
+
     <dashboard.default>#/dashboards?_g=()</dashboard.default>
 
     <log.dir>/tmp</log.dir>
@@ -542,9 +544,9 @@
 
     <lucene.version>6.6.1</lucene.version>
 
-    <es.version>5.6.6</es.version>
-    <es.version.md5>409fe6a56c681f3e3c04600693853f78</es.version.md5>
-    <ror.version>1.16.15_es${es.version}</ror.version>
+    <es.version>5.6.7</es.version>
+    <es.version.md5>244ec9fbd89e817302329b696842f5a1</es.version.md5>
+    <ror.version>1.16.16_es${es.version}</ror.version>
     <es.port>9200</es.port>
     <es.host>localhost</es.host>
     <!-- For docker, es.host is container
@@ -568,7 +570,7 @@
     <es.network.host>127.0.0.1</es.network.host>
     <es.xpack.config></es.xpack.config>
 
-    <kb.version.sha512>75803ff81cb73a48e2071f6249ec90b863246ce04b668919f811e43b27614ccb571f220e4667fc0b505ed45f531d8487aed615752752889d498a2f77e06b2f28</kb.version.sha512>
+    <kb.version.sha512>92c3a8e912d98835c66b3de95821150d184d04bbfd0e9b60d1dcce627158fa361476b9ac8c47ac436dd3973992efab806072a5d306becfa12f382c556ee2bf89</kb.version.sha512>
     <kb.protocol>${es.protocol}</kb.protocol>
     <kb.port>5601</kb.port>
     <kb.host>localhost</kb.host>
@@ -666,10 +668,10 @@ node.data: NODE_DATA
 node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
-        <kb.es.rw.username>USERNAME</kb.es.rw.username>
-        <kb.es.rw.password>PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>USERNAME</kb.es.serverusername>
-        <kb.es.serverpassword>PASSWORD</kb.es.serverpassword>
+        <kb.es.rw.username>KIBANA_RW_USER</kb.es.rw.username>
+        <kb.es.rw.password>KIBANA_RW_PASSWORD</kb.es.rw.password>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
+        <kb.es.serverpassword>KIBANA_SRV_PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>
 
@@ -678,11 +680,12 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
       <id>eea-inspire-official</id>
       <properties>
         <war.name>official</war.name>
-        <webapp.context>/official</webapp.context>
-        <webapp.rootUrl>/official/</webapp.rootUrl>
-        <webapp.url>https://inspire-dashboard.eea.europa.eu/official</webapp.url>
-        <webapp.username>changeme</webapp.username>
-        <webapp.password>changeme</webapp.password>
+        <webapp.context>/</webapp.context>
+        <webapp.rootUrl>/</webapp.rootUrl>
+        <webapp.url>https://inspire-dashboard.eea.europa.eu</webapp.url>
+        <webapp.username>admin</webapp.username>
+        <webapp.password>ADMINPASSWORD</webapp.password>
+        <webapp.visitor.password>dXQTptnvrCBrrNnGj</webapp.visitor.password>
         <authentication.mode>ba</authentication.mode>
         <etf.installation.path>/var/local/etf</etf.installation.path>
         <data.dir>/daobs-data-dir/datadir</data.dir>
@@ -693,10 +696,10 @@ node.data: NODE_DATA
 node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
-        <kb.es.rw.username>USERNAME</kb.es.rw.username>
-        <kb.es.rw.password>PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>USERNAME</kb.es.serverusername>
-        <kb.es.serverpassword>PASSWORD</kb.es.serverpassword>
+        <kb.es.rw.username>admin</kb.es.rw.username>
+        <kb.es.rw.password>KIBANA_SRV_PASSWORD</kb.es.rw.password>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
+        <kb.es.serverpassword>KIBANA_SRV_PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>
 
@@ -705,9 +708,12 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
       <id>eea-inspire-dashboard</id>
       <properties>
         <war.name>dashboard</war.name>
-        <webapp.context>/dashboard</webapp.context>
-        <webapp.rootUrl>/dashboard/</webapp.rootUrl>
-        <webapp.url>https://inspire-dashboard.eea.europa.eu/dashboard</webapp.url>
+        <webapp.context>/</webapp.context>
+        <webapp.rootUrl>/</webapp.rootUrl>
+        <webapp.url>https://inspire-dashboard.eea.europa.eu</webapp.url>
+        <webapp.username>admin</webapp.username>
+        <webapp.password>ADMINPASSWORD</webapp.password>
+        <webapp.visitor.password>dXQTptnvrCBrrNnGj</webapp.visitor.password>
         <authentication.mode>ldap</authentication.mode>
         <etf.installation.path>/var/local/etf</etf.installation.path>
         <data.dir>/daobs-data-dir/datadir</data.dir>
@@ -718,10 +724,10 @@ node.data: NODE_DATA
 node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
-        <kb.es.rw.username>USERNAME</kb.es.rw.username>
-        <kb.es.rw.password>PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>USERNAME</kb.es.serverusername>
-        <kb.es.serverpassword>PASSWORD</kb.es.serverpassword>
+        <kb.es.rw.username>admin</kb.es.rw.username>
+        <kb.es.rw.password>KIBANA_SRV_PASSWORD</kb.es.rw.password>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
+        <kb.es.serverpassword>KIBANA_SRV_PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>
 

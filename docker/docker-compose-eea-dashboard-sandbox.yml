@@ -36,17 +36,17 @@ services:
     container_name: sandbox-cerebro
 
   kibana:
-    environment:
-      - "REGIONMAP_LAYERS_URL=dashboard"
-      - "SERVER_BASEPATH=dashboard"
     networks:
       - network-dashboard-sandbox
     container_name: sandbox-kibana
 
   nginx:
     ports:
-      - "81:80"
+      #- "81:80"
       - "444:443"
+    environment:
+      - DASHBOARD_URL=http://dashboard:8080
+      - ES_URL=http://sandbox-es0:9200
     networks:
       - network-dashboard-sandbox
     container_name: sandbox-nginx

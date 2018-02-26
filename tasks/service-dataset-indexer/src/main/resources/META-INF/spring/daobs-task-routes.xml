@@ -44,6 +44,8 @@
 
   <bean id="xsltUtility" class="org.daobs.routing.utility.Utility"/>
 
+  <bean id="serviceDatasetAnalyzer" class="org.daobs.tasks.ServiceDatasetAnalyzer"/>
+
   <bean id="duplicateRepo"
         class="org.apache.camel.processor.idempotent.MemoryIdempotentRepository"/>
 
@@ -105,8 +107,14 @@
     </cm:onException>
 
 
+
     <cm:route id="route-task-start"
               autoStartup="{{task.service-dataset-indexer.startup.cli}}">
+      <cm:description>
+        Starting point when running from command line.
+        Then trigger the task with options defined in config.properties.
+        See mode CLI.
+      </cm:description>
       <cm:from uri="timer://start?repeatCount=1"/>
       <cm:setHeader headerName="documentFilter">
         <cm:simple>{{task.service-dataset-indexer.filter}}</cm:simple>
@@ -114,355 +122,30 @@
       <cm:to uri="direct:task-analyze-start"/>
     </cm:route>
 
+
+
     <cm:route id="route-task-jms-start"
               autoStartup="{{task.service-dataset-indexer.startup.jms}}">
+      <cm:description>
+        Starting point when a JMS message is received.
+        The message contains the filter to process a set of records.
+      </cm:description>
       <cm:from uri="activemq:task-analyze"/>
       <cm:setHeader headerName="documentFilter">
         <cm:groovy>'{{task.service-dataset-indexer.filter}}' + ' ' + exchange.in.body.trim()</cm:groovy>
       </cm:setHeader>
-      <cm:to uri="direct:task-analyze-start"/>
+      <cm:to uri="direct:task-analyze2-start"/>
     </cm:route>
 
-    <cm:route id="route-task-analyze">
+
+    <cm:route id="route-task-analyze2">
       <cm:description>
-        Query document to index.
-
-        Loop on all records.
-
+        Query document to analyze and index.
+        Loop on all records matching the filter.
         Check for all associated datasets.
       </cm:description>
-      <cm:from uri="direct:task-analyze-start"/>
-
-
-      <cm:log message="Background task indexing all service/data sets links ..."
-              loggingLevel="INFO"
-              logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-
-      <cm:log
-        message="Processing documents matching filter $simple{header.documentFilter}..."
-        loggingLevel="INFO"
-        logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-
-      <!-- Get number of services to analyze -->
-      <cm:removeHeaders pattern="harvesterName"/>
-      <cm:setHeader headerName="Exchange.HTTP_URI">
-        <cm:simple>{{es.url}}/{{es.index.records}}/_search</cm:simple>
-      </cm:setHeader>
-     <!-- <cm:setHeader headerName="Exchange.HTTP_QUERY">
-        <cm:groovy>'from=0&amp;size=0'</cm:groovy>
-      </cm:setHeader>-->
-      <cm:setBody>
-        <cm:simple>{
-          "sort" : [{
-            "id" : {"order" : "asc"}
-          }],
-          "_source": [{{task.service-dataset-indexer.fields}}],
-          "query": {
-            "query_string" : {
-              "query" : "$simple{header.documentFilter}"
-            }
-          }
-        }</cm:simple>
-      </cm:setBody>
-
-      <!--<cm:log
-        message="$simple{body}"
-        loggingLevel="DEBUG"
-        logName="org.daobs.task.ServiceDatasetIndexer"/>-->
-
-      <cm:to
-        uri="http4://index?throwExceptionOnFailure=false"/>
-      <cm:convertBodyTo type="java.lang.String"/>
-
-      <cm:unmarshal ref="xmljson"/>
-      <cm:choice>
-        <cm:when>
-          <cm:xpath>//hits/total and //hits/total > 0</cm:xpath>
-          <cm:setHeader headerName="numberOfRecordsMatched">
-            <cm:xpath resultType="java.lang.String">
-              //hits/total
-            </cm:xpath>
-          </cm:setHeader>
-          <cm:log
-            message="$simple{header.numberOfRecordsMatched} services record(s) to index."
-            loggingLevel="INFO"
-            logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-          <cm:split parallelProcessing="false" strategyRef="nullBodyStrategy">
-            <cm:method bean="serviceDatasetIndexerPagination"
-                       method="getPages"/>
-            <cm:setHeader headerName="start">
-              <cm:simple>${bean:serviceDatasetIndexerPagination?method=getStart}</cm:simple>
-            </cm:setHeader>
-            <cm:setHeader headerName="row">
-              <cm:simple>{{task.service-dataset-indexer.records.per.page}}
-              </cm:simple>
-            </cm:setHeader>
-
-            <cm:log
-              message="Page #$simple{property.CamelSplitIndex} - start: $simple{header.start} | row: $simple{header.row}."
-              loggingLevel="INFO"
-              logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-
-            <cm:setHeader headerName="CamelHttpMethod">
-              <cm:constant>POST</cm:constant>
-            </cm:setHeader>
-            <!-- TODO: Use scroll instead. -->
-            <cm:setHeader headerName="Exchange.HTTP_URI">
-              <cm:simple>{{es.url}}/{{es.index.records}}/_search</cm:simple>
-            </cm:setHeader>
-            <cm:setHeader headerName="Exchange.HTTP_QUERY">
-              <cm:groovy>'from=' + exchange.in.headers.start + '&amp;size=' + exchange.in.headers.row</cm:groovy>
-            </cm:setHeader>
-            <cm:setBody>
-              <cm:simple>
-                {
-                "sort" : [{
-                  "id" : {"order" : "asc"}
-                }],
-                "_source": [{{task.service-dataset-indexer.fields}}],
-                "query": {
-                    "query_string" : {
-                      "query" : "$simple{header.documentFilter}"
-                    }
-                  }
-                }
-              </cm:simple>
-            </cm:setBody>
-            <cm:to
-              uri="http4://index?throwExceptionOnFailure=false"/>
-            <cm:convertBodyTo type="java.lang.String"/>
-            <cm:unmarshal ref="xmljson"/>
-            <cm:split parallelProcessing="false" strategyRef="nullBodyStrategy">
-              <cm:xpath>//hits/hits//e[_source]</cm:xpath>
-              <cm:setHeader headerName="documentIdentifier">
-                <cm:xpath resultType="java.lang.String">e/_source/id</cm:xpath>
-              </cm:setHeader>
-              <cm:setHeader headerName="harvesterId">
-                <cm:xpath resultType="java.lang.String">e/_source/harvesterId</cm:xpath>
-              </cm:setHeader>
-              <cm:setHeader headerName="serviceType">
-                <cm:xpath resultType="java.lang.String">e/_source/serviceType</cm:xpath>
-              </cm:setHeader>
-
-
-              <cm:split parallelProcessing="false">
-                <cm:xpath>e/_source/recordOperateOn/*</cm:xpath>
-                <cm:setBody>
-                  <cm:xpath resultType="java.lang.String">normalize-space(.)</cm:xpath>
-                </cm:setBody>
-
-                <cm:log
-                  message="  - Processing dataset #$simple{body} ..."
-                  loggingLevel="INFO"
-                  logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-                <cm:multicast parallelProcessing="false"
-                              strategyRef="nullBodyStrategy">
-                  <cm:to uri="direct:index-association"/>
-                  <cm:to uri="direct:index-inspirethemes-in-service"/>
-                </cm:multicast>
-
-                <!--<cm:setHeader headerName="idToCheck">
-                  <cm:groovy>exchange.in.headers.documentIdentifier + '-' + exchange.in.headers.serviceType + '-' + body
-                  </cm:groovy>
-                </cm:setHeader>
-                <cm:idempotentConsumer messageIdRepositoryRef="duplicateRepo">
-                  <cm:header>idToCheck</cm:header>
-                  <cm:log message=" * Service '$simple{header.documentIdentifier}' operates on '${body}'."
-                          loggingLevel="INFO"
-                          logName="org.daobs.task.ServiceDatasetIndexer"/>
-                  <cm:multicast parallelProcessing="false">
-                    <cm:to uri="direct:index-association"/>
-                    <cm:to uri="direct:index-inspirethemes-in-service"/>
-                  </cm:multicast>
-                </cm:idempotentConsumer>-->
-              </cm:split>
-            </cm:split>
-          </cm:split>
-        </cm:when>
-        <cm:otherwise>
-          <cm:log message="No services found."
-                  loggingLevel="INFO"
-                  logName="org.daobs.task.ServiceDatasetIndexer"/>
-        </cm:otherwise>
-      </cm:choice>
-    </cm:route>
-
-
-    <cm:route id="route-index-association">
-      <cm:from uri="direct:index-association"/>
-      <cm:setHeader headerName="beginTime">
-        <cm:simple>${date:now:yyyyMMdd'T'HH':'mm':'ss}</cm:simple>
-      </cm:setHeader>
-      <cm:log
-        message="Service '$simple{header.documentIdentifier}' ($simple{header.serviceType}) related to '$simple{body}'"
-        loggingLevel="INFO"
-        logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-      <cm:setBody>
-        <!-- TODO: record may be operated by more than one service  -->
-        <cm:simple>{ "update" : { "_index" : "{{es.index.records}}", "_type" : "{{es.index.records}}", "_id" : "$simple{body}"} }
-{"doc": { "recordOperatedByType": "$simple{header.serviceType}", "recordOperatedBy": "$simple{header.documentIdentifier}", "recordOperatedByType$simple{header.serviceType}": "$simple{header.documentIdentifier}"} }</cm:simple>
-      </cm:setBody>
-      <cm:aggregate strategyRef="addAggregatorStrategy"
-                    completionSize="200"
-                    completionTimeout="30000"
-                    parallelProcessing="false">
-        <cm:correlationExpression>
-          <cm:constant>true</cm:constant>
-        </cm:correlationExpression>
-        <cm:log
-          message="  aggregated ${property.CamelAggregatedSize} by ${property.CamelAggregatedCompletedBy} ..."
-          loggingLevel="INFO"
-          logName="org.daobs.task.ServiceDatasetIndexer"/>
-        <cm:to uri="direct:save-association"/>
-      </cm:aggregate>
-    </cm:route>
-
-
-    <cm:route id="route-index-inspirethemes-in-service">
-      <cm:from uri="direct:index-inspirethemes-in-service"/>
-      <cm:setHeader headerName="beginTime">
-        <cm:simple>${date:now:yyyyMMdd'T'HH':'mm':'ss}</cm:simple>
-      </cm:setHeader>
-      <cm:setHeader headerName="serviceIdentifier">
-        <cm:simple>${header.documentIdentifier}</cm:simple>
-      </cm:setHeader>
-      <cm:setHeader headerName="datasetIdentifier">
-        <cm:simple>${body}</cm:simple>
-      </cm:setHeader>
-      <cm:log
-        message="Search INSPIRE themes in dataset '$simple{header.datasetIdentifier}' and add them to the service '$simple{header.serviceIdentifier}' ..."
-        loggingLevel="INFO"
-        logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-
-      <cm:setHeader headerName="CamelHttpMethod">
-        <cm:constant>GET</cm:constant>
-      </cm:setHeader>
-      <!-- TODO: Use scroll instead. -->
-      <cm:setHeader headerName="Exchange.HTTP_URI">
-        <cm:simple>{{es.url}}/{{es.index.records}}/{{es.index.records}}/$simple{header.datasetIdentifier}</cm:simple>
-      </cm:setHeader>
-      <cm:setHeader headerName="Exchange.HTTP_QUERY">
-        <cm:simple>_source_include=inspire*</cm:simple>
-      </cm:setHeader>
-      <cm:setBody>
-        <cm:simple></cm:simple>
-      </cm:setBody>
-      <cm:to
-        uri="http4://index?throwExceptionOnFailure=false"/>
-
-      <cm:convertBodyTo type="java.lang.String"/>
-
-      <cm:unmarshal ref="xmljson"/>
-
-      <cm:choice>
-        <cm:when>
-          <cm:xpath>count(.//_source) = 0</cm:xpath>
-          <!-- TODO: Add the info in the service record ?-->
-          <cm:log
-            message="Dataset '$simple{header.datasetIdentifier}' not found. Probably a wrong srv:operatesOn element in the service."
-            loggingLevel="INFO"
-            logName="org.daobs.task.ServiceDatasetIndexer"/>
-        </cm:when>
-        <cm:when>
-          <cm:xpath>count(.//inspireTheme) > 0</cm:xpath>
-
-           <cm:setHeader headerName="themes">
-            <cm:xpath resultType="java.lang.String">string-join(//inspireTheme, ', ')</cm:xpath>
-          </cm:setHeader>
-          <cm:log
-            message="INSPIRE theme(s) for dataset '$simple{header.datasetIdentifier}' are '$simple{header.themes}'."
-            loggingLevel="INFO"
-            logName="org.daobs.task.ServiceDatasetIndexer"/>
-
-          <cm:setHeader headerName="index">
-            <cm:simple>{{es.index.records}}</cm:simple>
-          </cm:setHeader>
-
-          <cm:setHeader headerName="type">
-            <cm:simple>{{es.index.records}}</cm:simple>
-          </cm:setHeader>
-          <!-- Camel XSLT issue with Saxon 8
-          http://camel.465427.n5.nabble.com/camel-xslt-with-saxon-8-7-td5759704.html
-          <cm:to uri="xslt:WEB-INF/xslt/index-service-themes.xsl?saxon=false"/>
-          -->
-          <cm:to
-            uri="bean:xsltUtility?method=transform(*, '/xslt/index-service-themes.xsl')"/>
-
-          <!--<cm:log
-            message="$simple{body}"
-            loggingLevel="DEBUG"
-            logName="org.daobs.task.ServiceDatasetIndexer"/>-->
-
-          <cm:choice>
-            <cm:when>
-              <cm:groovy>!"".equals(body)</cm:groovy>
-              <cm:aggregate strategyRef="addAggregatorStrategy"
-                            completionSize="200"
-                            completionTimeout="30000"
-                            parallelProcessing="false">
-                <cm:correlationExpression>
-                  <cm:constant>true</cm:constant>
-                </cm:correlationExpression>
-                <cm:log
-                  message="  aggregated ${property.CamelAggregatedSize} by ${property.CamelAggregatedCompletedBy} ..."
-                  loggingLevel="INFO"
-                  logName="org.daobs.task.ServiceDatasetIndexer"/>
-                <cm:to uri="direct:save-association"/>
-              </cm:aggregate>
-            </cm:when>
-            <cm:otherwise>
-              <cm:log
-                message="No INSPIRE themes found in dataset '$simple{header.datasetIdentifier}'."
-                loggingLevel="INFO"
-                logName="org.daobs.task.ServiceDatasetIndexer"/>
-            </cm:otherwise>
-          </cm:choice>
-        </cm:when>
-        <cm:otherwise>
-          <cm:log
-            message="No INSPIRE themes found for dataset '$simple{header.datasetIdentifier}'."
-            loggingLevel="INFO"
-            logName="org.daobs.task.ServiceDatasetIndexer"/>
-        </cm:otherwise>
-      </cm:choice>
-    </cm:route>
-
-
-    <cm:route id="save-association">
-      <cm:from uri="direct:save-association"/>
-      <cm:setBody>
-              <cm:simple>${body}\n</cm:simple>
-      </cm:setBody>
-      <cm:log message="Updating index with '$simple{body}' ..."
-              loggingLevel="DEBUG"
-              logName="org.daobs.task.ServiceDatasetIndexer"/>
-      <cm:removeHeaders pattern="*"/>
-
-      <cm:setHeader headerName="CamelHttpMethod">
-        <cm:constant>POST</cm:constant>
-      </cm:setHeader>
-
-      <cm:setHeader headerName="Exchange.HTTP_URI">
-        <cm:groovy>'{{es.url}}/{{es.index.records}}/_bulk'</cm:groovy>
-      </cm:setHeader>
-      <cm:setHeader headerName="Exchange.HTTP_QUERY"><cm:simple></cm:simple></cm:setHeader>
-      <cm:setHeader headerName="Content-Type">
-        <cm:constant>application/json</cm:constant>
-      </cm:setHeader>
-
-      <cm:to uri="http4://index?throwExceptionOnFailure=false"/>
-
-      <cm:log
-        message="Association saved. ${body}"
-        loggingLevel="INFO"
-        logName="org.daobs.task.ServiceDatasetIndexer"/>
+      <cm:from uri="direct:task-analyze2-start"/>
+      <cm:to uri="bean:serviceDatasetAnalyzer?method=linkServiceAndDatasets"/>
     </cm:route>
   </cm:camelContext>
 </beans>

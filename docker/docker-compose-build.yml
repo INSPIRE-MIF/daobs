@@ -25,15 +25,13 @@ services:
       context: ./kibana
     image: inspiremif/kibana:latest
 
+  nginx:
+    build:
+      context: ./nginx
+    image: inspiremif/nginx:latest
+
   cerebro:
     build:
       context: ./cerebro
     image: inspiremif/cerebro:latest
 
-  sysctl:
-    network_mode: none
-    image: rawmind/alpine-sysctl:0.1
-    privileged: true
-    environment:
-      - "SYSCTL_KEY=vm.max_map_count"
-      - "SYSCTL_VALUE=262144"

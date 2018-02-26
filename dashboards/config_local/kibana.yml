@@ -1,7 +1,7 @@
 server.name: kibana
 #server.host: "0"
 
-server.basePath: "${webapp.rootUrl}dashboard"
+server.basePath: "/dashboard"
 
 kibana.index: "${es.index.dashboards}"
 

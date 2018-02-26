@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="col-sm-5">
-            <div class="input-group">
+            <div class="input-group" data-ng-show="!disableReportConfiguration">
               <input type="text" class="form-control" ng-model="reportTypeName" placeholder="Report type name...">
               <span class="input-group-btn">
                 <button class="btn btn-success" type="button" data-ng-click="createReportType(reportTypeName)"
@@ -279,7 +279,7 @@
             monitoringHelp
           </div>
 
-          <div class="form-group">
+          <div class="form-group" data-ng-show="!disableReportConfiguration">
             <div class="col-sm-offset-1 col-sm-11">
               <button id="ds-btn-reportType-remove"
                       type="submit"
@@ -297,7 +297,7 @@
               <th data-translate="">name</th>
               <th data-translate="">definition</th>
               <th data-translate="">type</th>
-              <th data-translate="">action</th>
+              <th data-translate="" data-ng-show="!disableReportConfiguration">action</th>
             </tr>
             <tr>
               <th>
@@ -310,7 +310,7 @@
                        data-ng-model="reportConfigSearch.$"/>
               </th>
               <th></th>
-              <th></th>
+              <th data-ng-show="!disableReportConfiguration"></th>
             </tr>
             <tr
               data-ng-repeat="v in rules | orderBy:'id' | filter:reportConfigSearch">
@@ -346,7 +346,7 @@
                         class="label label-success">I</span>
                 </h4>
               </td>
-              <td>
+              <td data-ng-show="!disableReportConfiguration">
                 <div class='row text-center'>
                   <button
                     class="btn btn-link"
@@ -362,7 +362,7 @@
               </td>
             </tr>
           </table>
-          <div class="row">
+          <div class="row" data-ng-show="!disableReportConfiguration">
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
 

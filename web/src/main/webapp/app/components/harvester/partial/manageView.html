@@ -264,6 +264,15 @@
                   <span data-translate="">restartEtfMissing</span>
                 </a>
               </li>
+              <li>
+                <a role="button"
+                   data-ng-click="serviceLinker(selected, false)"
+                   data-ng-show="statsForScope[selected.uuid].count > 0"
+                   title="{{'restartServiceLinker' | translate}}">
+                  <i class="fa fa-fw"></i>&nbsp;
+                  <span data-translate="">restartServiceLinker</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>

@@ -42,7 +42,7 @@
       </cm:description>
       <cm:from uri="direct-vm:indexDocuments"/>
 
-      <!-- From XML response containing ISO19139 records to Solr XML transaction document-->
+      <!-- From XML response containing ISO19139 records to ES XML transaction document-->
       <cm:to uri="bean:xsltUtility?method=transform(*, '/xslt/metadata.xsl')"/>
       <!-- Some header may trigger [Fatal Error] :1:1: Premature end of file.
       See https://github.com/INSPIRE-MIF/daobs/issues/90 -->

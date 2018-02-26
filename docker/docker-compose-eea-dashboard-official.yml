@@ -36,17 +36,20 @@ services:
     container_name: official-cerebro
 
   kibana:
-    environment:
-      - REGIONMAP_LAYERS_URL=/official/assets/data/europe.geojson
-      - SERVER_BASEPATH=official
+    #environment:
+    #  - REGIONMAP_LAYERS_URL=/official/assets/data/europe.geojson
+    #  - SERVER_BASEPATH=official
     networks:
       - network-dashboard-official
     container_name: official-kibana
 
   nginx:
     ports:
-      - "80:80"
+      #- "80:80"
       - "443:443"
+    environment:
+      - DASHBOARD_URL=http://dashboard:8080
+      - ES_URL=http://official-es0:9200
     networks:
       - network-dashboard-official
     container_name: official-nginx
