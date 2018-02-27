@@ -81,6 +81,7 @@
 
   <cm:camelContext id="task.db-validation-checker"
                    errorHandlerRef="loggingErrorHandler"
+                   allowUseOriginalMessage="true"
                    useMDCLogging="true">
 
     <cm:properties>

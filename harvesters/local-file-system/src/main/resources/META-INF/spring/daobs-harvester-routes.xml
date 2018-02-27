@@ -51,6 +51,7 @@
   <cm:camelContext
     id="harvesters.lfs"
     errorHandlerRef="loggingErrorHandler"
+    allowUseOriginalMessage="true"
     useMDCLogging="true">
 
     <cm:properties>
