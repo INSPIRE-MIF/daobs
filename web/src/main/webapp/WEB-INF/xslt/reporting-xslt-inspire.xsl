@@ -627,19 +627,22 @@
   <!-- Dataset is duplicated as many time as the number of INSPIRE themes -->
   <xsl:template mode="SpatialDataSetFactoryForEachInspireTheme"
                 match="doc">
+    <xsl:variable name="inspireThemes"
+                  select="distinct-values(arr[@name = 'inspireTheme']/str[. != ''])"/>
+
     <xsl:variable name="inspireThemeNumbers"
-                  select="count(distinct-values(arr[@name = 'inspireTheme']/str))"/>
+                  select="count($inspireThemes)"/>
 
     <xsl:if test="$inspireThemeNumbers > 1">
       <xsl:comment>This data set contains
-        <xsl:value-of select="$inspireThemeNumbers"/> INSPIRE themes.
+        <xsl:value-of select="$inspireThemeNumbers"/> INSPIRE themes (<xsl:value-of select="string-join($inspireThemes, ',')"/>).
         It was duplicated for each themes.
       </xsl:comment>
     </xsl:if>
     <xsl:variable name="document" select="."/>
 
 
-    <xsl:for-each select="distinct-values(arr[@name = 'inspireTheme']/str)">
+    <xsl:for-each select="$inspireThemes">
       <SpatialDataSet>
         <name>
           <xsl:value-of select="$document/str[@name = 'resourceTitle']/text()"/>
@@ -652,7 +655,7 @@
           <xsl:value-of
             select="$document/str[@name = 'metadataIdentifier']/text()"/>
         </uuid>
-
+        
         <xsl:call-template name="InspireAnnexAndThemeFactory">
           <xsl:with-param name="inspireThemes"
                           select="."/>
