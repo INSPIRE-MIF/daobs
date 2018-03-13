@@ -95,7 +95,7 @@ readonlyrest:
     auth_key: ${kb.es.ro.username}:${kb.es.ro.password}
     groups: ["kibana_ro"]
 
-  - username: ${kb.es.serverusername}
+  - username: kibana_server
     # auth_key is good for testing, but replace it with `auth_key_sha256`!
-    auth_key: ${kb.es.serverusername}:${kb.es.serverpassword}
+    auth_key: kibana_server:${kb.es.serverpassword}
     groups: ["kibana_srv"]

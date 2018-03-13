@@ -19,9 +19,7 @@ sed "s#NODE_DATA#$NODE_DATA#g" -i /usr/share/elasticsearch/config/elasticsearch.
 
 #sed "s#KIBANA_RW_USER#$KIBANA_RW_USER#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
 #sed "s#KIBANA_RW_PASSWORD#$KIBANA_RW_PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
-#sed "s#KIBANA_SRV_PASSWORD#$KIBANA_SRV_PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
-
-sed "s#KIBANA_SRV_PASSWORD#$ADMINPASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
+sed "s#KIBANA_SRV_PASSWORD#$KIBANA_SRV_PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
 
 if [ -z "$DISCOVERY_ZEN" ]
 then
