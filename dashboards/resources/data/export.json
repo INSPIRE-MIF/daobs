@@ -63,7 +63,7 @@
       "version": 1,
       "timeRestore": true,
       "timeTo": "now",
-      "timeFrom": "now-5y",
+      "timeFrom": "now-9y",
       "refreshInterval": {
         "display": "Off",
         "pause": false,
@@ -206,7 +206,7 @@
       "version": 1,
       "timeRestore": true,
       "timeTo": "now",
-      "timeFrom": "now-5y",
+      "timeFrom": "now-9y",
       "refreshInterval": {
         "display": "Off",
         "pause": false,
