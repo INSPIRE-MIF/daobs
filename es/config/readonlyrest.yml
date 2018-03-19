@@ -91,7 +91,7 @@ readonlyrest:
     auth_key: ${kb.es.rw.username}:${kb.es.rw.password}
     groups: ["kibana_rw"]
 
-  - username: kibana_ro
+  - username: ${kb.es.ro.username}
     auth_key: ${kb.es.ro.username}:${kb.es.ro.password}
     groups: ["kibana_ro"]
 

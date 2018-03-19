@@ -693,9 +693,11 @@ node.data: NODE_DATA
 node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
-        <kb.es.rw.username>kibana_rw</kb.es.rw.username>
-        <kb.es.rw.password>KIBANA_SRV_PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>admin</kb.es.serverusername>
+        <kb.es.ro.username>${webapp.visitor.username}</kb.es.ro.username>
+        <kb.es.ro.password>${webapp.visitor.password}</kb.es.ro.password>
+        <kb.es.rw.username>${webapp.username}</kb.es.rw.username>
+        <kb.es.rw.password>${webapp.password}</kb.es.rw.password>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
         <kb.es.serverpassword>KIBANA_SRV_PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>
@@ -721,9 +723,11 @@ node.data: NODE_DATA
 node.master: NODE_MASTER]]></es.single-node.discovery>
         <es.network.host>192.168.1.10</es.network.host>
         <kb.host>kibana</kb.host>
-        <kb.es.rw.username>kibana_rw</kb.es.rw.username>
-        <kb.es.rw.password>KIBANA_SRV_PASSWORD</kb.es.rw.password>
-        <kb.es.serverusername>admin</kb.es.serverusername>
+        <kb.es.ro.username>${webapp.visitor.username}</kb.es.ro.username>
+        <kb.es.ro.password>${webapp.visitor.password}</kb.es.ro.password>
+        <kb.es.rw.username>${webapp.username}</kb.es.rw.username>
+        <kb.es.rw.password>${webapp.password}</kb.es.rw.password>
+        <kb.es.serverusername>kibana_server</kb.es.serverusername>
         <kb.es.serverpassword>KIBANA_SRV_PASSWORD</kb.es.serverpassword>
       </properties>
     </profile>

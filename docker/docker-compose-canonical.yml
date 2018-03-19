@@ -5,8 +5,8 @@ services:
     depends_on:
       - "kibana"
     environment:
-      #- KIBANA_SRV_PASSWORD=test # n.b.: must match the password on elasticsearch
-      - ADMINPASSWORD=changeme # n.b.: must match the password on elasticsearch
+      - KIBANA_SRV_PASSWORD=changeme # n.b.: must match the password on elasticsearch
+      - ADMINPASSWORD=changeme
     restart: always
     command: ["bash", "/wait-for-it.sh", "kibana:5601", "-t", "0", "--", "/docker-entry.sh"]
 
@@ -24,8 +24,8 @@ services:
       - NODE_MASTER=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=YES
-      #- KIBANA_SRV_PASSWORD=changeme
-      - ADMINPASSWORD=changeme
+      - KIBANA_SRV_PASSWORD=changeme
+      - ADMINPASSWORD=changeme # n.b.: must match the password on the dashboard application
     restart: always
 
   elasticsearch-node1:
@@ -78,8 +78,7 @@ services:
   kibana:
     image: inspiremif/kibana:latest
     environment:
-      #- KIBANA_SRV_PASSWORD=changeme # n.b.: must match the password on elasticsearch
-      - ADMINPASSWORD=changeme # n.b.: must match the password on elasticsearch
+      - KIBANA_SRV_PASSWORD=changeme # n.b.: must match the password on elasticsearch
     depends_on:
       - "elasticsearch"
     restart: always
