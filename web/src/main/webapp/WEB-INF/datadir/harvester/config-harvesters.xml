@@ -224,6 +224,7 @@
     <daobs:name>Cyprus eservices</daobs:name>
     <daobs:url>http://eservices.dls.moi.gov.cy/geoportal_inspire/csw</daobs:url>
     <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
+    <daobs:nbOfRecordsPerPage>20</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
 
   <daobs:harvester>
