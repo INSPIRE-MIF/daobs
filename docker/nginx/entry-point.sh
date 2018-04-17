@@ -39,7 +39,7 @@ fi
 echo "Replacing allowed_domain, dashboard & es url"
 
 cp /nginx.conf /etc/nginx/nginx.conf
-sed "s#ALLOWED_DOMAIN#$ALLOWED_DOMAIN#g" -i /etc/nginx/nginx.conf
+#sed "s#ALLOWED_DOMAIN#$ALLOWED_DOMAIN#g" -i /etc/nginx/nginx.conf
 sed "s#DASHBOARD_URL#$DASHBOARD_URL#g" -i /etc/nginx/nginx.conf
 sed "s#ES_URL#$ES_URL#g" -i /etc/nginx/nginx.conf
 

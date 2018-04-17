@@ -96,7 +96,6 @@ services:
     environment:
       - "GENERATESSL=NO"
       - "CERTIFICATESUBJ=/C=DK/ST=Copenhagen/L=Copenhagen/O=EEA/OU=IT Department/CN=inspire-dashboard.eea"
-      - "ALLOWED_DOMAIN=*.ec.europa.eu" # for setting X-FRAME-OPTIONS
     restart: always
     command: ["sh", "./entry-point.sh"]
 
