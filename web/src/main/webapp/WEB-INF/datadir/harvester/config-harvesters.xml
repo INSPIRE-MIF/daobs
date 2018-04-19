@@ -509,6 +509,15 @@ Service metadata  http://geoportal.nipp.hr/hr/application/find#|f22afe64-49dd-49
     <daobs:folder>SK2</daobs:folder>
     <daobs:name>Národná vyhľadávacia služba (Register priestorových informácií)</daobs:name>
     <daobs:url>https://rpi.gov.sk/rpi_csw/service.svc/post?</daobs:url>
+    <daobs:filter>
+      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml"
+                  xmlns:daobs="http://daobs.org">
+        <ogc:PropertyIsNotEqualTo>
+          <ogc:PropertyName>AnyText</ogc:PropertyName>
+          <ogc:Literal>AKSR</ogc:Literal>
+        </ogc:PropertyIsNotEqualTo>
+      </ogc:Filter>
+    </daobs:filter>
   </daobs:harvester>
 
   <daobs:harvester>
