@@ -24,6 +24,7 @@ package org.daobs.controller;
 
 import io.swagger.annotations.Api;
 import org.apache.camel.CamelContext;
+import org.apache.camel.impl.DefaultShutdownStrategy;
 import org.apache.camel.spi.InflightRepository;
 import org.daobs.workers.ContextStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,46 @@ public class WorkersManager {
             ex.getExchange().getUnitOfWork()
               .getOriginalInMessage().getHeader("numberOfRecordsMatched")
         ));
+      }
+    }
+    return result;
+  }
+
+
+  /**
+   * Get inflight exchanges.
+   */
+  @RequestMapping(value = "/reload",
+    produces = {
+      MediaType.APPLICATION_XML_VALUE,
+      MediaType.APPLICATION_JSON_VALUE,
+      MediaType.APPLICATION_XHTML_XML_VALUE
+    },
+    method = RequestMethod.GET)
+  @ResponseBody
+  public List<String> reload() {
+    ArrayList<String> result = new ArrayList<>();
+
+    result.add("Reloading context");
+    for (CamelContext context : camelContextStore.getCamelContexts()) {
+      result.add("Processing context " + context.getName());
+      try {
+        DefaultShutdownStrategy shutdownStrategy = new DefaultShutdownStrategy();
+        shutdownStrategy.setTimeout(30); // Force shutdown in 30sec
+        context.setShutdownStrategy(shutdownStrategy);
+        context.stop();
+        result.add("Context stopped");
+
+        try {
+          context.start();
+          result.add("Context started.");
+        } catch (Exception e) {
+          result.add("Error during startup: " + e.getMessage());
+          e.printStackTrace();
+        }
+      } catch (Exception e) {
+        result.add("Error during stop: " + e.getMessage());
+        e.printStackTrace();
       }
     }
     return result;
