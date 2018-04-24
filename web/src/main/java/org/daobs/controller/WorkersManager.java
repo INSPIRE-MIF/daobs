@@ -102,12 +102,12 @@ public class WorkersManager {
    * Get inflight exchanges.
    */
   @RequestMapping(value = "/reload",
-    produces = {
-      MediaType.APPLICATION_XML_VALUE,
-      MediaType.APPLICATION_JSON_VALUE,
-      MediaType.APPLICATION_XHTML_XML_VALUE
-    },
-    method = RequestMethod.GET)
+      produces = {
+        MediaType.APPLICATION_XML_VALUE,
+        MediaType.APPLICATION_JSON_VALUE,
+        MediaType.APPLICATION_XHTML_XML_VALUE
+      },
+      method = RequestMethod.GET)
   @ResponseBody
   public List<String> reload() {
     ArrayList<String> result = new ArrayList<>();
@@ -125,13 +125,13 @@ public class WorkersManager {
         try {
           context.start();
           result.add("Context started.");
-        } catch (Exception e) {
-          result.add("Error during startup: " + e.getMessage());
-          e.printStackTrace();
+        } catch (Exception ex) {
+          result.add("Error during startup: " + ex.getMessage());
+          ex.printStackTrace();
         }
-      } catch (Exception e) {
-        result.add("Error during stop: " + e.getMessage());
-        e.printStackTrace();
+      } catch (Exception ex) {
+        result.add("Error during stop: " + ex.getMessage());
+        ex.printStackTrace();
       }
     }
     return result;
