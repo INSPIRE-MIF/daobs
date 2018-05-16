@@ -117,7 +117,8 @@ public class WorkersManager {
       result.add("Processing context " + context.getName());
       try {
         DefaultShutdownStrategy shutdownStrategy = new DefaultShutdownStrategy();
-        shutdownStrategy.setTimeout(30); // Force shutdown in 30sec
+        shutdownStrategy.setTimeout(10); // Force shutdown in 10sec
+        shutdownStrategy.setShutdownNowOnTimeout(true);
         context.setShutdownStrategy(shutdownStrategy);
         context.stop();
         result.add("Context stopped");
