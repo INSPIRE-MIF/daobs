@@ -594,6 +594,9 @@
 
     <inspire.validation.background>false</inspire.validation.background>
 
+    <!-- Set to true to index indicators only based on the year of reporting
+    and ignore day and month. Only affect INSPIRE monitoring format. -->
+    <reports.yearlyIndicator>false</reports.yearlyIndicator>
 
     <kibana.port>8985</kibana.port>
 

@@ -34,6 +34,8 @@
   <xsl:include href="constant.xsl"/>
   <xsl:include href="metadata-inspire-constant.xsl"/>
 
+  <xsl:param name="yearlyIndicators" select="'false'"/>
+
   <xsl:variable name="indicatorLabels">
     <indicator id="SDSv_Num">
       Nb of spatial data services
@@ -979,14 +981,16 @@
     <!-- Format date properly. Sometimes month is written
 using one character or two. Prepend 0 when needed. -->
     <xsl:variable name="month"
-                  select="if ($dateNode/month = '00' or $dateNode/month = '0') then '12'
+                  select="if ($yearlyIndicators = 'true') then '12'
+                        else if ($dateNode/month = '00' or $dateNode/month = '0') then '12'
                         else if (string-length($dateNode/month) = 1)
                         then concat('0', $dateNode/month)
                         else if (string-length($dateNode/month) = 2)
                         then $dateNode/month
                         else '12'"/>
     <xsl:variable name="day"
-                  select="if ($dateNode/day = '00' or $dateNode/day = '0') then '31'
+                  select="if ($yearlyIndicators = 'true') then '31'
+                        else if ($dateNode/day = '00' or $dateNode/day = '0') then '31'
                         else if (string-length($dateNode/day) = 1)
                         then concat('0', $dateNode/day)
                         else if (string-length($dateNode/day) = 2)
