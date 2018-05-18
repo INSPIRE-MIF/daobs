@@ -655,7 +655,7 @@
           <xsl:value-of
             select="$document/str[@name = 'metadataIdentifier']/text()"/>
         </uuid>
-        
+
         <xsl:call-template name="InspireAnnexAndThemeFactory">
           <xsl:with-param name="inspireThemes"
                           select="."/>
@@ -874,14 +874,14 @@
     <!-- INSPIRE theme or themes to be used to build the section. -->
     <xsl:param name="inspireThemes"/>
 
-    <xsl:for-each select="$inspireThemes">
+    <xsl:for-each select="distinct-values($inspireThemes)">
       <xsl:variable name="theme" select="."/>
       <xsl:variable name="mapping"
                     select="$inspireThemesMap/map[matches($theme, @theme, 'i')]"/>
 
       <xsl:if test="$mapping/@annex != ''">
         <Themes>
-          <xsl:element name="{concat('Annex', $mapping/@annex)}">
+          <xsl:element name="{concat('Annex', $mapping[1]/@annex)}">
             <xsl:value-of select="$mapping/@monitoring"/>
           </xsl:element>
         </Themes>
