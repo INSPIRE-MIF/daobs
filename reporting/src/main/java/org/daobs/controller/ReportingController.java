@@ -134,6 +134,18 @@ public class ReportingController {
   @Value("${es.index.records}")
   private String index;
 
+
+  public String getYearlyIndicator() {
+    return yearlyIndicator;
+  }
+
+  public void setYearlyIndicator(String yearlyIndicator) {
+    this.yearlyIndicator = yearlyIndicator;
+  }
+
+  @Value("${reports.yearlyIndicator}")
+  private String yearlyIndicator = "true";
+
   /**
    * Get list of available reports.
    */
@@ -1125,9 +1137,13 @@ public class ReportingController {
       // + xslt + ". Check resource location.");
     }
 
+    Map<String, String> params = new HashMap<>();
+    params.put("yearlyIndicators", yearlyIndicator);
+
     Element results = simpleTransform(
         xmlFile.getAbsolutePath(),
-        stylesheet);
+        stylesheet,
+        params);
 
     if (results != null) {
       Iterator iterator = results.getChildren().iterator();
@@ -1190,14 +1206,22 @@ public class ReportingController {
    * Simple XSL transformation. To be Improved.
    */
   public static Element simpleTransform(String sourcePath,
-                                        Source stylesheet) {
+                                        Source stylesheet,
+                                        Map<String, String> params) {
     TransformerFactory transformerFactory = TransformerFactory.newInstance();
     JDOMResult jdomResult = new JDOMResult();
     try {
       Transformer transformer =
           transformerFactory.newTransformer(stylesheet);
 
-      transformer.transform(new StreamSource(new File(sourcePath)),
+      transformer.clearParameters();
+      if (params != null) {
+        params.keySet().forEach(e -> {
+          transformer.setParameter(e, params.get(e));
+        });
+      }
+      transformer.transform(
+          new StreamSource(new File(sourcePath)),
           jdomResult);//new StreamResult(new File(resultDir)));
       return jdomResult.getDocument().getRootElement().detach();
     } catch (Exception e1) {

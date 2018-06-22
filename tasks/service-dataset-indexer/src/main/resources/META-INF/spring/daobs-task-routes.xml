@@ -64,6 +64,7 @@
   <cm:camelContext
     id="task.service-dataset-indexer"
     errorHandlerRef="loggingErrorHandler"
+    allowUseOriginalMessage="true"
     useMDCLogging="true">
 
     <cm:properties>

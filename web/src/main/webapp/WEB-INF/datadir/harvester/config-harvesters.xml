@@ -233,6 +233,7 @@
     <daobs:name>Cyprus eservices</daobs:name>
     <daobs:url>http://eservices.dls.moi.gov.cy/geoportal_inspire/csw</daobs:url>
     <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
+    <daobs:nbOfRecordsPerPage>20</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
 
   <daobs:harvester>
@@ -341,11 +342,17 @@
     <daobs:url>https://www.geodata.se/InspireCswProxy/csw</daobs:url>
   </daobs:harvester>
 
+  <!--
+  UUID  f22afe64-49dd-49a4-b04b-62f1873f2218
+Folder name  HR
+URL  http://geoportal.nipp.hr/geonetwork/srv/hrv/csw-inspire
+Service metadata  http://geoportal.nipp.hr/hr/application/find#|f22afe64-49dd-49a4-b04b-62f1873f2218
+  -->
   <daobs:harvester>
     <daobs:uuid>fe1cebf2-784e-4412-ab0f-3a405803a0d3</daobs:uuid>
     <daobs:scope>HR</daobs:scope>
     <daobs:folder>HR</daobs:folder>
-    <daobs:name>Pilot kataloškog servera (Otišao)</daobs:name>
+    <daobs:name>NIPP Kataloška usluga</daobs:name>
     <daobs:url>http://geoportal.nipp.hr/geonetwork/srv/hrv/csw-inspire
     </daobs:url>
     <daobs:pointOfTruthURLPattern>
@@ -506,21 +513,20 @@
   </daobs:harvester>
 
   <daobs:harvester>
-    <daobs:uuid>a0e38db0-904f-477b-afdd-339ac304db53</daobs:uuid>
-    <daobs:scope>SK</daobs:scope>
-    <daobs:folder>SK</daobs:folder>
-    <daobs:name>Katalógová služba Národného Geoportálu (Slovenská agentúra
-      životného prostredia)
-    </daobs:name>
-    <daobs:url>http://csw.sazp.sk/</daobs:url>
-  </daobs:harvester>
-
-  <daobs:harvester>
     <daobs:uuid>218a6808-049c-11e7-93ae-92361f002671</daobs:uuid>
     <daobs:scope>SK</daobs:scope>
     <daobs:folder>SK2</daobs:folder>
     <daobs:name>Národná vyhľadávacia služba (Register priestorových informácií)</daobs:name>
     <daobs:url>https://rpi.gov.sk/rpi_csw/service.svc/post?</daobs:url>
+    <daobs:filter>
+      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml"
+                  xmlns:daobs="http://daobs.org">
+        <ogc:PropertyIsNotEqualTo>
+          <ogc:PropertyName>AnyText</ogc:PropertyName>
+          <ogc:Literal>AKSR</ogc:Literal>
+        </ogc:PropertyIsNotEqualTo>
+      </ogc:Filter>
+    </daobs:filter>
   </daobs:harvester>
 
   <daobs:harvester>

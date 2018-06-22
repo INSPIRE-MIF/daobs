@@ -23,10 +23,12 @@ package org.daobs.tasks.validation.inspire;
 
 import static org.daobs.routing.utility.Utility.encodeForJson;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -37,6 +39,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 /**
@@ -148,24 +152,41 @@ public class OnlineServiceValidatorClient {
     HttpPost httpPost = new HttpPost(this.inspireResourceTesterUrl);
     httpPost.addHeader("Accept", "application/xml");
 
-    MultipartEntity reqEntity = new MultipartEntity();
-
-    if (resourceDescriptorFile != null) {
-      FileBody dataFile = new FileBody(resourceDescriptorFile);
-      reqEntity.addPart("uploadedFile", dataFile);
+    // See http://inspire-geoportal.ec.europa.eu/validator2/html/usingaswebservice.html
+    // To Avoid HTTP status 301, use POST with body
+    // "This binding is best suited for machine-to-machine interaction."
+    HttpEntity entity = null;
+    httpPost.addHeader("Content-type", "text/plain");
+    try {
+      entity = new ByteArrayEntity(
+        resourceDescriptorFile != null
+          ? Files.readAllBytes(Paths.get(resourceDescriptorFile.toURI()))
+          : resourceDescriptorText.getBytes("UTF-8"));
+    } catch (IOException exc) {
+      exc.printStackTrace();
     }
+    httpPost.setEntity(entity);
 
-    if (resourceDescriptorText != null) {
-      StringBody stringPart = null;
-      try {
-        stringPart = new StringBody(resourceDescriptorText);
-      } catch (UnsupportedEncodingException exception) {
-        exception.printStackTrace();
-      }
-      reqEntity.addPart("resourceRepresentation", stringPart);
-    }
-
-    httpPost.setEntity(reqEntity);
+    // Old way of calling the service return 201 or 301.
+    // 301 would require polling
+    //    MultipartEntity reqEntity = new MultipartEntity();
+    //
+    //    if (resourceDescriptorFile != null) {
+    //      FileBody dataFile = new FileBody(resourceDescriptorFile);
+    //      reqEntity.addPart("uploadedFile", dataFile);
+    //    }
+    //
+    //    if (resourceDescriptorText != null) {
+    //      StringBody stringPart = null;
+    //      try {
+    //        stringPart = new StringBody(resourceDescriptorText);
+    //      } catch (UnsupportedEncodingException exception) {
+    //        exception.printStackTrace();
+    //      }
+    //      reqEntity.addPart("resourceRepresentation", stringPart);
+    //    }
+    //
+    //    httpPost.setEntity(reqEntity);
 
     try {
       report.start();

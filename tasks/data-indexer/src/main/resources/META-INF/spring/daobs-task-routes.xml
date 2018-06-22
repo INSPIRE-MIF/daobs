@@ -52,6 +52,7 @@
   <cm:camelContext
     id="task.data-indexer"
     errorHandlerRef="loggingErrorHandler"
+    allowUseOriginalMessage="true"
     useMDCLogging="true">
 
     <cm:properties>

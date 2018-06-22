@@ -96,7 +96,7 @@ Advanced Configuration
 ----------------------
 Nginx is running on port 443|444 (it uses different ports in the official and sandbox applications, in order to enable both of them to bind to the localhost). It can be configured as a proxy, using `nginx/nginx.conf`. The current configuration forwards all root requests on port 80|81 to the dashboard containers:
 
-```
+```nginx
 location / {
     #dashboard application on the root
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -137,37 +137,35 @@ When setting an elasticsearch host on cerebro, *make sure use the container name
 http://[ES_IP]:9200
 ```
 
-The readonlyrest plugin allows to implement security & access control for elasticsearch and kibana. In the elasticsearch image two users are created: one in the ["kibana_rw"] group and another in the ["kibana_srv"] group. The credentials for these users are set in the docker-compose file, in the section which corresponds to the master node of elasticsearch (called "elasticsearch"):
+The readonlyrest plugin allows to implement security & access control for elasticsearch and kibana. In the elasticsearch image three users are created: in the ["kibana_ro"], ["kibana_rw"] and ["kibana_srv"] group. The ["kibana_rw"] credentials should match the credentials from the dashboard application. The username of the dashboard application is preset to "admin", and the username of the the ["kibana_srv"] user is preset to "kibana_server". The passwords for these two users should be set in set in the docker-compose file, and need to be injected into several containers. **Please note that the ADMINPASSWORD and KIBANA_SRV_PASSWORD, should be the same in every container**. To change these passwords, update the following sections of the `docker-compose-canonical.yml` file.
 
+```yaml
+dashboard:
+  [...]
+  environment:
+    - KIBANA_SRV_PASSWORD=changeme # n.b.: must match the password on elasticsearch
+    - ADMINPASSWORD=changeme
+    [..]
 ```
+
+```yaml
 elasticsearch:
   [...]
   environment:
     [...]
     - KIBANA_SRV_PASSWORD=changeme
-    - KIBANA_RW_USER=changeme
-    - KIBANA_RW_PASSWORD=changeme
-```
-
-The `KIBANA_SRV_PASSWORD` variable sets the password for the `kibana_server` user. The `KIBANA_RW_USER` and `KIBANA_RW_PASSWORD` variables set the username and password of a user on the ["kibana_rw"] group.
-
-Then you need to match the value of `KIBANA_SRV_PASSWORD` in the configuration of the dashboard:
-
-```
-dashboard:
+    - ADMINPASSWORD=changeme # n.b.: must match the password on the dashboard
     [...]
-    environment:
-    - KIBANA_SRV_PASSWORD=changeme # n.b.: must match the credentials on elasticsearch
 ```
 
-And set the same value in the configuration of kibana:
-
-```
+```yaml
 kibana:
   [...]
   environment:
-    - KIBANA_SRV_PASSWORD=changeme # n.b.: must match the credentials on elasticsearch
+    - KIBANA_SRV_PASSWORD=changeme # n.b.: must match the password on elasticsearch
+    [...]
 ```
+
 
 Persisted Volumes
 -----------------
@@ -182,7 +180,7 @@ On this orchestration, **SSL is enabled** by default.
 In order to setup SSL with your own certificates, on the nginx section of docker-compose-canonical.yml you need to set the environmental variable `GENERATESSL` to `NO`.
 Please check also the bind mounts, on the volume section, and make sure that they point to the location of your public certificate and private key; by default they point to `/etc/pki/tls/certs/server-eionet.crt` and `/etc/pki/tls/private/server-eionet.key`.
 
-```
+```yaml
 volumes:
   - /etc/localtime:/etc/localtime:ro
   - /etc/pki/tls/certs/server-eionet.crt:/tmp/cert.crt:ro

@@ -68,6 +68,7 @@
     xmlns:geoportal="http://inspire.ec.europa.eu/schemas/geoportal/1.0"
     id="task.validation-checker"
     errorHandlerRef="loggingErrorHandler"
+    allowUseOriginalMessage="true"
     useMDCLogging="true">
 
     <cm:properties>

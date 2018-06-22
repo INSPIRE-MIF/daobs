@@ -24,6 +24,7 @@ package org.daobs.controller;
 
 import io.swagger.annotations.Api;
 import org.apache.camel.CamelContext;
+import org.apache.camel.impl.DefaultShutdownStrategy;
 import org.apache.camel.spi.InflightRepository;
 import org.daobs.workers.ContextStore;
 import org.springframework.beans.factory.annotation.Autowired;

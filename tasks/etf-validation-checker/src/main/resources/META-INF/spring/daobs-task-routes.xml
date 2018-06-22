@@ -65,6 +65,7 @@
 
   <cm:camelContext id="task.validation-etf-checker"
                    errorHandlerRef="loggingErrorHandler"
+                   allowUseOriginalMessage="true"
                    useMDCLogging="true">
 
     <cm:properties>

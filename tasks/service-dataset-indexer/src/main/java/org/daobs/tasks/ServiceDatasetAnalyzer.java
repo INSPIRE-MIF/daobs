@@ -39,6 +39,7 @@ import org.elasticsearch.search.SearchHit;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -220,7 +221,9 @@ public class ServiceDatasetAnalyzer {
           XContentBuilder source = jsonBuilder().startObject()
               .array("inspireTheme", allInspireThemes.toArray())
               .endObject();
-          UpdateResponse response = EsRequestBean.update(index, serviceId, source);
+          UpdateResponse response =
+              EsRequestBean.update(index,
+                  URLEncoder.encode(serviceId, "UTF-8"), source);
 
           System.out.println(String.format(
               "  Updated service %s INSPIRE theme %s.",
@@ -273,7 +276,9 @@ public class ServiceDatasetAnalyzer {
         }
         source.endObject();
         try {
-          UpdateResponse response = EsRequestBean.update(index, uuid, source);
+          UpdateResponse response =
+              EsRequestBean.update(index,
+                  URLEncoder.encode(uuid, "UTF-8"), source);
 
           System.out.println(String.format(
               "  Updated dataset %s service info. Response %s.",

@@ -88,10 +88,10 @@ readonlyrest:
   users:
 
   - username: admin
-    auth_key: admin:KIBANA_SRV_PASSWORD
+    auth_key: admin:ADMINPASSWORD
     groups: ["kibana_rw"]
 
-  - username: kibana_ro
+  - username: visitor
     auth_key: visitor:dXQTptnvrCBrrNnGj
     groups: ["kibana_ro"]
 

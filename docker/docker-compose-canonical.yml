@@ -25,6 +25,7 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=YES
       - KIBANA_SRV_PASSWORD=changeme
+      - ADMINPASSWORD=changeme # n.b.: must match the password on the dashboard application
     restart: always
 
   elasticsearch-node1:

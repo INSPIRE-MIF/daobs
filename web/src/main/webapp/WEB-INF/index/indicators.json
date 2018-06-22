@@ -26,6 +26,9 @@
         "indicatorName": {
           "type": "keyword"
         },
+        "indicatorLabel": {
+          "type": "keyword"
+        },
         "indicatorValue": {
           "type": "double"
         },
