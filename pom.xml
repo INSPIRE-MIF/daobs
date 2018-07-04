@@ -542,11 +542,11 @@
     <!-- Define one or more groups allowed for ES authorization -->
     <ldap.groups.allowed>"extranet","extranet-inspire-reporter","extranet-inspire-dashboard"</ldap.groups.allowed>
 
-    <lucene.version>6.6.1</lucene.version>
+    <lucene.version>7.3.1</lucene.version>
 
-    <es.version>5.6.7</es.version>
-    <es.version.md5>244ec9fbd89e817302329b696842f5a1</es.version.md5>
-    <ror.version>1.16.16_es${es.version}</ror.version>
+    <es.version>6.3.0</es.version>
+    <es.version.md5>a9892967e813c8b4949df49d2cd2301a</es.version.md5>
+    <ror.version>1.16.21_es${es.version}</ror.version>
     <es.port>9200</es.port>
     <es.host>localhost</es.host>
     <!-- For docker, es.host is container
@@ -570,7 +570,7 @@
     <es.network.host>127.0.0.1</es.network.host>
     <es.xpack.config></es.xpack.config>
 
-    <kb.version.sha512>92c3a8e912d98835c66b3de95821150d184d04bbfd0e9b60d1dcce627158fa361476b9ac8c47ac436dd3973992efab806072a5d306becfa12f382c556ee2bf89</kb.version.sha512>
+    <kb.version.sha512>8d83a41389a75463e810644a8e2dbbd7bba0a3c55aec25189f7f56dadfe6f4879e03d27ff65a87e2beb0c7e635e09b0a5669b6ce75323169b937cd754fabe1a7</kb.version.sha512>
     <kb.protocol>${es.protocol}</kb.protocol>
     <kb.port>5601</kb.port>
     <kb.host>localhost</kb.host>

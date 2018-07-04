@@ -130,7 +130,7 @@ public class ServiceDatasetAnalyzer {
         // _source_include=inspire*
         Set<String> allInspireThemes = new HashSet<String>();
         // First add those from the service
-        Object serviceInspireTheme = service.getSource().get("inspireTheme");
+        Object serviceInspireTheme = service.getSourceAsMap().get("inspireTheme");
         if (serviceInspireTheme != null) {
           if (serviceInspireTheme instanceof ArrayList) {
             allInspireThemes.addAll((ArrayList) serviceInspireTheme);
@@ -144,7 +144,7 @@ public class ServiceDatasetAnalyzer {
             serviceId, allInspireThemes.toString()));
 
         // Then add those from the datasets
-        final Object datasetsObj = service.getSource().get("recordOperateOn");
+        final Object datasetsObj = service.getSourceAsMap().get("recordOperateOn");
         // No dataset related to that service
         if (datasetsObj == null) {
           System.out.println(String.format(
@@ -175,7 +175,7 @@ public class ServiceDatasetAnalyzer {
 
           while (dsHitIterator.hasNext()) {
             final SearchHit dataset = dsHitIterator.next();
-            final Object dsInspireThemes = dataset.getSource().get("inspireTheme");
+            final Object dsInspireThemes = dataset.getSourceAsMap().get("inspireTheme");
             if (dsInspireThemes != null) {
               if (dsInspireThemes instanceof ArrayList) {
                 allInspireThemes.addAll((ArrayList) dsInspireThemes);
@@ -194,7 +194,7 @@ public class ServiceDatasetAnalyzer {
           // registered in the recordOperateOn field
           // in order to indicate for those datasets that
           // they are operated by the service.
-          final Object serviceTypes = service.getSource().get("serviceType");
+          final Object serviceTypes = service.getSourceAsMap().get("serviceType");
           if (serviceTypes != null) {
             final Iterator<String> datasetIterator = datasets.iterator();
             while (datasetIterator.hasNext()) {

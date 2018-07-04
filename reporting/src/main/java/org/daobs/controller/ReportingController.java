@@ -1239,7 +1239,7 @@ public class ReportingController {
                                                    String scopeId,
                                                    String fq,
                                                    boolean calculate, String date)
-      throws ResourceNotFoundException, FileNotFoundException {
+    throws ResourceNotFoundException, FileNotFoundException {
     String configurationFilePath =
         indicatorConfigurationDir
         + INDICATOR_CONFIGURATION_FILE_PREFIX
@@ -1291,7 +1291,7 @@ public class ReportingController {
         });
       }
       xcb.endObject();
-      return xcb.string();
+      return xcb.toString();
     } catch (IOException ex) {
       ex.printStackTrace();
     }

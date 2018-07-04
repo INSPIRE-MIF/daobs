@@ -32,6 +32,7 @@ import net.sf.saxon.FeatureKeys;
 import org.apache.camel.Exchange;
 import org.apache.camel.Header;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.springframework.util.Assert;
 import org.w3c.dom.Document;
@@ -193,12 +194,11 @@ public class Utility {
 
                   if (isArray) {
                     xcb.endArray();
-                  }
-                }
+                  }                }
               }
             }
             xcb.endObject();
-            listOfXcb.put(id, xcb.string());
+            listOfXcb.put(id, Strings.toString(xcb));
           }
         }
       }

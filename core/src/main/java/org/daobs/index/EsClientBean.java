@@ -23,7 +23,7 @@ package org.daobs.index;
 
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -109,9 +109,10 @@ public class EsClientBean implements InitializingBean {
           .put("client.transport.sniff", false)
           .put("client.transport.ignore_cluster_name", true).build();
 
+
       // Set nodes to localhost or docker elasticsearch container
       client = new PreBuiltTransportClient(settings)
-          .addTransportAddress(new InetSocketTransportAddress(
+          .addTransportAddress(new TransportAddress(
           InetAddress.getByName(esHost), 9300));
 
       synchronized (EsClientBean.class) {

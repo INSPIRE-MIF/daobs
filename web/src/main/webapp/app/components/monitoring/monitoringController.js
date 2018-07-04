@@ -148,12 +148,6 @@
         }
       });
 
-      $scope.facetFields = ['resourceType', 'Org',
-        'OrgForResource', 'isValid', 'scope'];
-      var facetParam = '';
-      $.each($scope.facetFields, function (item) {
-        facetParam += '&facet.field=' + $scope.facetFields[item];
-      });
       $scope.facetValues = {};
       var aggs = {
         "scope": {
@@ -249,6 +243,9 @@
         $http.post(
           cfg.SERVICES.esdataCore + '/_search?size=0', {
             "query" : {
+              "query_string": {
+                "query": "+documentType:metadata"
+              }
             },
             "aggs": aggs
           }
