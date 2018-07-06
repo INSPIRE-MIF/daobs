@@ -34,6 +34,7 @@
         <th data-translate="">monitoringYear</th>
         <th data-translate="">monitoringDate</th>
         <th data-translate="">scope</th>
+        <th data-translate="">reportType</th>
         <th data-translate="">org</th>
         <th>
           <div class="btn-group pull-right" role="group"
@@ -73,6 +74,7 @@
         <td><strong>{{m._source.reportingDate}}</strong></td>
         <td title="{{m._source.reportingDate}}">{{m._source.reportingDate | fromNow}}</td>
         <td>{{m._source.scope}}</td>
+        <td>{{m._source.report}}</td>
         <td>
           <ul>
            <!-- FIXME <li data-ng-repeat="c in m._source.contact">

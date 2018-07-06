@@ -20,6 +20,9 @@
           "type": "date",
           "format": "date_hour_minute_second"
         },
+        "report": {
+          "type": "keyword"
+        },
         "indicatorType": {
           "type": "keyword"
         },

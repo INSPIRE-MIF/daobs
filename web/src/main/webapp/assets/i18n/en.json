@@ -34,6 +34,7 @@
   "org": "Organization",
   "email": "Email",
   "viewRules": "View report rules",
+  "reportType": "Report type",
   "chooseReportType": "Choose report type",
   "removeReportType": "Remove report type",
   "restartServiceLinker": "Analyze dataset & service links",
