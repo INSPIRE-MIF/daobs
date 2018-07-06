@@ -107,6 +107,9 @@
           $http.post(
             cfg.SERVICES.esdataCore + '/_search?size=0', {
               "query" : {
+                "query_string": {
+                  "query": "+documentType:metadata"
+                }
               },
               "aggs": {
                 "top_scope": {
