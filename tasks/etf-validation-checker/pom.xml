@@ -96,7 +96,7 @@
           <plugin>
             <groupId>com.googlecode.maven-download-plugin</groupId>
             <artifactId>download-maven-plugin</artifactId>
-            <version>1.2.1</version>
+            <version>1.4.1</version>
             <executions>
               <execution>
                 <id>download-etf</id>
@@ -105,9 +105,10 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>
+<!--                  <url>
                     http://www.geostandaarden.nl/validatie/inspire/versies/1.5/ETF1.5.zip
-                  </url>
+                  </url>-->
+                  <url>http://www.geostandaarden.nl/validatie/inspire/versies/1.5/ETF1.5.1.zip</url>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}</outputDirectory>
                 </configuration>
@@ -115,11 +116,11 @@
             </executions>
           </plugin>
 
-          <!-- ETF 1.5 package has the version number in the folder, rename it -->
-          <plugin>
+          <!-- Not needed since ETF1.5.1 is extracted to ETF folder already -->
+          <!-- <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.7</version>
+            <version>1.8</version>
             <executions>
               <execution>
                 <id>rename-file</id>
@@ -134,7 +135,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>
+          </plugin>-->
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <executions>
