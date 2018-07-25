@@ -109,9 +109,9 @@ public class ReportingController {
 
   private String indicatorConfigurationDir;
 
-  @Value("${es.scrollSize}")
+  @Value("${es.scrollSize:100}")
   private int scrollSize;
-  
+
   public String getIndicatorConfigurationDir() {
     return indicatorConfigurationDir;
   }

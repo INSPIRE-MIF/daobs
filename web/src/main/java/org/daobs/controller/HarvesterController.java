@@ -63,7 +63,7 @@ public class HarvesterController {
   @Value("${reports.dir}")
   private String reportsPath;
 
-  @Value("${es.scrollSize}")
+  @Value("${es.scrollSize:100}")
   private int scrollSize;
 
 
