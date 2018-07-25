@@ -566,6 +566,8 @@
     <es.single-node.discovery>discovery.type: single-node</es.single-node.discovery>
     <es.network.host>127.0.0.1</es.network.host>
     <es.xpack.config></es.xpack.config>
+    <es.scrollSize>100</es.scrollSize>
+
 
     <kb.version.sha512>92c3a8e912d98835c66b3de95821150d184d04bbfd0e9b60d1dcce627158fa361476b9ac8c47ac436dd3973992efab806072a5d306becfa12f382c556ee2bf89</kb.version.sha512>
     <kb.protocol>${es.protocol}</kb.protocol>

@@ -109,6 +109,9 @@ public class ReportingController {
 
   private String indicatorConfigurationDir;
 
+  @Value("${es.scrollSize}")
+  private int scrollSize;
+  
   public String getIndicatorConfigurationDir() {
     return indicatorConfigurationDir;
   }
@@ -963,7 +966,7 @@ public class ReportingController {
       @RequestParam final String query) {
     String message = null;
     try {
-      message = EsRequestBean.deleteByQuery("indicators", query, 1000);
+      message = EsRequestBean.deleteByQuery("indicators", query, scrollSize);
       return new ResponseEntity<>(
         message,
         HttpStatus.OK);

@@ -165,7 +165,7 @@
         "resourceType": {
           "terms":  {
             "field": "resourceType",
-            "size": "100"
+            "size": "10"
           }
         },
         "isValid": {
@@ -176,13 +176,13 @@
         "OrgForResource": {
           "terms":  {
             "field": "OrgForResource",
-            "size": "100"
+            "size": "50"
           }
         },
         "Org": {
           "terms":  {
             "field": "Org",
-            "size": "100"
+            "size": "50"
           }
         }
       };
