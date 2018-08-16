@@ -223,7 +223,7 @@ public class ServiceDatasetAnalyzer {
               .endObject();
           UpdateResponse response =
               EsRequestBean.update(index,
-                  URLEncoder.encode(serviceId, "UTF-8"), source);
+                  URLEncoder.encode(serviceId, "UTF-8").replaceAll("%3A", ":"), source);
 
           System.out.println(String.format(
               "  Updated service %s INSPIRE theme %s.",
@@ -278,7 +278,7 @@ public class ServiceDatasetAnalyzer {
         try {
           UpdateResponse response =
               EsRequestBean.update(index,
-                  URLEncoder.encode(uuid, "UTF-8"), source);
+                URLEncoder.encode(uuid, "UTF-8").replaceAll("%3A", ":"), source);
 
           System.out.println(String.format(
               "  Updated dataset %s service info. Response %s.",

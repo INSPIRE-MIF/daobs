@@ -146,6 +146,9 @@
       <cm:setHeader headerName="CamelHttpMethod">
         <cm:constant>POST</cm:constant>
       </cm:setHeader>
+      <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+        <cm:constant>application/json</cm:constant>
+      </cm:setHeader>
       <cm:setHeader headerName="Exchange.HTTP_URI">
         <cm:simple>{{es.url}}/{{es.index.records}}/_search</cm:simple>
       </cm:setHeader>
@@ -181,6 +184,9 @@
 
         <cm:setHeader headerName="CamelHttpMethod">
           <cm:constant>GET</cm:constant>
+        </cm:setHeader>
+        <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+          <cm:constant>application/json</cm:constant>
         </cm:setHeader>
         <cm:setHeader headerName="Exchange.HTTP_URI">
           <cm:simple>{{es.url}}/{{es.index.records}}/_search</cm:simple>

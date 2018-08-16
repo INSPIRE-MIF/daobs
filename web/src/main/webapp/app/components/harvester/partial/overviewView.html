@@ -105,15 +105,19 @@
         </td>
       </tr>
       <tr data-ng-show="harvesterConfig"
-          data-ng-repeat="h in harvesterConfig | filter:harvesterSearch | orderBy:predicate:reverse">
+          data-ng-repeat="h in harvesterConfig | filter:harvesterSearch | orderBy:predicate:reverse"
+          data-ng-class="{'success': statsForRemote[h.uuid].count && statsForScope[h.uuid].count == statsForRemote[h.uuid].count,
+                          'warning': statsForRemote[h.uuid].count && statsForScope[h.uuid].count != statsForRemote[h.uuid].count}">
         <td class=""
             title="{{h.scope}}">
           <strong>{{h.scope}}</strong>
         </td>
         <td>
-          <a ng-href="#/harvesting/manage?uuid={{h.uuid}}">
+          <a data-ng-if="getUser().authenticated"
+             ng-href="#/harvesting/manage?uuid={{h.uuid}}">
             <strong>{{h.name}}</strong>
           </a>
+          <strong data-ng-if="!getUser().authenticated">{{h.name}}</strong>
         </td>
         <td>
           <strong data-ng-show="statsForScope[h.uuid]">
@@ -122,14 +126,14 @@
           </strong>
         </td>
         <td>
-          <small data-ng-show="statsForScope[h.uuid].count && statsForRemote[h.uuid] && statsForRemote[h.uuid].count">&nbsp;/&nbsp;</small>
-          <small data-ng-show="statsForRemote[h.uuid].count"
+          <strong data-ng-show="statsForScope[h.uuid].count && statsForRemote[h.uuid] && statsForRemote[h.uuid].count">&nbsp;/&nbsp;</strong>
+          <strong data-ng-show="statsForRemote[h.uuid].count"
                  title="{{statsForRemote[h.uuid].when | date:'M/d/yyyy HH:mm:ss'}}">
             <span>
               {{statsForRemote[h.uuid].count}}
               <span data-translate="">recordsInRemote</span>
             </span>
-          </small>
+          </strong>
         </td>
         <td>
           <small data-ng-repeat="(key, value) in statsForScope[h.uuid]"

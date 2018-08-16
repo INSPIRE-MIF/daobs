@@ -82,7 +82,7 @@
             </span>
         </small>
         <small data-ng-repeat="(key, value) in statsForScope[selected.uuid]"
-               data-ng-if="key !== 'count' && key !== 'val'">
+               data-ng-if="key !== 'count' && key !== 'val' && key !== 'aggregations'">
           <h6>{{key | translate}}</h6>
           <ul>
             <li data-ng-repeat="b in value.buckets">

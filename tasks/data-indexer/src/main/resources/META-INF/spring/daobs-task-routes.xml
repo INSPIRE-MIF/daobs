@@ -126,6 +126,9 @@
       <cm:setHeader headerName="CamelHttpMethod">
         <cm:constant>POST</cm:constant>
       </cm:setHeader>
+      <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+        <cm:constant>application/json</cm:constant>
+      </cm:setHeader>
       <cm:setHeader headerName="Exchange.HTTP_URI">
         <!-- TODO Migrate to ES -->
         <cm:simple>{{es.url}}/{{es.index.records}}/_search?q=$simple{header.documentFilter}&amp;fl={{task.data-indexer.fields}}&amp;wt=xml&amp;start=0&amp;rows=0</cm:simple>
@@ -157,6 +160,9 @@
 
         <cm:setHeader headerName="CamelHttpMethod">
           <cm:constant>GET</cm:constant>
+        </cm:setHeader>
+        <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+          <cm:constant>application/json</cm:constant>
         </cm:setHeader>
         <cm:setHeader headerName="Exchange.HTTP_URI">
           <cm:simple>{{es.url}}/{{es.index.records}}/_search</cm:simple>
@@ -251,8 +257,8 @@
       <cm:setHeader headerName="camelHttpMethod">
         <cm:constant>POST</cm:constant>
       </cm:setHeader>
-      <cm:setHeader headerName="Content-Type">
-        <cm:constant>application/xml</cm:constant>
+      <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+        <cm:constant>application/json</cm:constant>
       </cm:setHeader>
       <cm:to
         uri="http4://index?throwExceptionOnFailure=false"/>
