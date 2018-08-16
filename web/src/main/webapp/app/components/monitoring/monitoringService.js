@@ -70,6 +70,12 @@
                       "field": "scope",
                       "size": "100"
                     }
+                  },
+                  "reportType": {
+                    "terms":  {
+                      "field": "report",
+                      "size": "100"
+                    }
                   }
                 }
               }

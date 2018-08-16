@@ -156,6 +156,12 @@
             "size": "100"
           }
         },
+        "report": {
+          "terms":  {
+            "field": "report",
+            "size": "100"
+          }
+        },
         "harvestedDate": {
           "terms":  {
             "field": "harvestedDate",

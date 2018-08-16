@@ -48,6 +48,7 @@
   "XML": "Format XML",
   "notInspireValidated": "INSPIRE validation (records not validated)",
   "configure": "Configurer",
+  "reportType": "Type de rapport",
   "createNewReport": "Create new report",
   "viewRecords": "Voir les fiches",
   "remove": "Supprimer",

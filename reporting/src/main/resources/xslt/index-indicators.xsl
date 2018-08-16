@@ -1060,6 +1060,9 @@ using one character or two. Prepend 0 when needed. -->
           select="concat('monitoring', $reportIdentifier, $reportingScope, $reportingDate)"/>
       </id>
       <documentType>monitoring</documentType>
+      <report>
+        <xsl:value-of select="$reportIdentifier"/>
+      </report>
       <scope>
         <xsl:value-of select="$reportingScope"/>
       </scope>
