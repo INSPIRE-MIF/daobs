@@ -194,7 +194,8 @@ public class Utility {
 
                   if (isArray) {
                     xcb.endArray();
-                  }                }
+                  }
+                }
               }
             }
             xcb.endObject();

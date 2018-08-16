@@ -185,6 +185,19 @@ public class HarvesterController {
       );
       // TODO: Delete records having only one harvestedDate
       // TODO: Delete harvestedDate field from records having more than one
+      //      {
+      //        "script": {
+      //          "lang": "painless",
+      //            "inline":
+      //        "ctx._source.harvestedDate.remove(ctx._source.harvestedDate.indexOf(date))",
+      //            "params": {
+      //              "date": "1"
+      //            }
+      //          }
+      //      }
+      //      "filter" : {
+      //        "missing" : { "field" : "harvestedDate" }
+      //      }
       message = EsRequestBean.deleteByQuery("records", query, 1000);
     } catch (Exception ex) {
       ex.printStackTrace();

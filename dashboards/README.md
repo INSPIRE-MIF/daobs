@@ -12,6 +12,7 @@ Set the following properties in Kibana config (```config/kibana.yml```):
 
 ```
 server.basePath: "/<webappname>/dashboard"
+server.rewriteBasePath: false
 
 kibana.index: ".dashboards"
 

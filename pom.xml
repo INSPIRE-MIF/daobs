@@ -544,9 +544,9 @@
 
     <lucene.version>7.3.1</lucene.version>
 
-    <es.version>6.3.0</es.version>
-    <es.version.md5>a9892967e813c8b4949df49d2cd2301a</es.version.md5>
-    <ror.version>1.16.21_es${es.version}</ror.version>
+    <es.version>6.3.2</es.version>
+    <es.version.md5>bc37871633b4dfa7451a7ad053a4df0e</es.version.md5>
+    <ror.version>1.16.23_es${es.version}</ror.version>
     <es.port>9200</es.port>
     <es.host>localhost</es.host>
     <!-- For docker, es.host is container
@@ -570,7 +570,7 @@
     <es.network.host>127.0.0.1</es.network.host>
     <es.xpack.config></es.xpack.config>
 
-    <kb.version.sha512>8d83a41389a75463e810644a8e2dbbd7bba0a3c55aec25189f7f56dadfe6f4879e03d27ff65a87e2beb0c7e635e09b0a5669b6ce75323169b937cd754fabe1a7</kb.version.sha512>
+    <kb.version.sha512>35eb97ca2f8d0bd80dc7dcdc5bc03f8ab21d1280d11d892f12eda5a173a951dfe88718d45c94ff0a748bb324e44f243cda0ba314c6dcd249cd960928f7c7b7ea</kb.version.sha512>
     <kb.protocol>${es.protocol}</kb.protocol>
     <kb.port>5601</kb.port>
     <kb.host>localhost</kb.host>
