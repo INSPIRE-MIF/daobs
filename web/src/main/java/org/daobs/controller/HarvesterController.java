@@ -68,6 +68,9 @@ public class HarvesterController {
   @Value("${reports.dir}")
   private String reportsPath;
 
+  @Value("${es.scrollSize:100}")
+  private int scrollSize;
+
 
   @ApiOperation(value = "Get harvesters",
       nickname = "get")
@@ -198,7 +201,7 @@ public class HarvesterController {
       //      "filter" : {
       //        "missing" : { "field" : "harvestedDate" }
       //      }
-      message = EsRequestBean.deleteByQuery("records", query, 1000);
+      message = EsRequestBean.deleteByQuery("records", query, scrollSize);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
