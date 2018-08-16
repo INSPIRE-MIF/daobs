@@ -70,6 +70,9 @@
           removeRecords: function (h, date) {
             var deferred = $q.defer();
 
+            if (date && date.indexOf(".") !== -1) {
+              date = date.split(".")[0];
+            }
             $http.delete(cfg.SERVICES.harvesters + '/' + h.uuid + '/records' +
               (date ? '?date=' + date : '')).then(
               function (data) {

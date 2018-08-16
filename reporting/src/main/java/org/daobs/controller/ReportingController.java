@@ -21,8 +21,6 @@
 
 package org.daobs.controller;
 
-import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -41,7 +39,7 @@ import org.elasticsearch.ResourceNotFoundException;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.support.WriteRequest;
-import org.elasticsearch.common.xcontent.*;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.DOMOutputter;
@@ -72,18 +70,21 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
 import java.nio.file.Paths;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -300,7 +301,7 @@ public class ReportingController {
       @ApiParam(value = "The specification to add as an XML string")
       @RequestParam("specification")
         String specification)
-    throws IOException {
+      throws IOException {
 
     File tmpFile = File.createTempFile("report", ".xml");
     try {
@@ -1160,15 +1161,18 @@ public class ReportingController {
             Map<String, XContentBuilder> documentProperties =
                 Utility.documentToXcb(
                     new DOMOutputter().output(
-                        new Document().setContent(new Element("add").addContent(new Element("doc")).setContent(element.clone()))));
+                        new Document()
+                          .setContent(new Element("add")
+                          .addContent(new Element("doc"))
+                            .setContent(element.clone()))));
             Set<Map.Entry<String, XContentBuilder>> entries = documentProperties.entrySet();
 
             if (entries.size() == 1) {
               Map.Entry<String, XContentBuilder> entry = entries.iterator().next();
               bulkRequestBuilder.add(
-                client.getClient()
-                  .prepareIndex("indicators", "indicators", entry.getKey())
-                  .setSource(entry.getValue())
+                  client.getClient()
+                    .prepareIndex("indicators", "indicators", entry.getKey())
+                    .setSource(entry.getValue())
               );
             }
 
@@ -1247,7 +1251,7 @@ public class ReportingController {
                                                    String scopeId,
                                                    String fq,
                                                    boolean calculate, String date)
-    throws ResourceNotFoundException, FileNotFoundException {
+      throws ResourceNotFoundException, FileNotFoundException {
     String configurationFilePath =
         indicatorConfigurationDir
         + INDICATOR_CONFIGURATION_FILE_PREFIX

@@ -133,11 +133,12 @@ public class Utility {
 
     Map<String, XContentBuilder> map = documentToXcb(xml);
     Map<String, String> listOfJson = new HashMap<>();
-    map.forEach((k, v) -> {
-      listOfJson.put(k, Strings.toString(v));
+    map.forEach((key, value) -> {
+      listOfJson.put(key, Strings.toString(value));
     });
     return listOfJson;
-  };
+  }
+
 
   /**
    * Convert document to JSON.
@@ -243,7 +244,7 @@ public class Utility {
             "{"
             + "\"script\": {"
               + "\"source\": "
-                  + "\"ctx._source.harvestedDate.add(params.harvestedDate)\", "
+                  + "\"ctx._source.harvestedDate.add(params.harvestedDate[0])\", "
                  + "\"lang\": \"painless\", "
                 +  "\"params\": %s"
                + "}, "

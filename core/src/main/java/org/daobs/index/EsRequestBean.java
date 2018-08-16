@@ -41,6 +41,10 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentParser;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.UpdateByQueryAction;
+import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
+import org.elasticsearch.script.Script;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.springframework.beans.factory.annotation.Value;
@@ -214,6 +218,24 @@ public class EsRequestBean {
   }
 
 
+  /**
+   * Update using painless scripts.
+   */
+  public static BulkByScrollResponse updateByScript(String collection,
+                                                    String query,
+                                                    String script
+  ) throws Exception {
+    EsClientBean client = EsClientBean.get();
+    UpdateByQueryRequestBuilder updateByQuery =
+        UpdateByQueryAction.INSTANCE.newRequestBuilder(client.getClient());
+    updateByQuery.source(collection)
+        .abortOnVersionConflict(false)
+        .filter(QueryBuilders.queryStringQuery(query))
+        .script(new Script(script));
+    BulkByScrollResponse response = updateByQuery.get();
+
+    return response;
+  }
 
   /**
    * Convert search response to node.
