@@ -73,7 +73,7 @@
           data-ng-class="monitoringDanger ? 'danger' : ''">
         <td><strong>{{m._source.reportingDate}}</strong></td>
         <td title="{{m._source.reportingDate}}">{{m._source.reportingDate | fromNow}}</td>
-        <td>{{m._source.scope}}</td>
+        <td>{{m._source.scope[0]}}</td>
         <td>{{m._source.report}}</td>
         <td>
           <ul>

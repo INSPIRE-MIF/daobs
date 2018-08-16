@@ -104,7 +104,6 @@
           "synInspireAnnexes": {
             "type": "synonym",
             "tokenizer": "keyword",
-            "ignore_case": true,
             "synonyms": [
               "Coordinate reference systems => I",
               "Elevation => II",
@@ -1057,7 +1056,7 @@
         },
         "document": {
           "type" : "text",
-          "index" : "no",
+          "index" : false,
           "doc_values": false
         },
         "documentStandard": {
@@ -1239,7 +1238,7 @@
         },
         "validReport": {
           "type" : "text",
-          "index" : "no",
+          "index" : false,
           "doc_values": false
         },
         "schemaValidDate": {

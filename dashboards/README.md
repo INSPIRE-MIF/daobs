@@ -12,6 +12,7 @@ Set the following properties in Kibana config (```config/kibana.yml```):
 
 ```
 server.basePath: "/<webappname>/dashboard"
+server.rewriteBasePath: false
 
 kibana.index: ".dashboards"
 
@@ -105,4 +106,11 @@ elasticdump \
 elasticdump \
   --input=http://localhost:9200/.dashboards \
   --output=index-dashboards.json  
+```
+
+
+### Remove index
+
+```
+curl -XDELETE 'http://localhost:9200/.dashboards'
 ```

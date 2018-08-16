@@ -1055,39 +1055,39 @@ using one character or two. Prepend 0 when needed. -->
 
   <xsl:template match="MonitoringMD|daobs:reporting">
     <doc>
-      <field name="id">
+      <id>
         <xsl:value-of
           select="concat('monitoring', $reportIdentifier, $reportingScope, $reportingDate)"/>
-      </field>
-      <field name="documentType">monitoring</field>
-      <field name="report">
+      </id>
+      <documentType>monitoring</documentType>
+      <report>
         <xsl:value-of select="$reportIdentifier"/>
-      </field>
-      <field name="scope">
+      </report>
+      <scope>
         <xsl:value-of select="$reportingScope"/>
-      </field>
-      <field name="reportingDateSubmission">
+      </scope>
+      <reportingDateSubmission>
         <xsl:value-of select="$reportingDateSubmission"/>
-      </field>
-      <field name="reportingDate">
+      </reportingDateSubmission>
+      <reportingDate>
         <xsl:value-of select="$reportingDate"/>
-      </field>
-      <field name="reportingYear">
+      </reportingDate>
+      <reportingYear>
         <xsl:value-of select="$reportingYear"/>
-      </field>
-      <field name="contact">{
+      </reportingYear>
+      <contact>{
         "org": "<xsl:value-of select="replace(organizationName,
                                         $doubleQuote, $escapedDoubleQuote)"/>",
         "email": "<xsl:value-of select="email"/>"
         }
-      </field>
+      </contact>
 
       <xsl:apply-templates mode="indicatorValue"
                            select="
                 daobs:variables/daobs:variable|
                 daobs:indicators/daobs:indicator|
                 ../Indicators//*[count(*) = 0 and text() != '']"/>
-      <field name="isOfficial">true</field>
+      <isOfficial>true</isOfficial>
     </doc>
   </xsl:template>
 
@@ -1096,42 +1096,42 @@ using one character or two. Prepend 0 when needed. -->
     <xsl:for-each select="descendant::*[count(*) = 0 and text() != '']">
       <xsl:variable name="indicatorIdentifier" select="local-name()"/>
       <doc>
-        <field name="id">
+        <id>
           <xsl:value-of
             select="concat('indicator', $reportIdentifier, $indicatorIdentifier,
                 $reportingDate, $reportingScope)"/>
-        </field>
-        <field name="documentType">indicator</field>
-        <field name="indicatorType">
+        </id>
+        <documentType>indicator</documentType>
+        <indicatorType>
           <xsl:value-of select="$indicatorType"/>
-        </field>
-        <field name="indicatorName">
+        </indicatorType>
+        <indicatorName>
           <xsl:value-of select="$indicatorIdentifier"/>
-        </field>
+        </indicatorName>
         <xsl:variable name="label"
                       select="$indicatorLabels/*[@id = $indicatorIdentifier]/normalize-space(.)"/>
         <xsl:if test="$label != ''">
-          <field name="indicatorLabel">
+          <indicatorLabel>
             <xsl:value-of select="$label"/>
-          </field>
+          </indicatorLabel>
         </xsl:if>
         <xsl:if test="text() != ''">
-          <field name="indicatorValue">
+          <indicatorValue>
             <xsl:value-of select="text()"/>
-          </field>
+          </indicatorValue>
         </xsl:if>
-        <field name="scope">
+        <scope>
           <xsl:value-of select="$reportingScope"/>
-        </field>
-        <field name="reportingDateSubmission">
+        </scope>
+        <reportingDateSubmission>
           <xsl:value-of select="$reportingDateSubmission"/>
-        </field>
-        <field name="reportingDate">
+        </reportingDateSubmission>
+        <reportingDate>
           <xsl:value-of select="$reportingDate"/>
-        </field>
-        <field name="reportingYear">
+        </reportingDate>
+        <reportingYear>
           <xsl:value-of select="$reportingYear"/>
-        </field>
+        </reportingYear>
       </doc>
     </xsl:for-each>
   </xsl:template>
@@ -1145,9 +1145,9 @@ using one character or two. Prepend 0 when needed. -->
     <xsl:variable name="indicatorIdentifier"
                   select="if (@id) then @id else local-name()"/>
 
-    <field name="iv{$indicatorIdentifier}">
+    <xsl:element name="iv{$indicatorIdentifier}">
       <xsl:value-of select="if (daobs:value) then daobs:value else text()"/>
-    </field>
+    </xsl:element>
   </xsl:template>
 
   <xsl:template match="*"
@@ -1159,38 +1159,38 @@ using one character or two. Prepend 0 when needed. -->
 
     <!--<xsl:message>  Indicator <xsl:value-of select="concat($indicatorIdentifier, ': ', daobs:value)"/></xsl:message>-->
     <doc>
-      <field name="id">
+      <id>
         <xsl:value-of
           select="concat('indicator', $reportIdentifier, $indicatorIdentifier,
               $reportingDate, $reportingScope)"/>
-      </field>
-      <field name="documentType">indicator</field>
-      <field name="indicatorType">
+      </id>
+      <documentType>indicator</documentType>
+      <indicatorType>
         <xsl:value-of select="$indicatorType"/>
-      </field>
-      <field name="indicatorName">
+      </indicatorType>
+      <indicatorName>
         <xsl:value-of select="$indicatorIdentifier"/>
-      </field>
-      <field name="indicatorLabel">
+      </indicatorName>
+      <indicatorLabel>
         <xsl:value-of select="daobs:name"/>
-      </field>
+      </indicatorLabel>
       <xsl:if test="daobs:value != ''">
-        <field name="indicatorValue">
+        <indicatorValue>
           <xsl:value-of select="daobs:value"/>
-        </field>
+        </indicatorValue>
       </xsl:if>
-      <field name="scope">
+      <scope>
         <xsl:value-of select="$reportingScope"/>
-      </field>
-      <field name="reportingDateSubmission">
+      </scope>
+      <reportingDateSubmission>
         <xsl:value-of select="$reportingDateSubmission"/>
-      </field>
-      <field name="reportingDate">
+      </reportingDateSubmission>
+      <reportingDate>
         <xsl:value-of select="$reportingDate"/>
-      </field>
-      <field name="reportingYear">
+      </reportingDate>
+      <reportingYear>
         <xsl:value-of select="$reportingYear"/>
-      </field>
+      </reportingYear>
     </doc>
   </xsl:template>
 
@@ -1199,65 +1199,65 @@ using one character or two. Prepend 0 when needed. -->
     <doc>
       <xsl:variable name="uuid"
                     select="if (uuid != '') then uuid else 'nouuid'"/>
-      <field name="id">
+      <id>
         <xsl:value-of
           select="concat('monitoring',
                         $reportingScope, $reportingDate,
                         $uuid, '-', position())"/>
-      </field>
-      <field name="metadataIdentifier">
+      </id>
+      <metadataIdentifier>
         <xsl:value-of select="$uuid"/>
-      </field>
-      <field name="documentType">monitoringMetadata</field>
-      <field name="resourceType">service</field>
-      <field name="scope">
+      </metadataIdentifier>
+      <documentType>monitoringMetadata</documentType>
+      <resourceType>service</resourceType>
+      <scope>
         <xsl:value-of select="$reportingScope"/>
-      </field>
-      <field name="reportingDateSubmission">
+      </scope>
+      <reportingDateSubmission>
         <xsl:value-of select="$reportingDateSubmission"/>
-      </field>
-      <field name="reportingDate">
+      </reportingDateSubmission>
+      <reportingDate>
         <xsl:value-of select="$reportingDate"/>
-      </field>
-      <field name="reportingYear">
+      </reportingDate>
+      <reportingYear>
         <xsl:value-of select="$reportingYear"/>
-      </field>
-      <field name="resourceTitle">
+      </reportingYear>
+      <resourceTitle>
         <xsl:value-of select="name"/>
-      </field>
-      <field name="custodianOrgForResource">
+      </resourceTitle>
+      <custodianOrgForResource>
         <xsl:value-of select="respAuthority"/>
-      </field>
+      </custodianOrgForResource>
       <xsl:for-each-group select="Themes/*" group-by="name()">
-        <field name="inspireAnnex">
+        <inspireAnnex>
           <xsl:value-of
             select="if (name() = 'AnnexIII') then 'iii' else if (name() = 'AnnexII') then 'ii' else 'i'"/>
-        </field>
+        </inspireAnnex>
       </xsl:for-each-group>
       <xsl:for-each select="Themes/*">
         <xsl:variable name="themeKey" select="."/>
-        <field name="inspireTheme">
+        <inspireTheme>
           <xsl:value-of
             select="$inspireThemesMap/map[@monitoring = $themeKey]/@theme"/>
-        </field>
+        </inspireTheme>
       </xsl:for-each>
 
 
-      <field name="isAboveThreshold">
+      <isAboveThreshold>
         <xsl:value-of select="MdServiceExistence/mdConformity = 'true'"/>
-      </field>
-      <field name="harvesterUuid">
+      </isAboveThreshold>
+      <harvesterUuid>
         <xsl:value-of select="MdServiceExistence/discoveryAccessibilityUuid"/>
-      </field>
-      <field name="linkUrl">
+      </harvesterUuid>
+      <linkUrl>
         <xsl:value-of select="NetworkService/URL"/>
-      </field>
-      <field name="serviceType">
+      </linkUrl>
+      <serviceType>
         <xsl:value-of select="NetworkService/NnServiceType"/>
-      </field>
-      <field name="inspireConformResource">
+      </serviceType>
+      <inspireConformResource>
         <xsl:value-of select="NetworkService/nnConformity = 'true'"/>
-      </field>
+      </inspireConformResource>
     </doc>
   </xsl:template>
 
@@ -1267,68 +1267,68 @@ using one character or two. Prepend 0 when needed. -->
       <xsl:variable name="uuid"
                     select="if (uuid != '') then uuid else 'nouuid'"/>
       <!-- Append position to all uuids to make them unique -->
-      <field name="id">
+      <id>
         <xsl:value-of
           select="concat('monitoring',
                         $reportingScope, $reportingDate,
                         $uuid, '-', position())"/>
-      </field>
-      <field name="metadataIdentifier">
+      </id>
+      <metadataIdentifier>
         <xsl:value-of select="$uuid"/>
-      </field>
-      <field name="documentType">monitoringMetadata</field>
-      <field name="resourceType">dataset</field>
-      <field name="scope">
+      </metadataIdentifier>
+      <documentType>monitoringMetadata</documentType>
+      <resourceType>dataset</resourceType>
+      <scope>
         <xsl:value-of select="$reportingScope"/>
-      </field>
-      <field name="reportingDateSubmission">
+      </scope>
+      <reportingDateSubmission>
         <xsl:value-of select="$reportingDateSubmission"/>
-      </field>
-      <field name="reportingDate">
+      </reportingDateSubmission>
+      <reportingDate>
         <xsl:value-of select="$reportingDate"/>
-      </field>
-      <field name="reportingYear">
+      </reportingDate>
+      <reportingYear>
         <xsl:value-of select="$reportingYear"/>
-      </field>
-      <field name="resourceTitle">
+      </reportingYear>
+      <resourceTitle>
         <xsl:value-of select="name"/>
-      </field>
-      <field name="custodianOrgForResource">
+      </resourceTitle>
+      <custodianOrgForResource>
         <xsl:value-of select="respAuthority"/>
-      </field>
+      </custodianOrgForResource>
       <xsl:for-each-group select="Themes/*" group-by="name()">
-        <field name="inspireAnnex">
+        <inspireAnnex>
           <xsl:value-of
             select="if (name() = 'AnnexIII') then 'iii' else if (name() = 'AnnexII') then 'ii' else 'i'"/>
-        </field>
+        </inspireAnnex>
       </xsl:for-each-group>
       <xsl:for-each select="Themes/*">
         <xsl:variable name="themeKey" select="."/>
-        <field name="inspireTheme">
+        <inspireTheme>
           <xsl:value-of
             select="$inspireThemesMap/map[@monitoring = $themeKey]/@theme"/>
-        </field>
+        </inspireTheme>
       </xsl:for-each>
 
 
       <xsl:for-each
         select="MdDataSetExistence/MdAccessibility/(discovery|view|download|viewDownload)[. = 'true']">
-        <field name="recordOperatedByType">
+        <recordOperatedByType>
           <xsl:value-of select="name()"/>
-        </field>
+        </recordOperatedByType>
       </xsl:for-each>
 
-      <field name="isAboveThreshold">
+      <isAboveThreshold>
         <xsl:value-of select="count(MdDataSetExistence/IRConformity) > 0"/>
-      </field>
-      <field name="harvesterUuid">
+      </isAboveThreshold>
+      <harvesterUuid>
         <xsl:value-of
           select="MdDataSetExistence/MdAccessibility/discoveryUuid"/>
-      </field>
-      <field name="inspireConformResource">
+      </harvesterUuid>
+      <inspireConformResource>
         <xsl:value-of
           select="MdDataSetExistence/IRConformity/structureCompliance = 'true'"/>
-      </field>
+      </inspireConformResource>
     </doc>
   </xsl:template>
 

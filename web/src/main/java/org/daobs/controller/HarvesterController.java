@@ -33,6 +33,7 @@ import org.daobs.harvester.config.Harvesters;
 import org.daobs.harvester.repository.HarvesterConfigRepository;
 import org.daobs.index.EsRequestBean;
 import org.daobs.messaging.JmsMessager;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -67,6 +68,12 @@ public class HarvesterController {
 
   @Value("${reports.dir}")
   private String reportsPath;
+
+  @Value("${es.scrollSize:100}")
+  private int scrollSize;
+
+  @Value("${es.index.records}")
+  private String index;
 
 
   @ApiOperation(value = "Get harvesters",
@@ -169,23 +176,60 @@ public class HarvesterController {
     String message = null;
     final boolean hasDate = StringUtils.isNotEmpty(date);
     try {
-      String query = hasDate
-          ? String.format(
-              "+harvesterUuid:\"%s\" +harvestedDate:\"%s\" "
-                + "+(documentType:metadata "
-                + "documentType:association "
-                + "documentType:harvesterTaskReport)",
-              uuid.trim(), date
-          ) :
-          String.format(
-              "+harvesterUuid:\"%s\" "
-                + "+(documentType:metadata "
-                + "documentType:association)",
-              uuid.trim()
-      );
-      // TODO: Delete records having only one harvestedDate
-      // TODO: Delete harvestedDate field from records having more than one
-      message = EsRequestBean.deleteByQuery("records", query, 1000);
+      if (hasDate) {
+        String reportQuery = String.format(
+            "+harvesterUuid:\"%s\" +harvestedDate:\"%s\" "
+              + "+documentType:harvesterTaskReport", uuid.trim(), date
+          );
+        String query = String.format(
+            "+harvesterUuid:\"%s\" +harvestedDate:\"%s\" "
+              + "+(documentType:metadata documentType:association)", uuid.trim(), date
+        );
+        // Delete harvestedDate field from records having more than one
+        BulkByScrollResponse bulkByScrollResponse = EsRequestBean.updateByScript(index, query,
+            // Remove field if the last value in array is the date requested
+            "if (ctx._source.harvestedDate instanceof List && "
+              + "ctx._source.harvestedDate.indexOf(\"" + date + "\") != -1 && "
+              + "ctx._source.harvestedDate.size() == 1) {"
+              + "       ctx._source.remove(\"harvestedDate\")"
+              // Remove value from current array
+              + "      } else if (ctx._source.harvestedDate instanceof List && "
+              + "       ctx._source.harvestedDate.indexOf(\"" + date + "\") != -1) {"
+              + "       ctx._source.harvestedDate.remove(ctx._source.harvestedDate.indexOf(\""
+              + date + "\"))"
+              + "     } else {"
+              // Remove value if a string is still here - should not happen
+              // because the field is always added as array
+              + "       if (ctx._source.harvestedDate == \"" + date + "\") {"
+              + "           ctx._source.remove(\"harvestedDate\")"
+              + "       }"
+              + "     }");
+        long updated = bulkByScrollResponse.getStatus().getUpdated();
+
+        // Delete records having no harvestedDate anymore
+        //      "filter" : {
+        //        "missing" : { "field" : "harvestedDate" }
+        //      }
+
+        String queryRecordWithNoHarvestedDates = String.format(
+            "+harvesterUuid:\"%s\" -harvestedDate:[* TO *] "
+              + "+(documentType:metadata documentType:association)", uuid.trim()
+        );
+        message = EsRequestBean.deleteByQuery(index, queryRecordWithNoHarvestedDates, scrollSize);
+
+        // Delete report
+        EsRequestBean.deleteByQuery(index, reportQuery, scrollSize);
+      } else {
+        String query = String.format(
+            "+harvesterUuid:\"%s\" "
+              + "+(documentType:harvesterTaskReport "
+              + "documentType:metadata "
+              + "documentType:association)",
+            uuid.trim());
+        message = EsRequestBean.deleteByQuery(index, query, scrollSize);
+      }
+
+      // TODO: Add entry in the log that deletion occurred
     } catch (Exception ex) {
       ex.printStackTrace();
     }

@@ -149,6 +149,9 @@
       <cm:setHeader headerName="CamelHttpMethod">
         <cm:constant>POST</cm:constant>
       </cm:setHeader>
+      <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+        <cm:constant>application/json</cm:constant>
+      </cm:setHeader>
       <cm:setHeader headerName="Exchange.HTTP_URI">
         <cm:simple>{{es.url}}/{{es.index.records}}/_search</cm:simple>
       </cm:setHeader>
@@ -203,7 +206,6 @@
             <cm:setHeader headerName="fileNameSuffix">
               <cm:simple>bean:utility?method=encrypt</cm:simple>
             </cm:setHeader>
-            <!-- Retrieve XML document from Solr document -->
             <cm:setBody>
               <cm:xpath resultType="java.lang.String">e/_source/document/text()
               </cm:xpath>
@@ -231,7 +233,10 @@
       </cm:description>
       <cm:from uri="direct:task-validate-start"/>
       <cm:log message="Background task checking document validation status ..."
-              loggingLevel="INFO"
+              loggingLevel="DEBUG"
+              logName="org.daobs.task.ValidationChecker"/>
+      <cm:log message="Filter $simple{header.documentFilter}"
+              loggingLevel="DEBUG"
               logName="org.daobs.task.ValidationChecker"/>
 
 
@@ -239,6 +244,9 @@
       <cm:removeHeaders pattern="harvesterName"/>
       <cm:setHeader headerName="CamelHttpMethod">
         <cm:constant>POST</cm:constant>
+      </cm:setHeader>
+      <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+        <cm:constant>application/json</cm:constant>
       </cm:setHeader>
       <cm:setHeader headerName="Exchange.HTTP_URI">
         <cm:simple>{{es.url}}/{{es.index.records}}/_search</cm:simple>
@@ -263,7 +271,7 @@
       </cm:setBody>
       <cm:log
         message="$simple{body}"
-        loggingLevel="INFO"
+        loggingLevel="DEBUG"
         logName="org.daobs.task.ValidationChecker"/>
       <cm:to
         uri="http4://index?throwExceptionOnFailure=false"/>
@@ -298,6 +306,9 @@
 
         <cm:setHeader headerName="CamelHttpMethod">
           <cm:constant>POST</cm:constant>
+        </cm:setHeader>
+        <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+          <cm:constant>application/json</cm:constant>
         </cm:setHeader>
         <!-- TODO: Use scroll instead. -->
         <cm:setHeader headerName="Exchange.HTTP_URI">
@@ -388,6 +399,9 @@
         <cm:setHeader headerName="CamelHttpMethod">
           <cm:constant>POST</cm:constant>
         </cm:setHeader>
+        <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+          <cm:constant>application/json</cm:constant>
+        </cm:setHeader>
         <cm:setHeader headerName="Exchange.HTTP_URI">
           <cm:groovy>'{{es.url}}/{{es.index.records}}/{{es.index.records}}/' +
             URLEncoder.encode(exchange.in.headers.documentIdentifier, 'UTF-8') + '/_update'</cm:groovy>
@@ -429,6 +443,9 @@
           <cm:setHeader headerName="CamelHttpMethod">
             <cm:constant>POST</cm:constant>
           </cm:setHeader>
+          <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+            <cm:constant>application/json</cm:constant>
+          </cm:setHeader>
           <cm:setHeader headerName="Exchange.HTTP_QUERY"><cm:simple></cm:simple></cm:setHeader>
           <cm:setBody>
             <cm:simple>{"doc": {
@@ -458,11 +475,12 @@
 
     <cm:route id="route-validation-inspire-checker">
       <cm:from uri="direct:validation-inspire"/>
+     <!-- document identifier is now based on UUID + datestamp
       <cm:setHeader headerName="documentIdentifier">
         <cm:xpath resultType="java.lang.String">
           /gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString/text()
         </cm:xpath>
-      </cm:setHeader>
+      </cm:setHeader>-->
       <cm:setHeader headerName="beginTime">
         <cm:simple>${date:now:yyyy-MM-dd'T'HH':'mm':'ss}</cm:simple>
       </cm:setHeader>
@@ -479,6 +497,9 @@
 
       <cm:setHeader headerName="CamelHttpMethod">
         <cm:constant>POST</cm:constant>
+      </cm:setHeader>
+      <cm:setHeader headerName="Exchange.CONTENT_TYPE">
+        <cm:constant>application/json</cm:constant>
       </cm:setHeader>
       <cm:setBody>
         <cm:simple>{"doc":{

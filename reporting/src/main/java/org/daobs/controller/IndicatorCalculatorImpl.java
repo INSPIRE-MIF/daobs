@@ -237,7 +237,7 @@ public class IndicatorCalculatorImpl implements IndicatorCalculator {
       logger.log(java.util.logging.Level.FINE,
           String.format("  Expression '%s'.", variable.getQuery())
       );
-      Double statValue;
+      Double statValue = null;
       Double defaultValue = variable.getDefault();
       Query query = variable.getQuery();
       String format = variable.getNumberFormat();
@@ -245,14 +245,24 @@ public class IndicatorCalculatorImpl implements IndicatorCalculator {
         // 2 cases here:
         // a) Simple query and the number of records found are returned
         // b) Query with stats
-
         String statsField = query.getStatsField();
         if (statsField != null) {
-          statValue = EsRequestBean.getStats(index,
-              variable.getQuery().getValue(),
-              filterQuery,
-              statsField,
-              query.getStats());
+
+          try {
+            statValue = EsRequestBean.getStats(index,
+                variable.getQuery().getValue(),
+                filterQuery,
+                statsField,
+                query.getStats());
+          } catch (NoSuchMethodException e2) {
+            e2.printStackTrace();
+            String message = String.format("  Stats expresion not supported for %s. "
+                + "Error is %s.",
+                variable.getId(),
+                e2.getMessage());
+            logger.log(Level.WARNING, message);
+            variable.setStatus(message);
+          }
         } else {
           statValue = EsRequestBean.getNumFound(index,
               variable.getQuery().getValue(),

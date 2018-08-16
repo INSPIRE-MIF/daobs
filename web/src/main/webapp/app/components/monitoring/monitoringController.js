@@ -148,12 +148,6 @@
         }
       });
 
-      $scope.facetFields = ['resourceType', 'Org',
-        'OrgForResource', 'isValid', 'scope'];
-      var facetParam = '';
-      $.each($scope.facetFields, function (item) {
-        facetParam += '&facet.field=' + $scope.facetFields[item];
-      });
       $scope.facetValues = {};
       var aggs = {
         "scope": {
@@ -178,7 +172,7 @@
         "resourceType": {
           "terms":  {
             "field": "resourceType",
-            "size": "100"
+            "size": "10"
           }
         },
         "isValid": {
@@ -189,13 +183,13 @@
         "OrgForResource": {
           "terms":  {
             "field": "OrgForResource",
-            "size": "100"
+            "size": "50"
           }
         },
         "Org": {
           "terms":  {
             "field": "Org",
-            "size": "100"
+            "size": "50"
           }
         }
       };
@@ -255,6 +249,9 @@
         $http.post(
           cfg.SERVICES.esdataCore + '/_search?size=0', {
             "query" : {
+              "query_string": {
+                "query": "+documentType:metadata"
+              }
             },
             "aggs": aggs
           }
@@ -660,6 +657,11 @@
 
         angular.forEach(listOfDeffered, function (item) {
           item.promise.then(function (data) {
+            if (data) {
+              angular.forEach(data, function (key, value) {
+                addMessage('monitoringSubmitError', item.file.name + ': [' + key + '] ' + value);
+              });
+            }
             addMessage('monitoringSubmitSuccess', item.file.name);
           }, function (response) {
             addMessage('monitoringSubmitError', item.file.name);

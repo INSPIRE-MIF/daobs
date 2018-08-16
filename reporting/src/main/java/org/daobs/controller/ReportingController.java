@@ -21,8 +21,6 @@
 
 package org.daobs.controller;
 
-import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,13 +33,16 @@ import org.daobs.indicator.config.Indicator;
 import org.daobs.indicator.config.Reporting;
 import org.daobs.indicator.config.Reports;
 import org.daobs.indicator.config.Variable;
+import org.daobs.routing.utility.Utility;
 import org.daobs.util.UnzipUtility;
 import org.elasticsearch.ResourceNotFoundException;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.output.DOMOutputter;
 import org.jdom2.transform.JDOMResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,10 +70,8 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,13 +79,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -108,6 +106,9 @@ public class ReportingController {
   private static final int commitInterval = 1000;
 
   private String indicatorConfigurationDir;
+
+  @Value("${es.scrollSize:100}")
+  private int scrollSize;
 
   public String getIndicatorConfigurationDir() {
     return indicatorConfigurationDir;
@@ -300,7 +301,7 @@ public class ReportingController {
       @ApiParam(value = "The specification to add as an XML string")
       @RequestParam("specification")
         String specification)
-    throws IOException {
+      throws IOException {
 
     File tmpFile = File.createTempFile("report", ".xml");
     try {
@@ -964,7 +965,7 @@ public class ReportingController {
       @RequestParam final String query) {
     String message = null;
     try {
-      message = EsRequestBean.deleteByQuery("indicators", query, 1000);
+      message = EsRequestBean.deleteByQuery("indicators", query, scrollSize);
       return new ResponseEntity<>(
         message,
         HttpStatus.OK);
@@ -1157,13 +1158,24 @@ public class ReportingController {
         try {
           if (next instanceof Element) {
             Element element = (Element) next;
-            String json = elementToJson(element);
-            String id = getId(element);
+            Map<String, XContentBuilder> documentProperties =
+                Utility.documentToXcb(
+                    new DOMOutputter().output(
+                        new Document()
+                          .setContent(new Element("add")
+                          .addContent(new Element("doc"))
+                            .setContent(element.clone()))));
+            Set<Map.Entry<String, XContentBuilder>> entries = documentProperties.entrySet();
 
+            if (entries.size() == 1) {
+              Map.Entry<String, XContentBuilder> entry = entries.iterator().next();
+              bulkRequestBuilder.add(
+                  client.getClient()
+                    .prepareIndex("indicators", "indicators", entry.getKey())
+                    .setSource(entry.getValue())
+              );
+            }
 
-            bulkRequestBuilder.add(
-                client.getClient().prepareIndex("indicators", "indicators", id).setSource(json)
-            );
             counter++;
 
             if (bulkRequestBuilder.numberOfActions() % commitInterval == 0) {
@@ -1265,38 +1277,6 @@ public class ReportingController {
     }
   }
 
-
-  /**
-   * Convert Element to JSON.
-   */
-  public String elementToJson(Element xml) {
-    try {
-      XContentBuilder xcb = jsonBuilder()
-          .startObject();
-
-      List childNodes = xml.getChildren();
-
-      if (childNodes != null) {
-        childNodes.forEach(o -> {
-          if (o instanceof Element) {
-            Element element = (Element) o;
-            try {
-              xcb.field(
-                  element.getAttributeValue("name"),
-                  element.getTextNormalize());
-            } catch (IOException e1) {
-              e1.printStackTrace();
-            }
-          }
-        });
-      }
-      xcb.endObject();
-      return xcb.string();
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    }
-    return null;
-  }
 
   /**
    * Get first element with id name attribute.

@@ -32,6 +32,7 @@ import net.sf.saxon.FeatureKeys;
 import org.apache.camel.Exchange;
 import org.apache.camel.Header;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.springframework.util.Assert;
 import org.w3c.dom.Document;
@@ -43,7 +44,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import scala.actors.threadpool.Arrays;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -129,11 +129,25 @@ public class Utility {
   /**
    * Convert document to JSON.
    */
-  public Map<String, String> documentToJson(Document xml) {
+  public static Map<String, String> documentToJson(Document xml) {
+
+    Map<String, XContentBuilder> map = documentToXcb(xml);
+    Map<String, String> listOfJson = new HashMap<>();
+    map.forEach((key, value) -> {
+      listOfJson.put(key, Strings.toString(value));
+    });
+    return listOfJson;
+  }
+
+
+  /**
+   * Convert document to JSON.
+   */
+  public static Map<String, XContentBuilder> documentToXcb(Document xml) {
     try {
       NodeList root = xml.getChildNodes();
       Node addNode = root.item(0);
-      Map<String, String> listOfXcb = new HashMap<>();
+      Map<String, XContentBuilder> listOfXcb = new HashMap<>();
       if (root != null) {
         NodeList records = addNode.getChildNodes();
 
@@ -198,7 +212,7 @@ public class Utility {
               }
             }
             xcb.endObject();
-            listOfXcb.put(id, xcb.string());
+            listOfXcb.put(id, xcb);
           }
         }
       }
@@ -208,6 +222,7 @@ public class Utility {
     }
     return null;
   }
+
 
   /**
    * Convert body of exchange to bulk JSON format.
@@ -229,7 +244,7 @@ public class Utility {
             "{"
             + "\"script\": {"
               + "\"source\": "
-                  + "\"ctx._source.harvestedDate.add(params.harvestedDate)\", "
+                  + "\"ctx._source.harvestedDate.add(params.harvestedDate[0])\", "
                  + "\"lang\": \"painless\", "
                 +  "\"params\": %s"
                + "}, "
