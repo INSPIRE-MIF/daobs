@@ -1160,7 +1160,7 @@ public class ReportingController {
         try {
           if (next instanceof Element) {
             Element element = (Element) next;
-            String json = elementToJson(element);
+            XContentBuilder json = elementToJson(element);
             String id = getId(element);
 
 
@@ -1272,7 +1272,7 @@ public class ReportingController {
   /**
    * Convert Element to JSON.
    */
-  public String elementToJson(Element xml) {
+  public XContentBuilder elementToJson(Element xml) {
     try {
       XContentBuilder xcb = jsonBuilder()
           .startObject();
@@ -1294,7 +1294,7 @@ public class ReportingController {
         });
       }
       xcb.endObject();
-      return xcb.toString();
+      return xcb;
     } catch (IOException ex) {
       ex.printStackTrace();
     }
