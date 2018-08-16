@@ -35,13 +35,16 @@ import org.daobs.indicator.config.Indicator;
 import org.daobs.indicator.config.Reporting;
 import org.daobs.indicator.config.Reports;
 import org.daobs.indicator.config.Variable;
+import org.daobs.routing.utility.Utility;
 import org.daobs.util.UnzipUtility;
 import org.elasticsearch.ResourceNotFoundException;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.support.WriteRequest;
-import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.*;
+import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.output.DOMOutputter;
 import org.jdom2.transform.JDOMResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,13 +76,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Paths;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1160,13 +1157,21 @@ public class ReportingController {
         try {
           if (next instanceof Element) {
             Element element = (Element) next;
-            XContentBuilder json = elementToJson(element);
-            String id = getId(element);
+            Map<String, XContentBuilder> documentProperties =
+                Utility.documentToXcb(
+                    new DOMOutputter().output(
+                        new Document().setContent(new Element("add").addContent(new Element("doc")).setContent(element.clone()))));
+            Set<Map.Entry<String, XContentBuilder>> entries = documentProperties.entrySet();
 
+            if (entries.size() == 1) {
+              Map.Entry<String, XContentBuilder> entry = entries.iterator().next();
+              bulkRequestBuilder.add(
+                client.getClient()
+                  .prepareIndex("indicators", "indicators", entry.getKey())
+                  .setSource(entry.getValue())
+              );
+            }
 
-            bulkRequestBuilder.add(
-                client.getClient().prepareIndex("indicators", "indicators", id).setSource(json)
-            );
             counter++;
 
             if (bulkRequestBuilder.numberOfActions() % commitInterval == 0) {
@@ -1268,38 +1273,6 @@ public class ReportingController {
     }
   }
 
-
-  /**
-   * Convert Element to JSON.
-   */
-  public XContentBuilder elementToJson(Element xml) {
-    try {
-      XContentBuilder xcb = jsonBuilder()
-          .startObject();
-
-      List childNodes = xml.getChildren();
-
-      if (childNodes != null) {
-        childNodes.forEach(o -> {
-          if (o instanceof Element) {
-            Element element = (Element) o;
-            try {
-              xcb.field(
-                  element.getAttributeValue("name"),
-                  element.getTextNormalize());
-            } catch (IOException e1) {
-              e1.printStackTrace();
-            }
-          }
-        });
-      }
-      xcb.endObject();
-      return xcb;
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    }
-    return null;
-  }
 
   /**
    * Get first element with id name attribute.

@@ -651,6 +651,11 @@
 
         angular.forEach(listOfDeffered, function (item) {
           item.promise.then(function (data) {
+            if (data) {
+              angular.forEach(data, function (key, value) {
+                addMessage('monitoringSubmitError', item.file.name + ': [' + key + '] ' + value);
+              });
+            }
             addMessage('monitoringSubmitSuccess', item.file.name);
           }, function (response) {
             addMessage('monitoringSubmitError', item.file.name);

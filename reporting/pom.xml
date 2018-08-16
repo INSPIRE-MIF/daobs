@@ -57,6 +57,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.daobs</groupId>
+      <artifactId>daobs-routing-utility</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
       <version>1.5.8</version>
@@ -77,6 +82,10 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.daobs</groupId>
+      <artifactId>daobs-routing-utility</artifactId>
     </dependency>
   </dependencies>
 

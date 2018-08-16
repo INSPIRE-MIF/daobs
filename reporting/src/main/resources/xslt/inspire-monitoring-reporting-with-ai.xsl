@@ -52,30 +52,30 @@
     <xsl:variable name="indicatorIdentifier"
                   select="concat(local-name(), $serviceType, ../../uuid/text())"/>
     <doc>
-      <field name="id">
+      <id>
         <xsl:value-of
           select="concat('ai', $indicatorIdentifier,
               $reportingDate, $reportingScope)"/>
-      </field>
-      <field name="documentType">ai</field>
-      <field name="indicatorName">
+      </id>
+      <documentType>ai</documentType>
+      <indicatorName>
         <xsl:value-of select="$indicatorIdentifier"/>
-      </field>
+      </indicatorName>
       <xsl:if test="text() != ''">
-        <field name="indicatorValue">
+        <indicatorValue>
           <xsl:value-of select="text()"/>
-        </field>
+        </indicatorValue>
       </xsl:if>
-      <field name="scope">
+      <scope>
         <xsl:value-of select="$reportingScope"/>
-      </field>
-      <field name="reportingDateSubmission">
+      </scope>
+      <reportingDateSubmission>
         <xsl:value-of select="$reportingDateSubmission"/>
-      </field>
-      <field name="reportingDate">
+      </reportingDateSubmission>
+      <reportingDate>
         <xsl:value-of select="$reportingDate"/>
       </field>
-      <field name="reportingYear">
+      <reportingYear>
         <xsl:value-of select="$documentYear"/>
       </field>
     </doc>
@@ -87,50 +87,50 @@
     <xsl:variable name="indicatorIdentifier"
                   select="local-name()"/>
     <doc>
-      <field name="id">
+      <id>
         <xsl:value-of
           select="concat('ai', $indicatorIdentifier,
               $reportingDate, $reportingScope, ../../uuid/text())"/>
       </field>
-      <field name="documentType">ai</field>
-      <field name="indicatorName">
+      <documentType>ai</field>
+      <indicatorName>
         <xsl:value-of select="$indicatorIdentifier"/>
       </field>
       <xsl:if test="text() != ''">
-        <field name="indicatorValue">
+        <indicatorValue>
           <xsl:value-of select="text()"/>
         </field>
       </xsl:if>
-      <field name="scope">
+      <scope>
         <xsl:value-of select="$reportingScope"/>
       </field>
-      <field name="reportingDateSubmission">
+      <reportingDateSubmission>
         <xsl:value-of select="$reportingDateSubmission"/>
       </field>
-      <field name="reportingDate">
+      <reportingDate>
         <xsl:value-of select="$reportingDate"/>
-      </field>
-      <field name="reportingYear">
+      </reportingDate>
+      <reportingYear>
         <xsl:value-of select="$documentYear"/>
-      </field>
+      </reportingYear>
 
       <xsl:for-each select="../../Themes/*[text() != '']">
         <xsl:variable name="inspireTheme" as="xs:string"
                       select="solr:analyzeField('analyzeField', text())"/>
 
         <xsl:if test="$inspireTheme != ''">
-          <field name="inspireTheme_syn">
+          <inspireTheme_syn>
             <xsl:value-of select="text()"/>
-          </field>
-          <field name="inspireTheme">
+          </inspireTheme_syn>
+          <inspireTheme>
             <xsl:value-of select="$inspireTheme"/>
-          </field>
+          </inspireTheme>
 
           <xsl:if test="position() = 1">
-            <field name="inspireAnnex">
+            <inspireAnnex>
               <xsl:value-of
                 select="solr:analyzeField('synInspireAnnexes', $inspireTheme)"/>
-            </field>
+            </inspireAnnex>
           </xsl:if>
         </xsl:if>
       </xsl:for-each>

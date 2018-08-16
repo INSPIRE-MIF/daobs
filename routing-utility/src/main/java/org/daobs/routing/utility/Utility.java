@@ -44,7 +44,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import scala.actors.threadpool.Arrays;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -130,11 +129,24 @@ public class Utility {
   /**
    * Convert document to JSON.
    */
-  public Map<String, String> documentToJson(Document xml) {
+  public static Map<String, String> documentToJson(Document xml) {
+
+    Map<String, XContentBuilder> map = documentToXcb(xml);
+    Map<String, String> listOfJson = new HashMap<>();
+    map.forEach((k, v) -> {
+      listOfJson.put(k, Strings.toString(v));
+    });
+    return listOfJson;
+  };
+
+  /**
+   * Convert document to JSON.
+   */
+  public static Map<String, XContentBuilder> documentToXcb(Document xml) {
     try {
       NodeList root = xml.getChildNodes();
       Node addNode = root.item(0);
-      Map<String, String> listOfXcb = new HashMap<>();
+      Map<String, XContentBuilder> listOfXcb = new HashMap<>();
       if (root != null) {
         NodeList records = addNode.getChildNodes();
 
@@ -199,7 +211,7 @@ public class Utility {
               }
             }
             xcb.endObject();
-            listOfXcb.put(id, Strings.toString(xcb));
+            listOfXcb.put(id, xcb);
           }
         }
       }
@@ -209,6 +221,7 @@ public class Utility {
     }
     return null;
   }
+
 
   /**
    * Convert body of exchange to bulk JSON format.
