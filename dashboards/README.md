@@ -107,3 +107,10 @@ elasticdump \
   --input=http://localhost:9200/.dashboards \
   --output=index-dashboards.json  
 ```
+
+
+### Remove index
+
+```
+curl -XDELETE 'http://localhost:9200/.dashboards'
+```
