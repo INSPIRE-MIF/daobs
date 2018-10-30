@@ -610,7 +610,7 @@
     <saxon-dom.version>9.1.0.8</saxon-dom.version>
     <saxon-xpath.version>9.1.0.8</saxon-xpath.version>
 
-    <spring.version>4.3.17.RELEASE</spring.version>
+    <spring.version>4.3.18.RELEASE</spring.version>
     <spring-security.version>4.1.5.RELEASE</spring-security.version>
 
     <posgresql.version>9.1-901.jdbc4</posgresql.version>
