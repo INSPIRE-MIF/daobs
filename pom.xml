@@ -329,7 +329,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.7</version>
+        <version>1.18</version>
       </dependency>
 
       <dependency>
@@ -610,15 +610,16 @@
     <saxon-dom.version>9.1.0.8</saxon-dom.version>
     <saxon-xpath.version>9.1.0.8</saxon-xpath.version>
 
-    <spring.version>4.2.4.RELEASE</spring.version>
-    <spring-security.version>4.0.3.RELEASE</spring-security.version>
+    <spring.version>4.3.17.RELEASE</spring.version>
+    <spring-security.version>4.1.1.RELEASE</spring-security.version>
 
     <posgresql.version>9.1-901.jdbc4</posgresql.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
 
     <camel.version>2.18.4</camel.version>
 
-    <jackson.version>1.9.2</jackson.version>
+    <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
+    <jackson.version>2.9.7</jackson.version>
 
     <!--<jms.broker.url>tcp://localhost:61616</jms.url>-->
     <jms.broker.url>vm://internaljmschannel</jms.broker.url>
