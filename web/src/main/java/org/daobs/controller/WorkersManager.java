@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Draft camel workers prototype.
@@ -82,12 +83,24 @@ public class WorkersManager {
         //            e.getExchange().setProperty(Exchange.ROUTE_STOP, Boolean.TRUE);
         // http://camel.apache.org/uuidgenerator.html could be customized
         // to have workers id set by starter app.
-        result.add(String.format("[%s:%s] %s (%dms/%dms) - step %s - Nb of records: %s",
-            ex.getExchange().getUnitOfWork().getOriginalInMessage().getHeader("harvesterUuid"),
-            ex.getExchange().getUnitOfWork().getOriginalInMessage().getHeader("harvesterScope"),
+        final long millis = ex.getElapsed();
+        String time = String.format("%02d min, %02d sec",
+          TimeUnit.MILLISECONDS.toMinutes(millis),
+                   TimeUnit.MILLISECONDS.toSeconds(millis) -
+                   TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
+        );
+        final long millisDuration = ex.getDuration();
+        String timeDuration = String.format("%02d min, %02d sec",
+          TimeUnit.MILLISECONDS.toMinutes(millisDuration),
+                   TimeUnit.MILLISECONDS.toSeconds(millisDuration) -
+                   TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisDuration))
+        );
+        result.add(String.format("%s %s for %s (current: %s/ inflight: %s) - step %s - Nb of records: %s",
             ex.getExchange().getExchangeId(),
-            ex.getElapsed(),
-            ex.getDuration(),
+            ex.getExchange().getContext().getManagementName(),
+            ex.getExchange().getUnitOfWork().getOriginalInMessage().getBody(String.class),
+            time,
+            timeDuration,
             ex.getExchange().getFromRouteId(),
             ex.getExchange().getUnitOfWork()
               .getOriginalInMessage().getHeader("numberOfRecordsMatched")
@@ -103,9 +116,7 @@ public class WorkersManager {
    */
   @RequestMapping(value = "/reload",
       produces = {
-        MediaType.APPLICATION_XML_VALUE,
-        MediaType.APPLICATION_JSON_VALUE,
-        MediaType.APPLICATION_XHTML_XML_VALUE
+        MediaType.APPLICATION_JSON_VALUE
       },
       method = RequestMethod.GET)
   @ResponseBody
@@ -117,21 +128,23 @@ public class WorkersManager {
       result.add("Processing context " + context.getName());
       try {
         DefaultShutdownStrategy shutdownStrategy = new DefaultShutdownStrategy();
-        shutdownStrategy.setTimeout(10); // Force shutdown in 10sec
+        shutdownStrategy.setTimeout(5); // Force shutdown in 10sec
         shutdownStrategy.setShutdownNowOnTimeout(true);
+        shutdownStrategy.shutdown();
         context.setShutdownStrategy(shutdownStrategy);
         context.stop();
-        result.add("Context stopped");
+        result.add(String.format("  Context status is %s.", context.getStatus()));
+        result.add("  Context stopped");
 
         try {
           context.start();
-          result.add("Context started.");
+          result.add("  Context started.");
         } catch (Exception ex) {
-          result.add("Error during startup: " + ex.getMessage());
+          result.add("  Error during startup: " + ex.getMessage());
           ex.printStackTrace();
         }
       } catch (Exception ex) {
-        result.add("Error during stop: " + ex.getMessage());
+        result.add("  Error during stop: " + ex.getMessage());
         ex.printStackTrace();
       }
     }
