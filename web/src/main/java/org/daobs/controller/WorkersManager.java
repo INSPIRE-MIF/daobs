@@ -21,12 +21,14 @@
 
 package org.daobs.controller;
 
-
 import io.swagger.annotations.Api;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultShutdownStrategy;
 import org.apache.camel.spi.InflightRepository;
+
 import org.daobs.workers.ContextStore;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -85,17 +87,18 @@ public class WorkersManager {
         // to have workers id set by starter app.
         final long millis = ex.getElapsed();
         String time = String.format("%02d min, %02d sec",
-          TimeUnit.MILLISECONDS.toMinutes(millis),
-                   TimeUnit.MILLISECONDS.toSeconds(millis) -
-                   TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
+            TimeUnit.MILLISECONDS.toMinutes(millis),
+            TimeUnit.MILLISECONDS.toSeconds(millis)
+            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
         );
         final long millisDuration = ex.getDuration();
         String timeDuration = String.format("%02d min, %02d sec",
-          TimeUnit.MILLISECONDS.toMinutes(millisDuration),
-                   TimeUnit.MILLISECONDS.toSeconds(millisDuration) -
-                   TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisDuration))
+             TimeUnit.MILLISECONDS.toMinutes(millisDuration),
+            TimeUnit.MILLISECONDS.toSeconds(millisDuration)
+            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisDuration))
         );
-        result.add(String.format("%s %s for %s (current: %s/ inflight: %s) - step %s - Nb of records: %s",
+        result.add(String.format(
+            "%s %s for %s (current: %s/ inflight: %s) - step %s - Nb of records: %s",
             ex.getExchange().getExchangeId(),
             ex.getExchange().getContext().getManagementName(),
             ex.getExchange().getUnitOfWork().getOriginalInMessage().getBody(String.class),
