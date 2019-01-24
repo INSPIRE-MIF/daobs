@@ -221,13 +221,36 @@ public class ServiceDatasetAnalyzer {
           XContentBuilder source = jsonBuilder().startObject()
               .array("inspireTheme", allInspireThemes.toArray())
               .endObject();
-          UpdateResponse response =
-              EsRequestBean.update(index,
-                  URLEncoder.encode(serviceId, "UTF-8"), source);
+          try {
+            UpdateResponse response =
+              EsRequestBean.update(index, serviceId, source);
 
-          System.out.println(String.format(
+            System.out.println(String.format(
               "  Updated service %s INSPIRE theme %s.",
               serviceId, response.toString()));
+          } catch (Exception updateException){
+            System.out.println(String.format(
+              "  Error while updating service %s INSPIRE theme. Error is %s. Trying to encode ID ...",
+              serviceId, updateException.getMessage()));
+            updateException.printStackTrace();
+
+            String serviceIdUtf = URLEncoder.encode(serviceId, "UTF-8");
+            try {
+              UpdateResponse response =
+                EsRequestBean.update(index,
+                  serviceIdUtf, source);
+
+              System.out.println(String.format(
+                "  Updated service %s INSPIRE theme %s.",
+                serviceIdUtf, response.toString()));
+            } catch (Exception updateEException){
+              System.out.println(String.format(
+                "  Error while updating service %s INSPIRE theme. Error is %s.",
+                serviceIdUtf, updateEException.getMessage()));
+              updateEException.printStackTrace();
+            }
+
+          }
         }
       }
 
@@ -278,13 +301,25 @@ public class ServiceDatasetAnalyzer {
         try {
           UpdateResponse response =
               EsRequestBean.update(index,
-                  URLEncoder.encode(uuid, "UTF-8"), source);
+                  uuid, source);
 
           System.out.println(String.format(
               "  Updated dataset %s service info. Response %s.",
               uuid, response.toString()));
         } catch (Exception updateException) {
           updateException.printStackTrace();
+
+          try {
+            UpdateResponse response =
+              EsRequestBean.update(index,
+                URLEncoder.encode(uuid, "UTF-8"), source);
+
+            System.out.println(String.format(
+              "  Updated dataset %s service info. Response %s.",
+              uuid, response.toString()));
+          } catch (Exception update2Exception) {
+            update2Exception.printStackTrace();
+          }
         }
       }
     } catch (Exception ex) {

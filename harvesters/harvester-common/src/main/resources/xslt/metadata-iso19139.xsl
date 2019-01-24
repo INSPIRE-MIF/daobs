@@ -832,12 +832,27 @@
         <!--<xsl:variable name="relatedTo" select="@uuidref"/>-->
         <xsl:variable name="getRecordByIdId">
           <xsl:if test="@xlink:href != ''">
-            <xsl:analyze-string select="@xlink:href"
-                                regex=".*[i|I][d|D]=([\w\-\.\{{\}}]*).*">
-              <xsl:matching-substring>
-                <xsl:value-of select="regex-group(1)"/>
-              </xsl:matching-substring>
-            </xsl:analyze-string>
+            <!--<xsl:message>operateOn xlink <xsl:value-of select="@xlink:href"/></xsl:message>-->
+            <xsl:choose>
+              <!-- Special CY case
+              https://taskman.eionet.europa.eu/issues/100677
+              -->
+              <xsl:when test="contains(@xlink:href, 'eservices.dls.moi.gov.cy/geoportal_inspire/rest/document')">
+                <xsl:variable name="remoteRecordUuid"
+                              select="document(@xlink:href)//gmd:fileIdentifier/gco:CharacterString"/>
+                <!--<xsl:message>operateOn xlink <xsl:value-of select="$remoteRecordUuid"/></xsl:message>-->
+
+                <xsl:value-of select="$remoteRecordUuid"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:analyze-string select="@xlink:href"
+                                    regex=".*[i|I][d|D]=([\w\-\.\{{\}}]*).*">
+                  <xsl:matching-substring>
+                    <xsl:value-of select="regex-group(1)"/>
+                  </xsl:matching-substring>
+                </xsl:analyze-string>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:if>
         </xsl:variable>
 
