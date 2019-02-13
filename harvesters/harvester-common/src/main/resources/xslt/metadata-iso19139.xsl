@@ -355,7 +355,7 @@
               <xsl:value-of select="text()"/>
             </inspireTheme_syn>
             <inspireTheme>
-              <xsl:value-of select="$inspireTheme"/>
+              <xsl:value-of select="lower-case($inspireTheme)"/>
             </inspireTheme>
 
             <!--
@@ -367,7 +367,7 @@
                 <xsl:value-of select="text()"/>
               </inspireThemeFirst_syn>
               <inspireThemeFirst>
-                <xsl:value-of select="$inspireTheme"/>
+                <xsl:value-of select="lower-case($inspireTheme)"/>
               </inspireThemeFirst>
               <inspireAnnexForFirstTheme>
                 <xsl:value-of
