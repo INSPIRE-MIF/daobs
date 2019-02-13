@@ -1,0 +1,660 @@
+<!--
+
+    Copyright 2014-2016 European Environment Agency
+
+    Licensed under the EUPL, Version 1.1 or – as soon
+    they will be approved by the European Commission -
+    subsequent versions of the EUPL (the "Licence");
+    You may not use this work except in compliance
+    with the Licence.
+    You may obtain a copy of the Licence at:
+
+    https://joinup.ec.europa.eu/community/eupl/og_page/eupl
+
+    Unless required by applicable law or agreed to in
+    writing, software distributed under the Licence is
+    distributed on an "AS IS" basis,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    either express or implied.
+    See the Licence for the specific language governing
+    permissions and limitations under the Licence.
+
+-->
+<daobs:reporting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:daobs="http://daobs.org"
+                 xsi:schemaLocation="http://daobs.org ../xsd/daobsIndicatorConfig.xsd"
+                 id="inspire">
+  <daobs:identification>
+    <daobs:title xml:lang="en">Monitoring Indicators (2019)</daobs:title>
+    <daobs:author>Monitoring and Reporting Drafting Team</daobs:author>
+    <daobs:url>http://inspire.ec.europa.eu/index.cfm/pageid/5022</daobs:url>
+  </daobs:identification>
+
+  <daobs:variables>
+    <!-- Indicator MDi1 (Existence of metadata) -->
+
+    <!-- DSv are estimates based on metadata. See MDvXX.
+    The reported value may be more than this. -->
+    <daobs:variable id="DSv_Num1" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnexForFirstTheme:i</daobs:query>
+      <daobs:comment>The value is based on the harvested records. It may be
+        underestimated
+        if the number of spatial data set does not have metadata or if error
+        occurred
+        during harvesting.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv_Num2" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnexForFirstTheme:ii</daobs:query>
+      <daobs:comment>The value is based on the harvested records. It may be
+        underestimated
+        if the number of spatial data set does not have metadata or if error
+        occurred
+        during harvesting.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv_Num3" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnexForFirstTheme:iii</daobs:query>
+      <daobs:comment>The value is based on the harvested records. It may be
+        underestimated
+        if the number of spatial data set does not have metadata or if error
+        occurred
+        during harvesting.</daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="SDSv_Num" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment>Only services having an INSPIRE annex are took into
+        account. We may harvest records related to no annex.</daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="NSv_NumDiscServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of discovery services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:discovery</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:discovery</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumViewServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of view services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:view</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:view</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumDownlServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of download services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:download</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:download</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumInvkServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of invoke services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:invoke</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:invoke</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumTransfServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of transformation services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:transformation</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:transformation</daobs:query>-->
+    </daobs:variable>
+
+
+    <daobs:variable id="MDv11" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I that
+        have metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnexForFirstTheme:i</daobs:query>
+    </daobs:variable>
+
+    <daobs:variable id="MDv12" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II that
+        have metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnexForFirstTheme:ii</daobs:query>
+    </daobs:variable>
+
+    <daobs:variable id="MDv13" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III that
+        have metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnexForFirstTheme:iii</daobs:query>
+    </daobs:variable>
+
+
+    <daobs:variable id="MDv14" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services that have
+        metadata</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+    </daobs:variable>
+
+
+    <!-- Indicator MDi2 (Conformity of metadata) -->
+    <daobs:variable id="MDv21" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I that
+        have conformant metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnexForFirstTheme:i</daobs:query>
+      <daobs:comment>INSPIRE validator is used to validate records.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="MDv22" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II that
+        have conformant metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnexForFirstTheme:ii</daobs:query>
+      <daobs:comment>INSPIRE validator is used to validate records.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="MDv23" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III that
+        have conformant metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnexForFirstTheme:iii</daobs:query>
+      <daobs:comment>INSPIRE validator is used to validate records.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="MDv24" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services that have
+        conformant metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:service) +isAboveThreshold:true</daobs:query>
+      <!--<daobs:query>+documentType:metadata +(resourceType:service) +isAboveThreshold:true +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment>INSPIRE validator is used to validate records.</daobs:comment>
+    </daobs:variable>
+
+
+    <!-- INSPIRE DSi1 (Geographical coverage of spatial data sets) -->
+
+    <!-- INSPIRE DSi2 (Conformity of spatial data sets) -->
+    <daobs:variable id="DSv21" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex
+        I that have conformant metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnexForFirstTheme:i +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 1089/2010 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv22" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex
+        II that have conformant metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnexForFirstTheme:ii +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 1089/2010 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv23" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex
+        III that have conformant metadata</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnexForFirstTheme:iii +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 1089/2010 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+
+
+    <!-- INSPIRE NSi1 (Accessibility of metadata through discovery services) -->
+    <daobs:variable id="NSv11" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets with metadata for
+        which a discovery service exists</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>
+      <daobs:comment>All records used to build the report are harvested, so all
+        records are available through discovery service (ie. equivalent to
+        DSv_Num).</daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv12" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services with metadata
+        for which a discovery service exists</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment>All records used to build the report are harvested, so all
+        records are available through discovery service (ie. equivalent to
+        SDSv_Num).</daobs:comment>
+    </daobs:variable>
+
+
+    <!-- INSPIRE NSi2 (Accessibility of data sets through view or download services) -->
+    <daobs:variable id="NSv21" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a view
+        service exists</daobs:name>
+      <daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>
+      <!--<daobs:query>+documentType:metadata {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment></daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv22" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a download
+        service exists</daobs:name>
+      <daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>
+      <!--<daobs:query>+documentType:metadata {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:download +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment></daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="NSv23" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a view and
+        download service exists</daobs:name>
+      <daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>
+      <!--<daobs:query>+documentType:metadata {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:viewAndDownload +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment></daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="NSv41" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant discovery network
+        services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:discovery +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 976/2009 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv42" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant view network services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:view +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 976/2009 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv43" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant download network services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:download +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 976/2009 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv44" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant transformation network
+        services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:transformation +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 976/2009 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv45" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant discovery invoke services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:invoke +inspireConformResource:true</daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check
+        that the Commission Regulation (EU) No 976/2009 report a conform
+        resource.</daobs:comment>
+    </daobs:variable>
+
+
+
+    <daobs:variable id="DSi13">
+      <daobs:name>The number of spatial data set metadata records that contain a keyword for priority list of spatial data sets (2019)</daobs:name>
+      <daobs:query>+documentType:metadata +thesaurus:"INSPIRE priority data set"</daobs:query>
+      <daobs:comment>
+        The number of spatial data sets for which the metadata contains a keyword from a register provided by the Commission indicating that the spatial data set is used for reporting under the environmental legislation
+
+        Based on https://ies-svn.jrc.ec.europa.eu/projects/2016-5/wiki/Implementation
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="DSi14">
+      <daobs:name>The number of spatial data set metadata records that contain a keyword "Regional" (2019)</daobs:name>
+      <daobs:query>+documentType:metadata +tag:Regional</daobs:query>
+      <daobs:comment>
+        Only check if a keyword is set to Regional. No check on a specific thesaurus.
+        To be improved once encoding rule is specified.
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="DSi15">
+      <daobs:name>The number of spatial data set metadata records that contain a keyword "National" (2019)</daobs:name>
+      <daobs:query>+documentType:metadata +tag:National</daobs:query>
+      <daobs:comment>
+        Only check if a keyword is set to National. No check on a specific thesaurus.
+        To be improved once encoding rule is specified.
+      </daobs:comment>
+    </daobs:variable>
+  </daobs:variables>
+
+  <daobs:indicators>
+    <daobs:indicator id="DSv_Num" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for all Annexes.</daobs:name>
+      <daobs:expression>DSv_Num1 + DSv_Num2 + DSv_Num3</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv_Num1"/>
+        <daobs:parameter id="DSv_Num2"/>
+        <daobs:parameter id="DSv_Num3"/></daobs:parameters>
+    </daobs:indicator>
+    
+    <daobs:indicator id="DSi11">
+      <daobs:name>The number of spatial data sets for which metadata exist (2019)</daobs:name>
+      <daobs:expression>DSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSv_NumAllServ" numberFormat="#">
+      <daobs:name>Number of all services.</daobs:name>
+      <daobs:expression>NSv_NumDiscServ + NSv_NumViewServ + NSv_NumDownlServ + NSv_NumTransfServ + NSv_NumInvkServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv_NumDiscServ"/>
+        <daobs:parameter id="NSv_NumViewServ"/>
+        <daobs:parameter id="NSv_NumDownlServ"/>
+        <daobs:parameter id="NSv_NumTransfServ"/>
+        <daobs:parameter id="NSv_NumInvkServ"/></daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSi12">
+      <daobs:name>The number of spatial data services for which metadata exist (2019)</daobs:name>
+      <daobs:expression>NSv_NumAllServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv_NumAllServ"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDi11" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex I having
+        metadata</daobs:name>
+      <daobs:expression>MDv11 / DSv_Num1</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv11"/>
+        <daobs:parameter id="DSv_Num1"/></daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="MDi12" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex II having
+        metadata</daobs:name>
+      <daobs:expression>MDv12 / DSv_Num2</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv12"/>
+        <daobs:parameter id="DSv_Num2"/></daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="MDi13" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex II having
+        metadata</daobs:name>
+      <daobs:expression>MDv13 / DSv_Num3</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv13"/>
+        <daobs:parameter id="DSv_Num3"/></daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="MDi14" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial services having metadata</daobs:name>
+      <daobs:expression>MDv14 / SDSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv14"/>
+        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDi1" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets or services having
+        metadata</daobs:name>
+      <daobs:expression>(MDv11 + MDv12 + MDv13 + MDv14) / (DSv_Num + SDSv_Num)</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv11"/>
+        <daobs:parameter id="MDv12"/>
+        <daobs:parameter id="MDv13"/>
+        <daobs:parameter id="MDv14"/>
+        <daobs:parameter id="DSv_Num"/>
+        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDv1_DS" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets that have metadata</daobs:name>
+      <daobs:expression>MDv11 + MDv12 + MDv13</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv11"/>
+        <daobs:parameter id="MDv12"/>
+        <daobs:parameter id="MDv13"/></daobs:parameters>
+      <daobs:comment>
+        Same remark as DSv_Num.</daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDv2_DS" numberFormat="#">
+      <daobs:name>Number of spatial data sets for all Annexes that have
+        conformant metadata</daobs:name>
+      <daobs:expression>MDv21 + MDv22 + MDv23</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv21"/>
+        <daobs:parameter id="MDv22"/>
+        <daobs:parameter id="MDv23"/></daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDi21" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex I with
+        conformant metadata</daobs:name>
+      <daobs:expression>MDv21 / DSv_Num1</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv21"/>
+        <daobs:parameter id="DSv_Num1"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="MDi22" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex II with
+        conformant metadata</daobs:name>
+      <daobs:expression>MDv22 / DSv_Num2</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv22"/>
+        <daobs:parameter id="DSv_Num2"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="MDi23" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex III with
+        conformant metadata</daobs:name>
+      <daobs:expression>MDv23 / DSv_Num3</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv23"/>
+        <daobs:parameter id="DSv_Num3"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="MDi24" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data services with conformant
+        metadata</daobs:name>
+      <daobs:expression>MDv24 / SDSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv24"/>
+        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+
+    <!-- TODO: rename id once old indicator is removed-->
+    <daobs:indicator id="MDi12_">
+      <daobs:name>Percentage of metadata for spatial data services conformant with Commission Regulation (EC) No 1205/20087 as regards metadata (2019)</daobs:name>
+      <daobs:expression>MDi24</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDi24"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDi2" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets and services with
+        conformant metadata</daobs:name>
+      <daobs:expression>(MDv21 + MDv22 + MDv23 + MDv24) / (DSv_Num + SDSv_Num)</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv21"/>
+        <daobs:parameter id="MDv22"/>
+        <daobs:parameter id="MDv23"/>
+        <daobs:parameter id="MDv24"/>
+        <daobs:parameter id="SDSv_Num"/>
+        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="DSv2" numberFormat="#">
+      <daobs:name>Number of conformant spatial data sets with conformant
+        metadata for all Annexes</daobs:name>
+      <daobs:expression>DSv21 + DSv22 + DSv23</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv21"/>
+        <daobs:parameter id="DSv22"/>
+        <daobs:parameter id="DSv23"/></daobs:parameters>
+    </daobs:indicator>
+
+    <!-- TODO: rename id once old indicator is removed-->
+    <daobs:indicator id="MDi11_">
+      <daobs:name>Percentage of metadata for spatial data sets conformant with Commission Regulation (EC) No 1205/20087 as regards metadata (2019)</daobs:name>
+      <daobs:expression>DSv2</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv2"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="DSi21" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata
+        for Annex I (2019)</daobs:name>
+      <daobs:expression>DSv21 / DSv_Num1</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv21"/>
+        <daobs:parameter id="DSv_Num1"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="DSi22" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata
+        for Annex II (2019)</daobs:name>
+      <daobs:expression>DSv22 / DSv_Num2</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv22"/>
+        <daobs:parameter id="DSv_Num2"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="DSi23" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata
+        for Annex III (2019)</daobs:name>
+      <daobs:expression>DSv23 / DSv_Num3</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv23"/>
+        <daobs:parameter id="DSv_Num3"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="DSi2" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata
+        for all Annexes (2019)</daobs:name>
+      <daobs:expression>DSv2 / DSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="DSv2"/>
+        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+
+
+
+    <daobs:indicator id="NSi11" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets with metadata, for which a discovery
+        service exists</daobs:name>
+      <daobs:expression>NSv11 / DSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv11"/>
+        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="NSi12" numberFormat="#.00">
+      <daobs:name>%age of spatial data services with metadata, for which a
+        discovery service exists</daobs:name>
+      <daobs:expression>NSv12 / SDSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv12"/>
+        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi1" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets and services with metadata, for
+        which a discovery service exists</daobs:name>
+      <daobs:expression>(NSv11 + NSv12) / (DSv_Num + SDSv_Num)</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv11"/>
+        <daobs:parameter id="NSv12"/>
+        <daobs:parameter id="DSv_Num"/>
+        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSi21" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets for which a view service exists (2019)</daobs:name>
+      <daobs:expression>NSv21 / DSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv21"/>
+        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="NSi22" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets for which a download service
+        exists (2019)</daobs:name>
+      <daobs:expression>NSv22 / DSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv22"/>
+        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="NSi2" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets for which a view and download
+        service exists (2019)</daobs:name>
+      <daobs:expression>NSv23 / DSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv23"/>
+        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSv4" numberFormat="#">
+      <daobs:name xml:lang="en">Number of all conformant network services</daobs:name>
+      <daobs:expression>NSv41 + NSv42 + NSv43 + NSv44 + NSv45</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv41"/>
+        <daobs:parameter id="NSv42"/>
+        <daobs:parameter id="NSv43"/>
+        <daobs:parameter id="NSv44"/>
+        <daobs:parameter id="NSv45"/></daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+
+
+    <daobs:indicator id="NSi41" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant discovery services (2019)</daobs:name>
+      <daobs:expression>NSv41 / NSv_NumDiscServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv41"/>
+        <daobs:parameter id="NSv_NumDiscServ"/></daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi42" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant view services (2019)</daobs:name>
+      <daobs:expression>NSv42 / NSv_NumViewServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv42"/>
+        <daobs:parameter id="NSv_NumViewServ"/></daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi43" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant download services (2019)</daobs:name>
+      <daobs:expression>NSv43 / NSv_NumDownlServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv43"/>
+        <daobs:parameter id="NSv_NumDownlServ"/></daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi44" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant transformation services (2019)</daobs:name>
+      <daobs:expression>NSv44 / NSv_NumTransfServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv44"/>
+        <daobs:parameter id="NSv_NumTransfServ"/></daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi45" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant invoke services</daobs:name>
+      <daobs:expression>NSv45 / NSv_NumInvkServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv45"/>
+        <daobs:parameter id="NSv_NumInvkServ"/></daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi4" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant services (2019)</daobs:name>
+      <daobs:expression>NSv4 / NSv_NumAllServ</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv4"/>
+        <daobs:parameter id="NSv_NumAllServ"/></daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+  </daobs:indicators>
+
+</daobs:reporting>

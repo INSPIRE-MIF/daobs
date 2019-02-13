@@ -445,6 +445,14 @@
         </xsl:for-each>
 
 
+
+        <xsl:for-each-group select="*/gmd:MD_Keywords/gmd:thesaurusName/*/
+                                        gmd:title/(gco:CharacterString|gmx:Anchor)"
+                            group-by=".">
+          <thesaurus><xsl:value-of select="."/></thesaurus>
+        </xsl:for-each-group>
+
+
         <!-- Index all keywords having a specific thesaurus -->
         <xsl:for-each
           select="*/gmd:MD_Keywords[gmd:thesaurusName]/
@@ -452,7 +460,7 @@
 
           <xsl:variable name="thesaurusName"
                         select="../gmd:thesaurusName[1]/gmd:CI_Citation/
-                                  gmd:title[1]/gco:CharacterString"/>
+                                  gmd:title[1]/(gco:CharacterString|gmx:Anchor)"/>
 
           <xsl:variable name="thesaurusId"
                         select="normalize-space(../gmd:thesaurusName/gmd:CI_Citation/
@@ -467,8 +475,8 @@
               <!-- Try to build a thesaurus key based on the name
               by removing space - to be improved. -->
               <xsl:when test="normalize-space($thesaurusName) != ''">
-                <!--TODO handle special character to build a valid key usable for field
-                <xsl:value-of select="replace($thesaurusName, ' ', '-')"/>-->
+                <!--TODO handle special character to build a valid key usable for field-->
+                <xsl:value-of select="replace($thesaurusName, '[^a-zA-Z0-9]', '')"/>
               </xsl:when>
             </xsl:choose>
           </xsl:variable>
