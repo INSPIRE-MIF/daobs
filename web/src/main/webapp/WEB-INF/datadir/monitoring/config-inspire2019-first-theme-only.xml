@@ -25,7 +25,7 @@
                  xsi:schemaLocation="http://daobs.org ../xsd/daobsIndicatorConfig.xsd"
                  id="inspire">
   <daobs:identification>
-    <daobs:title xml:lang="en">Monitoring Indicators (2019)</daobs:title>
+    <daobs:title xml:lang="en">Monitoring Indicators (2019) - Beta</daobs:title>
     <daobs:author>Monitoring and Reporting Drafting Team</daobs:author>
     <daobs:url>http://inspire.ec.europa.eu/index.cfm/pageid/5022</daobs:url>
   </daobs:identification>
@@ -312,169 +312,26 @@
   </daobs:variables>
 
   <daobs:indicators>
-    <daobs:indicator id="DSv_Num" numberFormat="#">
-      <daobs:name xml:lang="en">Number of spatial data sets for all Annexes.</daobs:name>
+
+    <daobs:indicator id="DSi11">
+      <daobs:name>The number of spatial data sets for which metadata exist (2019)</daobs:name>
       <daobs:expression>DSv_Num1 + DSv_Num2 + DSv_Num3</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="DSv_Num1"/>
         <daobs:parameter id="DSv_Num2"/>
         <daobs:parameter id="DSv_Num3"/></daobs:parameters>
     </daobs:indicator>
-    
-    <daobs:indicator id="DSi11">
-      <daobs:name>The number of spatial data sets for which metadata exist (2019)</daobs:name>
-      <daobs:expression>DSv_Num</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="DSv_Num"/>
-      </daobs:parameters>
-    </daobs:indicator>
 
-    <daobs:indicator id="NSv_NumAllServ" numberFormat="#">
-      <daobs:name>Number of all services.</daobs:name>
+    <daobs:indicator id="DSi12">
+      <daobs:name>The number of spatial data services for which metadata exist (2019)</daobs:name>
       <daobs:expression>NSv_NumDiscServ + NSv_NumViewServ + NSv_NumDownlServ + NSv_NumTransfServ + NSv_NumInvkServ</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv_NumDiscServ"/>
         <daobs:parameter id="NSv_NumViewServ"/>
         <daobs:parameter id="NSv_NumDownlServ"/>
         <daobs:parameter id="NSv_NumTransfServ"/>
-        <daobs:parameter id="NSv_NumInvkServ"/></daobs:parameters>
-    </daobs:indicator>
-
-    <daobs:indicator id="DSi12">
-      <daobs:name>The number of spatial data services for which metadata exist (2019)</daobs:name>
-      <daobs:expression>NSv_NumAllServ</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="NSv_NumAllServ"/>
+        <daobs:parameter id="NSv_NumInvkServ"/>
       </daobs:parameters>
-    </daobs:indicator>
-
-    <daobs:indicator id="MDi11" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets for Annex I having
-        metadata</daobs:name>
-      <daobs:expression>MDv11 / DSv_Num1</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv11"/>
-        <daobs:parameter id="DSv_Num1"/></daobs:parameters>
-      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
-    </daobs:indicator>
-    <daobs:indicator id="MDi12" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets for Annex II having
-        metadata</daobs:name>
-      <daobs:expression>MDv12 / DSv_Num2</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv12"/>
-        <daobs:parameter id="DSv_Num2"/></daobs:parameters>
-      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
-    </daobs:indicator>
-    <daobs:indicator id="MDi13" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets for Annex II having
-        metadata</daobs:name>
-      <daobs:expression>MDv13 / DSv_Num3</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv13"/>
-        <daobs:parameter id="DSv_Num3"/></daobs:parameters>
-      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
-    </daobs:indicator>
-    <daobs:indicator id="MDi14" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial services having metadata</daobs:name>
-      <daobs:expression>MDv14 / SDSv_Num</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv14"/>
-        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
-      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
-    </daobs:indicator>
-
-
-    <daobs:indicator id="MDi1" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets or services having
-        metadata</daobs:name>
-      <daobs:expression>(MDv11 + MDv12 + MDv13 + MDv14) / (DSv_Num + SDSv_Num)</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv11"/>
-        <daobs:parameter id="MDv12"/>
-        <daobs:parameter id="MDv13"/>
-        <daobs:parameter id="MDv14"/>
-        <daobs:parameter id="DSv_Num"/>
-        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
-      <daobs:comment>Using only harvesting records, it should be 1.</daobs:comment>
-    </daobs:indicator>
-
-
-    <daobs:indicator id="MDv1_DS" numberFormat="#">
-      <daobs:name xml:lang="en">Number of spatial data sets that have metadata</daobs:name>
-      <daobs:expression>MDv11 + MDv12 + MDv13</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv11"/>
-        <daobs:parameter id="MDv12"/>
-        <daobs:parameter id="MDv13"/></daobs:parameters>
-      <daobs:comment>
-        Same remark as DSv_Num.</daobs:comment>
-    </daobs:indicator>
-
-    <daobs:indicator id="MDv2_DS" numberFormat="#">
-      <daobs:name>Number of spatial data sets for all Annexes that have
-        conformant metadata</daobs:name>
-      <daobs:expression>MDv21 + MDv22 + MDv23</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv21"/>
-        <daobs:parameter id="MDv22"/>
-        <daobs:parameter id="MDv23"/></daobs:parameters>
-    </daobs:indicator>
-
-
-    <daobs:indicator id="MDi21" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets for Annex I with
-        conformant metadata</daobs:name>
-      <daobs:expression>MDv21 / DSv_Num1</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv21"/>
-        <daobs:parameter id="DSv_Num1"/></daobs:parameters>
-    </daobs:indicator>
-    <daobs:indicator id="MDi22" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets for Annex II with
-        conformant metadata</daobs:name>
-      <daobs:expression>MDv22 / DSv_Num2</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv22"/>
-        <daobs:parameter id="DSv_Num2"/></daobs:parameters>
-    </daobs:indicator>
-    <daobs:indicator id="MDi23" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets for Annex III with
-        conformant metadata</daobs:name>
-      <daobs:expression>MDv23 / DSv_Num3</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv23"/>
-        <daobs:parameter id="DSv_Num3"/></daobs:parameters>
-    </daobs:indicator>
-    <daobs:indicator id="MDi24" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data services with conformant
-        metadata</daobs:name>
-      <daobs:expression>MDv24 / SDSv_Num</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv24"/>
-        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
-    </daobs:indicator>
-
-    <!-- TODO: rename id once old indicator is removed-->
-    <daobs:indicator id="MDi12_">
-      <daobs:name>Percentage of metadata for spatial data services conformant with Commission Regulation (EC) No 1205/20087 as regards metadata (2019)</daobs:name>
-      <daobs:expression>MDi24</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDi24"/>
-      </daobs:parameters>
-    </daobs:indicator>
-
-    <daobs:indicator id="MDi2" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of spatial data sets and services with
-        conformant metadata</daobs:name>
-      <daobs:expression>(MDv21 + MDv22 + MDv23 + MDv24) / (DSv_Num + SDSv_Num)</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="MDv21"/>
-        <daobs:parameter id="MDv22"/>
-        <daobs:parameter id="MDv23"/>
-        <daobs:parameter id="MDv24"/>
-        <daobs:parameter id="SDSv_Num"/>
-        <daobs:parameter id="DSv_Num"/></daobs:parameters>
     </daobs:indicator>
 
 
@@ -488,12 +345,25 @@
         <daobs:parameter id="DSv23"/></daobs:parameters>
     </daobs:indicator>
 
-    <!-- TODO: rename id once old indicator is removed-->
-    <daobs:indicator id="MDi11_">
-      <daobs:name>Percentage of metadata for spatial data sets conformant with Commission Regulation (EC) No 1205/20087 as regards metadata (2019)</daobs:name>
-      <daobs:expression>DSv2</daobs:expression>
+
+    <daobs:indicator id="MDi11" numberFormat="#.00">
+      <daobs:name xml:lang="en">Percentage of metadata for spatial data sets conformant with Commission Regulation (EC) No 1205/20087 as regards metadata</daobs:name>
+      <daobs:expression>(MDv21 + MDv22 + MDv23) / DSi11</daobs:expression>
       <daobs:parameters>
-        <daobs:parameter id="DSv2"/>
+        <daobs:parameter id="MDv21"/>
+        <daobs:parameter id="MDv22"/>
+        <daobs:parameter id="MDv23"/>
+        <daobs:parameter id="DSi11"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDi12" numberFormat="#.00">
+      <daobs:name xml:lang="en">Percentage of metadata for spatial data services conformant with Commission Regulation (EC) No 1205/20087 as regards metadata</daobs:name>
+      <daobs:expression>MDv24 / SDSv_Num</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="MDv24"/>
+        <daobs:parameter id="SDSv_Num"/>
       </daobs:parameters>
     </daobs:indicator>
 
@@ -523,86 +393,55 @@
         <daobs:parameter id="DSv_Num3"/></daobs:parameters>
     </daobs:indicator>
     <daobs:indicator id="DSi2" numberFormat="#.00">
-      <daobs:name>%age of conformant spatial data sets with conformant metadata
-        for all Annexes (2019)</daobs:name>
-      <daobs:expression>DSv2 / DSv_Num</daobs:expression>
+      <daobs:name>Percentage of  spatial data sets that are in conformity with Commission Regulation (EU) No 1089/2010  as regards interoperability of spatial data sets (2019)</daobs:name>
+      <daobs:expression>DSv2 / DSi11</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="DSv2"/>
-        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+        <daobs:parameter id="DSi11"/></daobs:parameters>
     </daobs:indicator>
 
 
-
-    <daobs:indicator id="NSi11" numberFormat="#.00">
-      <daobs:name>%age of spatial data sets with metadata, for which a discovery
-        service exists</daobs:name>
-      <daobs:expression>NSv11 / DSv_Num</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="NSv11"/>
-        <daobs:parameter id="DSv_Num"/></daobs:parameters>
-    </daobs:indicator>
-    <daobs:indicator id="NSi12" numberFormat="#.00">
-      <daobs:name>%age of spatial data services with metadata, for which a
-        discovery service exists</daobs:name>
-      <daobs:expression>NSv12 / SDSv_Num</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="NSv12"/>
-        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
-    </daobs:indicator>
-
-    <daobs:indicator id="NSi1" numberFormat="#.00">
-      <daobs:name>%age of spatial data sets and services with metadata, for
-        which a discovery service exists</daobs:name>
-      <daobs:expression>(NSv11 + NSv12) / (DSv_Num + SDSv_Num)</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="NSv11"/>
-        <daobs:parameter id="NSv12"/>
-        <daobs:parameter id="DSv_Num"/>
-        <daobs:parameter id="SDSv_Num"/></daobs:parameters>
-    </daobs:indicator>
 
 
     <daobs:indicator id="NSi21" numberFormat="#.00">
-      <daobs:name>%age of spatial data sets for which a view service exists (2019)</daobs:name>
-      <daobs:expression>NSv21 / DSv_Num</daobs:expression>
+      <daobs:name>The percentage of  spatial data sets that are accessible through view services (2019)</daobs:name>
+      <daobs:expression>NSv21 / DSi11</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv21"/>
-        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+        <daobs:parameter id="DSi11"/></daobs:parameters>
     </daobs:indicator>
     <daobs:indicator id="NSi22" numberFormat="#.00">
-      <daobs:name>%age of spatial data sets for which a download service
-        exists (2019)</daobs:name>
-      <daobs:expression>NSv22 / DSv_Num</daobs:expression>
+      <daobs:name>The percentage of  spatial data sets that are accessible through download  services (2019)</daobs:name>
+      <daobs:expression>NSv22 / DSi11</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv22"/>
-        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+        <daobs:parameter id="DSi11"/></daobs:parameters>
     </daobs:indicator>
     <daobs:indicator id="NSi2" numberFormat="#.00">
-      <daobs:name>%age of spatial data sets for which a view and download
-        service exists (2019)</daobs:name>
-      <daobs:expression>NSv23 / DSv_Num</daobs:expression>
+      <daobs:name>The percentage of  spatial data sets that are accessible through view and the download  services (2019)</daobs:name>
+      <daobs:expression>NSv23 / DSi11</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv23"/>
-        <daobs:parameter id="DSv_Num"/></daobs:parameters>
+        <daobs:parameter id="DSi11"/></daobs:parameters>
     </daobs:indicator>
 
 
     <daobs:indicator id="NSv4" numberFormat="#">
       <daobs:name xml:lang="en">Number of all conformant network services</daobs:name>
-      <daobs:expression>NSv41 + NSv42 + NSv43 + NSv44 + NSv45</daobs:expression>
+      <daobs:expression>NSv41 + NSv42 + NSv43 + NSv44</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv41"/>
         <daobs:parameter id="NSv42"/>
         <daobs:parameter id="NSv43"/>
         <daobs:parameter id="NSv44"/>
-        <daobs:parameter id="NSv45"/></daobs:parameters>
+      </daobs:parameters>
       <daobs:comment></daobs:comment>
     </daobs:indicator>
 
 
 
     <daobs:indicator id="NSi41" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of conformant discovery services (2019)</daobs:name>
+      <daobs:name xml:lang="en">The percentage of the discovery services that are in conformity with Commission Regulation (EC) No 976/20099 as regards the Network Services (2019)</daobs:name>
       <daobs:expression>NSv41 / NSv_NumDiscServ</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv41"/>
@@ -611,7 +450,7 @@
     </daobs:indicator>
 
     <daobs:indicator id="NSi42" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of conformant view services (2019)</daobs:name>
+      <daobs:name xml:lang="en">The percentage of the view services that are in conformity with Commission Regulation (EC) No 976/20099 as regards the Network Services (2019)</daobs:name>
       <daobs:expression>NSv42 / NSv_NumViewServ</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv42"/>
@@ -620,7 +459,7 @@
     </daobs:indicator>
 
     <daobs:indicator id="NSi43" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of conformant download services (2019)</daobs:name>
+      <daobs:name xml:lang="en">The percentage of the download services that are in conformity with Commission Regulation (EC) No 976/20099 as regards the Network Services (2019)</daobs:name>
       <daobs:expression>NSv43 / NSv_NumDownlServ</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv43"/>
@@ -629,7 +468,7 @@
     </daobs:indicator>
 
     <daobs:indicator id="NSi44" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of conformant transformation services (2019)</daobs:name>
+      <daobs:name xml:lang="en">The percentage of the transformation services that are in conformity with Commission Regulation (EC) No 976/20099 as regards the Network Services (2019)</daobs:name>
       <daobs:expression>NSv44 / NSv_NumTransfServ</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv44"/>
@@ -637,24 +476,15 @@
       <daobs:comment></daobs:comment>
     </daobs:indicator>
 
-    <daobs:indicator id="NSi45" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of conformant invoke services</daobs:name>
-      <daobs:expression>NSv45 / NSv_NumInvkServ</daobs:expression>
-      <daobs:parameters>
-        <daobs:parameter id="NSv45"/>
-        <daobs:parameter id="NSv_NumInvkServ"/></daobs:parameters>
-      <daobs:comment></daobs:comment>
-    </daobs:indicator>
-
     <daobs:indicator id="NSi4" numberFormat="#.00">
-      <daobs:name xml:lang="en">%age of conformant services (2019)</daobs:name>
-      <daobs:expression>NSv4 / NSv_NumAllServ</daobs:expression>
+      <daobs:name xml:lang="en">The percentage of the network services that are in conformity with Commission Regulation (EC) No 976/20099 as regards the Network Services (2019)</daobs:name>
+      <daobs:expression>NSv4 / DSi12</daobs:expression>
       <daobs:parameters>
         <daobs:parameter id="NSv4"/>
-        <daobs:parameter id="NSv_NumAllServ"/></daobs:parameters>
+        <daobs:parameter id="DSi12"/>
+      </daobs:parameters>
       <daobs:comment></daobs:comment>
     </daobs:indicator>
 
   </daobs:indicators>
-
 </daobs:reporting>

@@ -75,6 +75,7 @@
       <array>
         <value>reporting-xslt-inspire</value>
         <value>reporting-xslt-inspire-first-theme-only</value>
+        <value>reporting-xslt-inspire2019-first-theme-only</value>
       </array>
     </property>
     <property name="prefix" value="/WEB-INF/xslt/"/>
