@@ -88,6 +88,7 @@
   <xsl:template match="/">
     <ns2:Monitoring
       xmlns:ns2="http://inspire.jrc.ec.europa.eu/monitoringreporting/monitoring"
+      xmlns:ind2019="http://inspire.jrc.ec.europa.eu/monitoringreporting/indicators2019"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <xsl:comment>Experimental INSPIRE report with indicators defined for 2019 reporting obligation</xsl:comment>
       <documentYear>
@@ -131,38 +132,17 @@
           <xsl:value-of select="$language"/>
         </language>
       </MonitoringMD>
-      <Indicators>
-        <xsl:variable name="indicatorList">
-          <id>DSi11</id>
-          <id>DSi12</id>
-          <id>DSi13</id>
-          <id>DSi14</id>
-          <id>DSi15</id>
-          <id>MDi11</id>
-          <id>MDi12</id>
-          <id>DSi2</id>
-          <id>DSi21</id>
-          <id>DSi22</id>
-          <id>DSi23</id>
-          <id>NSi2</id>
-          <id>NSi21</id>
-          <id>NSi22</id>
-          <id>NSi4</id>
-          <id>NSi41</id>
-          <id>NSi42</id>
-          <id>NSi43</id>
-          <id>NSi44</id>
-        </xsl:variable>
+      <ind2019:Indicators>
 
-        <xsl:variable name="root" select="/"/>
-        <xsl:for-each select="$indicatorList//id">
+        <xsl:for-each select="//(daobs:indicator|daobs:variable)[@id]">
+          <xsl:sort select="@id"/>
           <xsl:variable name="id"
-                        select="."/>
+                        select="@id"/>
           <xsl:element name="{$id}">
-            <xsl:value-of select="$root//(daobs:indicator|daobs:variable)[@id= $id]/daobs:value"/>
+            <xsl:value-of select="daobs:value"/>
           </xsl:element>
         </xsl:for-each>
-      </Indicators>
+      </ind2019:Indicators>
 
       <xsl:if test="$withRowData = true()">
         <!--<xsl:message><xsl:copy-of select="$spatialDataServices"/></xsl:message>-->

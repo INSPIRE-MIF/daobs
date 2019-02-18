@@ -1,0 +1,2256 @@
+<!--
+
+    Copyright 2014-2016 European Environment Agency
+
+    Licensed under the EUPL, Version 1.1 or – as soon
+    they will be approved by the European Commission -
+    subsequent versions of the EUPL (the "Licence");
+    You may not use this work except in compliance
+    with the Licence.
+    You may obtain a copy of the Licence at:
+
+    https://joinup.ec.europa.eu/community/eupl/og_page/eupl
+
+    Unless required by applicable law or agreed to in
+    writing, software distributed under the Licence is
+    distributed on an "AS IS" basis,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    either express or implied.
+    See the Licence for the specific language governing
+    permissions and limitations under the Licence.
+
+-->
+<daobs:reporting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:daobs="http://daobs.org"
+                 xsi:schemaLocation="http://daobs.org ../xsd/daobsIndicatorConfig.xsd"
+                 id="inspire">
+  <daobs:identification>
+    <daobs:title xml:lang="en">Monitoring Indicators (2019) - Beta</daobs:title>
+    <daobs:author>Monitoring and Reporting Drafting Team</daobs:author>
+    <daobs:url>http://inspire.ec.europa.eu/index.cfm/pageid/5022</daobs:url>
+  </daobs:identification>
+
+  <daobs:variables>
+
+
+
+    <daobs:variable id="DSi13.2019">
+      <daobs:name>The number of spatial data set metadata records that contain a keyword for priority list of spatial data sets (2019)</daobs:name>
+      <daobs:query>+documentType:metadata +thesaurus:"INSPIRE priority data set"</daobs:query>
+      <daobs:comment>
+        The number of spatial data sets for which the metadata contains a keyword from a register provided by the Commission indicating that the spatial data set is used for reporting under the environmental legislation
+
+        Based on https://ies-svn.jrc.ec.europa.eu/projects/2016-5/wiki/Implementation
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="DSi14.2019">
+      <daobs:name>The number of spatial data set metadata records that contain a keyword "Regional" (2019)</daobs:name>
+      <daobs:query>+documentType:metadata +tag:Regional</daobs:query>
+      <daobs:comment>
+        Only check if a keyword is set to Regional. No check on a specific thesaurus.
+        To be improved once encoding rule is specified.
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="DSi15.2019">
+      <daobs:name>The number of spatial data set metadata records that contain a keyword "National" (2019)</daobs:name>
+      <daobs:query>+documentType:metadata +tag:National</daobs:query>
+      <daobs:comment>
+        Only check if a keyword is set to National. No check on a specific thesaurus.
+        To be improved once encoding rule is specified.
+      </daobs:comment>
+    </daobs:variable>
+
+
+
+    <!-- Indicator MDi1 (Existence of metadata) -->
+
+    <!-- DSv are estimates based on metadata. See MDvXX.
+    The reported value may be more than this.
+    <daobs:variable id="DSv_Num1Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:i</daobs:query>
+      <daobs:comment>The value is based on the harvested records. It may be underestimated if the number of spatial data set does not have metadata or if error occurred during harvesting.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv_Num2Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:ii</daobs:query>
+      <daobs:comment>The value is based on the harvested records. It may be underestimated if the number of spatial data set does not have metadata or if error occurred during harvesting.</daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv_Num3Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III</daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:iii</daobs:query>
+      <daobs:comment>The value is based on the harvested records. It may be underestimated if the number of spatial data set does not have metadata or if error occurred during harvesting.</daobs:comment>
+    </daobs:variable>
+    -->
+
+    <daobs:variable id="SDSv_Num" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment>Only services having an INSPIRE annex are took into account. We may harvest records related to no annex.
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="NSv_NumDiscServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of discovery services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:discovery</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:discovery</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumViewServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of view services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:view</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:view</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumDownlServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of download services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:download</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:download</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumInvkServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of invoke services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:invoke</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:invoke</daobs:query>-->
+    </daobs:variable>
+
+    <daobs:variable id="NSv_NumTransfServ" numberFormat="#">
+      <daobs:name xml:lang="en">Number of transformation services</daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +inspireServiceType:transformation</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) +inspireServiceType:transformation</daobs:query>-->
+    </daobs:variable>
+
+
+    <daobs:variable id='MDv11_aI_t1' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Coordinate reference systems that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"coordinate reference systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv12_aII_t2' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Elevation that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"elevation"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv12_aII_t3' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land cover that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"land cover"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv12_aII_t4' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Orthoimagery that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"orthoimagery"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv12_aII_t5' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geology that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"geology"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t6' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Statistical units that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"statistical units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t7' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Buildings that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"buildings"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t8' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Soil that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"soil"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t9' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land use that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"land use"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t10' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Human health and safety that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"human health and safety"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t11' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Utility and governmental services that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"utility and governmental services"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t12' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical grid systems that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"geographical grid systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t13' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Environmental monitoring facilities that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"environmental monitoring facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t14' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Production and industrial facilities that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"production and industrial facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t15' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Agricultural and aquaculture facilities that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"agricultural and aquaculture facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t16' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Population distribution — demography that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"population distribution — demography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t17' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Area management/restriction/regulation zones and reporting units that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"area management/restriction/regulation zones and reporting units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t18' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Natural risk zones that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"natural risk zones"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t19' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Atmospheric conditions that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"atmospheric conditions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t20' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Meteorological geographical features that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"meteorological geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t21' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Oceanographic geographical features that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"oceanographic geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t22' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Sea regions that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"sea regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t23' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical names that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"geographical names"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t24' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Bio-geographical regions that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"bio-geographical regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t25' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Habitats and biotopes that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"habitats and biotopes"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t26' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Species distribution that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"species distribution"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t27' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Energy resources that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"energy resources"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv13_aIII_t28' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Mineral resources that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"mineral resources"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t29' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Administrative units that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"administrative units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t30' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Addresses that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"addresses"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t31' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Cadastral parcels that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"cadastral parcels"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t32' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Transport networks that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"transport networks"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t33' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Hydrography that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"hydrography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv11_aI_t34' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Protected sites that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireTheme:"protected sites"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id="MDv11Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:i</daobs:query>
+    </daobs:variable>
+
+    <daobs:variable id="MDv12Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:ii</daobs:query>
+    </daobs:variable>
+
+    <daobs:variable id="MDv13Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:iii</daobs:query>
+    </daobs:variable>
+
+
+    <daobs:variable id="MDv14" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services that have metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+    </daobs:variable>
+
+
+    <!-- Indicator MDi2 (Conformity of metadata) -->
+    <daobs:variable id="MDv21Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnex:i</daobs:query>
+      <daobs:comment>INSPIRE validator is used to validate records.
+      </daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="MDv22Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnex:ii</daobs:query>
+      <daobs:comment>INSPIRE validator is used to validate records.
+      </daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="MDv23Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnex:iii</daobs:query>
+      <daobs:comment>INSPIRE validator is used to validate records.
+      </daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id='MDv21_aI_t1' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Coordinate reference systems that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"coordinate reference systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t12' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical grid systems that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"geographical grid systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t23' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical names that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"geographical names"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t29' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Administrative units that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"administrative units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t30' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Addresses that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"addresses"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t31' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Cadastral parcels that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"cadastral parcels"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t32' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Transport networks that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"transport networks"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t33' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Hydrography that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"hydrography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv21_aI_t34' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Protected sites that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"protected sites"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv22_aII_t2' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Elevation that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"elevation"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv22_aII_t3' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land cover that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"land cover"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv22_aII_t4' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Orthoimagery that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"orthoimagery"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv22_aII_t5' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geology that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"geology"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t6' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Statistical units that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"statistical units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t7' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Buildings that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"buildings"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t8' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Soil that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"soil"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t9' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land use that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"land use"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t10' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Human health and safety that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"human health and safety"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t11' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Utility and governmental services that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"utility and governmental services"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t13' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Environmental monitoring facilities that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"environmental monitoring facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t14' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Production and industrial facilities that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"production and industrial facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t15' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Agricultural and aquaculture facilities that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"agricultural and aquaculture facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t16' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Population distribution — demography that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"population distribution — demography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t17' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Area management/restriction/regulation zones and reporting units that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"area management/restriction/regulation zones and reporting units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t18' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Natural risk zones that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"natural risk zones"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t19' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Atmospheric conditions that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"atmospheric conditions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t20' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Meteorological geographical features that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"meteorological geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t21' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Oceanographic geographical features that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"oceanographic geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t22' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Sea regions that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"sea regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t24' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Bio-geographical regions that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"bio-geographical regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t25' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Habitats and biotopes that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"habitats and biotopes"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t26' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Species distribution that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"species distribution"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t27' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Energy resources that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"energy resources"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='MDv23_aIII_t28' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Mineral resources that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireTheme:"mineral resources"</daobs:query>
+    </daobs:variable>
+
+
+    <daobs:variable id="MDv24" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:service) +isAboveThreshold:true </daobs:query>
+      <!--<daobs:query>+documentType:metadata +(resourceType:service) +isAboveThreshold:true +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment>INSPIRE validator is used to validate records.
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <!-- INSPIRE DSi1 (Geographical coverage of spatial data sets) -->
+
+    <!-- INSPIRE DSi2 (Conformity of spatial data sets) -->
+    <daobs:variable id="DSv21Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex I that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnex:i +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 1089/2010 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv22Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex II that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnex:ii +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 1089/2010 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="DSv23Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex III that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireAnnex:iii +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 1089/2010 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id='DSv21_aI_t1' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Coordinate reference systems that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"coordinate reference systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t12' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Geographical grid systems that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"geographical grid systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t23' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Geographical names that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"geographical names"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t29' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Administrative units that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"administrative units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t30' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Addresses that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"addresses"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t31' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Cadastral parcels that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"cadastral parcels"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t32' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Transport networks that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"transport networks"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t33' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Hydrography that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"hydrography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv21_aI_t34' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Protected sites that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"protected sites"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv22_aII_t2' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Elevation that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"elevation"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv22_aII_t3' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Land cover that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"land cover"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv22_aII_t4' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Orthoimagery that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"orthoimagery"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv22_aII_t5' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Geology that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"geology"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t6' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Statistical units that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"statistical units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t7' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Buildings that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"buildings"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t8' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Soil that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"soil"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t9' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Land use that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"land use"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t10' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Human health and safety that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"human health and safety"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t11' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Utility and governmental services that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"utility and governmental services"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t13' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Environmental monitoring facilities that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"environmental monitoring facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t14' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Production and industrial facilities that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"production and industrial facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t15' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Agricultural and aquaculture facilities that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"agricultural and aquaculture facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t16' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Population distribution — demography that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"population distribution — demography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t17' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Area management/restriction/regulation zones and reporting units that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"area management/restriction/regulation zones and reporting units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t18' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Natural risk zones that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"natural risk zones"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t19' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Atmospheric conditions that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"atmospheric conditions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t20' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Meteorological geographical features that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"meteorological geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t21' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Oceanographic geographical features that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"oceanographic geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t22' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Sea regions that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"sea regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t24' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Bio-geographical regions that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"bio-geographical regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t25' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Habitats and biotopes that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"habitats and biotopes"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t26' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Species distribution that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"species distribution"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t27' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Energy resources that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"energy resources"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='DSv23_aIII_t28' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of conformant spatial data sets for theme Mineral resources that have conformant metadata
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +isAboveThreshold:true +inspireConformResource:true +inspireTheme:"mineral resources"</daobs:query>
+    </daobs:variable>
+
+
+    <!-- INSPIRE NSi1 (Accessibility of metadata through discovery services) -->
+    <daobs:variable id="NSv11Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets with metadata for which a discovery service exists (count a dataset once if having many INSPIRE themes)
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) </daobs:query>
+      <daobs:comment>All records used to build the report are harvested, so all records are available through discovery service (ie. equivalent to DSv_Num).
+      </daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id="NSv12" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data services with metadata for which a discovery service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service</daobs:query>
+      <!--<daobs:query>+documentType:metadata +resourceType:service +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment>All records used to build the report are harvested, so all records are available through discovery service (ie. equivalent to SDSv_Num).
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <!-- INSPIRE NSi2 (Accessibility of data sets through view or download services) -->
+    <!-- TODO: should be one variable per annex and then sum the variables -->
+    <daobs:variable id="NSv21Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) </daobs:query>
+      <!--<daobs:query>+documentType:metadata  {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment></daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id='NSv21_aI_t1' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Coordinate reference systems for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"coordinate reference systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t12' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical grid systems for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"geographical grid systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t23' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical names for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"geographical names"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t29' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Administrative units for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"administrative units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t30' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Addresses for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"addresses"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t31' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Cadastral parcels for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"cadastral parcels"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t32' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Transport networks for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"transport networks"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t33' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Hydrography for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"hydrography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aI_t34' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Protected sites for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"protected sites"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aII_t2' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Elevation for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"elevation"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aII_t3' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land cover for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"land cover"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aII_t4' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Orthoimagery for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"orthoimagery"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aII_t5' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geology for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"geology"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t6' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Statistical units for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"statistical units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t7' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Buildings for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"buildings"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t8' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Soil for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"soil"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t9' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land use for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"land use"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t10' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Human health and safety for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"human health and safety"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t11' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Utility and governmental services for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"utility and governmental services"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t13' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Environmental monitoring facilities for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"environmental monitoring facilities"</daobs:query>
+    </daobs:variable>
+    za
+    <daobs:variable id='NSv21_aIII_t14' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Production and industrial facilities for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"production and industrial facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t15' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Agricultural and aquaculture facilities for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"agricultural and aquaculture facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t16' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Population distribution — demography for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"population distribution — demography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t17' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Area management/restriction/regulation zones and reporting units for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"area management/restriction/regulation zones and reporting units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t18' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Natural risk zones for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"natural risk zones"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t19' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Atmospheric conditions for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"atmospheric conditions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t20' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Meteorological geographical features for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"meteorological geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t21' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Oceanographic geographical features for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"oceanographic geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t22' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Sea regions for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"sea regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t24' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Bio-geographical regions for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"bio-geographical regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t25' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Habitats and biotopes for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"habitats and biotopes"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t26' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Species distribution for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"species distribution"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t27' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Energy resources for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"energy resources"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv21_aIII_t28' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Mineral resources for which a view service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +inspireTheme:"mineral resources"</daobs:query>
+    </daobs:variable>
+
+
+    <daobs:variable id="NSv22Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) </daobs:query>
+      <!--<daobs:query>+documentType:metadata  {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:download +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment></daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id='NSv22_aI_t1' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Coordinate reference systems for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"coordinate reference systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t12' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical grid systems for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"geographical grid systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t23' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical names for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"geographical names"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t29' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Administrative units for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"administrative units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t30' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Addresses for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"addresses"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t31' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Cadastral parcels for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"cadastral parcels"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t32' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Transport networks for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"transport networks"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t33' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Hydrography for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"hydrography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aI_t34' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Protected sites for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"protected sites"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aII_t2' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Elevation for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"elevation"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aII_t3' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land cover for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"land cover"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aII_t4' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Orthoimagery for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"orthoimagery"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aII_t5' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geology for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"geology"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t6' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Statistical units for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"statistical units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t7' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Buildings for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"buildings"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t8' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Soil for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"soil"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t9' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land use for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"land use"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t10' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Human health and safety for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"human health and safety"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t11' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Utility and governmental services for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"utility and governmental services"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t13' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Environmental monitoring facilities for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"environmental monitoring facilities"</daobs:query>
+    </daobs:variable>
+    za
+    <daobs:variable id='NSv22_aIII_t14' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Production and industrial facilities for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"production and industrial facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t15' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Agricultural and aquaculture facilities for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"agricultural and aquaculture facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t16' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Population distribution — demography for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"population distribution — demography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t17' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Area management/restriction/regulation zones and reporting units for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"area management/restriction/regulation zones and reporting units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t18' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Natural risk zones for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"natural risk zones"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t19' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Atmospheric conditions for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"atmospheric conditions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t20' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Meteorological geographical features for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"meteorological geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t21' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Oceanographic geographical features for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"oceanographic geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t22' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Sea regions for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"sea regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t24' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Bio-geographical regions for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"bio-geographical regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t25' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Habitats and biotopes for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"habitats and biotopes"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t26' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Species distribution for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"species distribution"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t27' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Energy resources for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"energy resources"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv22_aIII_t28' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Mineral resources for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:download +inspireTheme:"mineral resources"</daobs:query>
+    </daobs:variable>
+
+    <daobs:variable id="NSv23Old" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a view and download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii) </daobs:query>
+      <!--<daobs:query>+documentType:metadata  {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:viewAndDownload +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:comment></daobs:comment>
+    </daobs:variable>
+
+    <daobs:variable id='NSv23_aI_t1' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Coordinate reference systems for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"coordinate reference systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t12' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical grid systems for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"geographical grid systems"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t23' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geographical names for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"geographical names"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t29' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Administrative units for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"administrative units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t30' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Addresses for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"addresses"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t31' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Cadastral parcels for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"cadastral parcels"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t32' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Transport networks for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"transport networks"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t33' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Hydrography for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"hydrography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aI_t34' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Protected sites for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"protected sites"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aII_t2' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Elevation for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"elevation"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aII_t3' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land cover for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"land cover"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aII_t4' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Orthoimagery for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"orthoimagery"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aII_t5' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Geology for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"geology"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t6' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Statistical units for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"statistical units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t7' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Buildings for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"buildings"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t8' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Soil for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"soil"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t9' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Land use for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"land use"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t10' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Human health and safety for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"human health and safety"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t11' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Utility and governmental services for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"utility and governmental services"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t13' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Environmental monitoring facilities for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"environmental monitoring facilities"</daobs:query>
+    </daobs:variable>
+    za
+    <daobs:variable id='NSv23_aIII_t14' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Production and industrial facilities for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"production and industrial facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t15' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Agricultural and aquaculture facilities for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"agricultural and aquaculture facilities"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t16' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Population distribution — demography for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"population distribution — demography"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t17' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Area management/restriction/regulation zones and reporting units for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"area management/restriction/regulation zones and reporting units"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t18' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Natural risk zones for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"natural risk zones"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t19' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Atmospheric conditions for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"atmospheric conditions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t20' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Meteorological geographical features for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"meteorological geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t21' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Oceanographic geographical features for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"oceanographic geographical features"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t22' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Sea regions for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"sea regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t24' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Bio-geographical regions for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"bio-geographical regions"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t25' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Habitats and biotopes for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"habitats and biotopes"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t26' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Species distribution for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"species distribution"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t27' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Energy resources for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"energy resources"</daobs:query>
+    </daobs:variable>
+    <daobs:variable id='NSv23_aIII_t28' numberFormat='#'>
+      <daobs:name xml:lang='en'>Number of spatial data sets for theme Mineral resources for which a download service exists
+      </daobs:name>
+      <daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +recordOperatedByType:download +inspireTheme:"mineral resources"</daobs:query>
+    </daobs:variable>
+
+    <daobs:variable id="NSv41" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant discovery network services
+      </daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:discovery +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 976/2009 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv42" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant view network services
+      </daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:view +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 976/2009 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv43" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant download network services
+      </daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:download +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 976/2009 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv44" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant transformation network services
+      </daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:transformation +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 976/2009 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv45" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant discovery invoke services
+      </daobs:name>
+      <daobs:query>+documentType:metadata +resourceType:service +serviceType:invoke +inspireConformResource:true </daobs:query>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 976/2009 report a conform resource.
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <daobs:variable id="NSv31" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the annual number of network service request for all the discovery services
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiuserRequestdiscovery* </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv32" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the annual number of network service request for all the view services
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiuserRequestview* </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv33" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the annual number of network service request for all the download services
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiuserRequestdownload* </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv34" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the annual number of network service request for all the transformation services
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiuserRequesttransformation* </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="NSv35" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the annual number of network service request for all the invoke services
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiuserRequestinvoke* </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+
+
+    <!-- Use stats component
+    http://wiki.apache.org/solr/StatsComponent
+    -->
+    <daobs:variable id="DSv11_ActArea" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the actual areas of all the spatial data sets of Annex I
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiactualArea* +inspireAnnex:i </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="DSv12_ActArea" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the actual areas of all the spatial data sets of Annex II
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiactualArea* +inspireAnnex:ii </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="DSv13_ActArea" default="0" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the actual areas of all the spatial data sets of Annex III
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:aiactualArea* +inspireAnnex:iii </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="DSv11_RelArea" default="0.0001" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the relevant areas of all the spatial data sets of Annex I
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:airelevantArea* +inspireAnnex:i </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="DSv12_RelArea" default="0.0001" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the relevant areas of all the spatial data sets of Annex II
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:airelevantArea* +inspireAnnex:ii </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+    <daobs:variable id="DSv13_RelArea" default="0.0001" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the relevant areas of all the spatial data sets of Annex III
+      </daobs:name>
+      <daobs:query stats="sum" statsField="indicatorValue">+documentType:ai +id:airelevantArea* +inspireAnnex:iii </daobs:query>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:variable>
+  </daobs:variables>
+
+
+  <daobs:indicators>
+    <daobs:indicator id="MDv11" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I that have metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:i</daobs:query>-->
+      <daobs:expression>MDv11_aI_t33 + MDv11_aI_t32 + MDv11_aI_t31 + MDv11_aI_t30 + MDv11_aI_t29 + MDv11_aI_t23 + MDv11_aI_t12 + MDv11_aI_t1 + MDv11_aI_t34</daobs:expression>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:parameters> <daobs:parameter id="MDv11_aI_t1"/>
+      <daobs:parameter id="MDv11_aI_t12"/>
+      <daobs:parameter id="MDv11_aI_t23"/>
+      <daobs:parameter id="MDv11_aI_t29"/>
+      <daobs:parameter id="MDv11_aI_t30"/>
+      <daobs:parameter id="MDv11_aI_t31"/>
+      <daobs:parameter id="MDv11_aI_t32"/>
+      <daobs:parameter id="MDv11_aI_t33"/>
+      <daobs:parameter id="MDv11_aI_t34"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDv12" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II that have metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:ii</daobs:query>-->
+      <daobs:expression>MDv12_aII_t5 + MDv12_aII_t4 + MDv12_aII_t3 + MDv12_aII_t2</daobs:expression>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:parameters> <daobs:parameter id="MDv12_aII_t2"/>
+      <daobs:parameter id="MDv12_aII_t3"/>
+      <daobs:parameter id="MDv12_aII_t4"/>
+      <daobs:parameter id="MDv12_aII_t5"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDv13" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III that have metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:iii</daobs:query>-->
+      <daobs:expression>MDv13_aIII_t28 + MDv13_aIII_t27 + MDv13_aIII_t26 + MDv13_aIII_t25 + MDv13_aIII_t24 + MDv13_aIII_t22 + MDv13_aIII_t21 + MDv13_aIII_t20 + MDv13_aIII_t19 + MDv13_aIII_t18 + MDv13_aIII_t17 + MDv13_aIII_t16 + MDv13_aIII_t15 + MDv13_aIII_t14 + MDv13_aIII_t13 + MDv13_aIII_t11 + MDv13_aIII_t10 + MDv13_aIII_t9 + MDv13_aIII_t8 + MDv13_aIII_t7 + MDv13_aIII_t6</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv13_aIII_t6"/>
+      <daobs:parameter id="MDv13_aIII_t7"/>
+      <daobs:parameter id="MDv13_aIII_t8"/>
+      <daobs:parameter id="MDv13_aIII_t9"/>
+      <daobs:parameter id="MDv13_aIII_t10"/>
+      <daobs:parameter id="MDv13_aIII_t11"/>
+      <daobs:parameter id="MDv13_aIII_t13"/>
+      <daobs:parameter id="MDv13_aIII_t14"/>
+      <daobs:parameter id="MDv13_aIII_t15"/>
+      <daobs:parameter id="MDv13_aIII_t16"/>
+      <daobs:parameter id="MDv13_aIII_t17"/>
+      <daobs:parameter id="MDv13_aIII_t18"/>
+      <daobs:parameter id="MDv13_aIII_t19"/>
+      <daobs:parameter id="MDv13_aIII_t20"/>
+      <daobs:parameter id="MDv13_aIII_t21"/>
+      <daobs:parameter id="MDv13_aIII_t22"/>
+      <daobs:parameter id="MDv13_aIII_t24"/>
+      <daobs:parameter id="MDv13_aIII_t25"/>
+      <daobs:parameter id="MDv13_aIII_t26"/>
+      <daobs:parameter id="MDv13_aIII_t27"/>
+      <daobs:parameter id="MDv13_aIII_t28"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="DSv21" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex I that have conformant metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:i</daobs:query>-->
+      <daobs:expression>DSv21_aI_t33 + DSv21_aI_t32 + DSv21_aI_t31 + DSv21_aI_t30 + DSv21_aI_t29 + DSv21_aI_t23 + DSv21_aI_t12 + DSv21_aI_t1 + DSv21_aI_t34</daobs:expression>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:parameters> <daobs:parameter id="DSv21_aI_t1"/>
+      <daobs:parameter id="DSv21_aI_t12"/>
+      <daobs:parameter id="DSv21_aI_t23"/>
+      <daobs:parameter id="DSv21_aI_t29"/>
+      <daobs:parameter id="DSv21_aI_t30"/>
+      <daobs:parameter id="DSv21_aI_t31"/>
+      <daobs:parameter id="DSv21_aI_t32"/>
+      <daobs:parameter id="DSv21_aI_t33"/>
+      <daobs:parameter id="DSv21_aI_t34"/>
+      </daobs:parameters>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 1089/2010 report a conform resource.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSv22" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex II that have conformant metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:ii</daobs:query>-->
+      <daobs:expression>DSv22_aII_t5 + DSv22_aII_t4 + DSv22_aII_t3 + DSv22_aII_t2</daobs:expression>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:parameters> <daobs:parameter id="DSv22_aII_t2"/>
+      <daobs:parameter id="DSv22_aII_t3"/>
+      <daobs:parameter id="DSv22_aII_t4"/>
+      <daobs:parameter id="DSv22_aII_t5"/>
+      </daobs:parameters>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 1089/2010 report a conform resource.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSv23" numberFormat="#">
+      <daobs:name xml:lang="en">Number of conformant spatial data sets for Annex II that have conformant metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:iii</daobs:query>-->
+      <daobs:expression>DSv23_aIII_t28 + DSv23_aIII_t27 + DSv23_aIII_t26 + DSv23_aIII_t25 + DSv23_aIII_t24 + DSv23_aIII_t22 + DSv23_aIII_t21 + DSv23_aIII_t20 + DSv23_aIII_t19 + DSv23_aIII_t18 + DSv23_aIII_t17 + DSv23_aIII_t16 + DSv23_aIII_t15 + DSv23_aIII_t14 + DSv23_aIII_t13 + DSv23_aIII_t11 + DSv23_aIII_t10 + DSv23_aIII_t9 + DSv23_aIII_t8 + DSv23_aIII_t7 + DSv23_aIII_t6</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv23_aIII_t6"/>
+      <daobs:parameter id="DSv23_aIII_t7"/>
+      <daobs:parameter id="DSv23_aIII_t8"/>
+      <daobs:parameter id="DSv23_aIII_t9"/>
+      <daobs:parameter id="DSv23_aIII_t10"/>
+      <daobs:parameter id="DSv23_aIII_t11"/>
+      <daobs:parameter id="DSv23_aIII_t13"/>
+      <daobs:parameter id="DSv23_aIII_t14"/>
+      <daobs:parameter id="DSv23_aIII_t15"/>
+      <daobs:parameter id="DSv23_aIII_t16"/>
+      <daobs:parameter id="DSv23_aIII_t17"/>
+      <daobs:parameter id="DSv23_aIII_t18"/>
+      <daobs:parameter id="DSv23_aIII_t19"/>
+      <daobs:parameter id="DSv23_aIII_t20"/>
+      <daobs:parameter id="DSv23_aIII_t21"/>
+      <daobs:parameter id="DSv23_aIII_t22"/>
+      <daobs:parameter id="DSv23_aIII_t24"/>
+      <daobs:parameter id="DSv23_aIII_t25"/>
+      <daobs:parameter id="DSv23_aIII_t26"/>
+      <daobs:parameter id="DSv23_aIII_t27"/>
+      <daobs:parameter id="DSv23_aIII_t28"/>
+      </daobs:parameters>
+      <daobs:comment>Check the metadata record using INSPIRE validator and check that the Commission Regulation (EU) No 1089/2010 report a conform resource.
+      </daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDv21" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I that have conformant metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:i</daobs:query>-->
+      <daobs:expression>MDv21_aI_t33 + MDv21_aI_t32 + MDv21_aI_t31 + MDv21_aI_t30 + MDv21_aI_t29 + MDv21_aI_t23 + MDv21_aI_t12 + MDv21_aI_t1 + MDv21_aI_t34</daobs:expression>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:parameters> <daobs:parameter id="MDv21_aI_t1"/>
+      <daobs:parameter id="MDv21_aI_t12"/>
+      <daobs:parameter id="MDv21_aI_t23"/>
+      <daobs:parameter id="MDv21_aI_t29"/>
+      <daobs:parameter id="MDv21_aI_t30"/>
+      <daobs:parameter id="MDv21_aI_t31"/>
+      <daobs:parameter id="MDv21_aI_t32"/>
+      <daobs:parameter id="MDv21_aI_t33"/>
+      <daobs:parameter id="MDv21_aI_t34"/>
+      </daobs:parameters>
+      <daobs:comment>INSPIRE validator is used to validate records.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDv22" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II that have conformant metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:ii</daobs:query>-->
+      <daobs:expression>MDv22_aII_t5 + MDv22_aII_t4 + MDv22_aII_t3 + MDv22_aII_t2</daobs:expression>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:parameters> <daobs:parameter id="MDv22_aII_t2"/>
+      <daobs:parameter id="MDv22_aII_t3"/>
+      <daobs:parameter id="MDv22_aII_t4"/>
+      <daobs:parameter id="MDv22_aII_t5"/>
+      </daobs:parameters>
+      <daobs:comment>INSPIRE validator is used to validate records.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDv23" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III that have conformant metadata
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:iii</daobs:query>-->
+      <daobs:expression>MDv23_aIII_t28 + MDv23_aIII_t27 + MDv23_aIII_t26 + MDv23_aIII_t25 + MDv23_aIII_t24 + MDv23_aIII_t22 + MDv23_aIII_t21 + MDv23_aIII_t20 + MDv23_aIII_t19 + MDv23_aIII_t18 + MDv23_aIII_t17 + MDv23_aIII_t16 + MDv23_aIII_t15 + MDv23_aIII_t14 + MDv23_aIII_t13 + MDv23_aIII_t11 + MDv23_aIII_t10 + MDv23_aIII_t9 + MDv23_aIII_t8 + MDv23_aIII_t7 + MDv23_aIII_t6</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv23_aIII_t6"/>
+      <daobs:parameter id="MDv23_aIII_t7"/>
+      <daobs:parameter id="MDv23_aIII_t8"/>
+      <daobs:parameter id="MDv23_aIII_t9"/>
+      <daobs:parameter id="MDv23_aIII_t10"/>
+      <daobs:parameter id="MDv23_aIII_t11"/>
+      <daobs:parameter id="MDv23_aIII_t13"/>
+      <daobs:parameter id="MDv23_aIII_t14"/>
+      <daobs:parameter id="MDv23_aIII_t15"/>
+      <daobs:parameter id="MDv23_aIII_t16"/>
+      <daobs:parameter id="MDv23_aIII_t17"/>
+      <daobs:parameter id="MDv23_aIII_t18"/>
+      <daobs:parameter id="MDv23_aIII_t19"/>
+      <daobs:parameter id="MDv23_aIII_t20"/>
+      <daobs:parameter id="MDv23_aIII_t21"/>
+      <daobs:parameter id="MDv23_aIII_t22"/>
+      <daobs:parameter id="MDv23_aIII_t24"/>
+      <daobs:parameter id="MDv23_aIII_t25"/>
+      <daobs:parameter id="MDv23_aIII_t26"/>
+      <daobs:parameter id="MDv23_aIII_t27"/>
+      <daobs:parameter id="MDv23_aIII_t28"/>
+      </daobs:parameters>
+      <daobs:comment>INSPIRE validator is used to validate records.
+      </daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSv21" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a view service exists
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <!--<daobs:query>+documentType:metadata  {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:expression>NSv21_aI_t1 + NSv21_aI_t12 + NSv21_aI_t23 + NSv21_aI_t29 + NSv21_aI_t30 + NSv21_aI_t31 + NSv21_aI_t32 + NSv21_aI_t33 + NSv21_aI_t34 + NSv21_aII_t2 + NSv21_aII_t3 + NSv21_aII_t4 + NSv21_aII_t5 + NSv21_aIII_t10 + NSv21_aIII_t11 + NSv21_aIII_t13 + NSv21_aIII_t14 + NSv21_aIII_t15 + NSv21_aIII_t16 + NSv21_aIII_t17 + NSv21_aIII_t18 + NSv21_aIII_t19 + NSv21_aIII_t20 + NSv21_aIII_t21 + NSv21_aIII_t22 + NSv21_aIII_t24 + NSv21_aIII_t25 + NSv21_aIII_t26 + NSv21_aIII_t27 + NSv21_aIII_t28 + NSv21_aIII_t6 + NSv21_aIII_t7 + NSv21_aIII_t8 + NSv21_aIII_t9</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv21_aI_t1"/>
+      <daobs:parameter id="NSv21_aI_t12"/>
+      <daobs:parameter id="NSv21_aI_t23"/>
+      <daobs:parameter id="NSv21_aI_t29"/>
+      <daobs:parameter id="NSv21_aI_t30"/>
+      <daobs:parameter id="NSv21_aI_t31"/>
+      <daobs:parameter id="NSv21_aI_t32"/>
+      <daobs:parameter id="NSv21_aI_t33"/>
+      <daobs:parameter id="NSv21_aI_t34"/>
+      <daobs:parameter id="NSv21_aII_t2"/>
+      <daobs:parameter id="NSv21_aII_t3"/>
+      <daobs:parameter id="NSv21_aII_t4"/>
+      <daobs:parameter id="NSv21_aII_t5"/>
+      <daobs:parameter id="NSv21_aIII_t6"/>
+      <daobs:parameter id="NSv21_aIII_t7"/>
+      <daobs:parameter id="NSv21_aIII_t8"/>
+      <daobs:parameter id="NSv21_aIII_t9"/>
+      <daobs:parameter id="NSv21_aIII_t10"/>
+      <daobs:parameter id="NSv21_aIII_t11"/>
+      <daobs:parameter id="NSv21_aIII_t13"/>
+      <daobs:parameter id="NSv21_aIII_t14"/>
+      <daobs:parameter id="NSv21_aIII_t15"/>
+      <daobs:parameter id="NSv21_aIII_t16"/>
+      <daobs:parameter id="NSv21_aIII_t17"/>
+      <daobs:parameter id="NSv21_aIII_t18"/>
+      <daobs:parameter id="NSv21_aIII_t19"/>
+      <daobs:parameter id="NSv21_aIII_t20"/>
+      <daobs:parameter id="NSv21_aIII_t21"/>
+      <daobs:parameter id="NSv21_aIII_t22"/>
+      <daobs:parameter id="NSv21_aIII_t24"/>
+      <daobs:parameter id="NSv21_aIII_t25"/>
+      <daobs:parameter id="NSv21_aIII_t26"/>
+      <daobs:parameter id="NSv21_aIII_t27"/>
+      <daobs:parameter id="NSv21_aIII_t28"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSv22" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a download service exists
+      </daobs:name>
+      <daobs:expression>NSv22_aI_t1 + NSv22_aI_t12 + NSv22_aI_t23 + NSv22_aI_t29 + NSv22_aI_t30 + NSv22_aI_t31 + NSv22_aI_t32 + NSv22_aI_t33 + NSv22_aI_t34 + NSv22_aII_t2 + NSv22_aII_t3 + NSv22_aII_t4 + NSv22_aII_t5 + NSv22_aIII_t10 + NSv22_aIII_t11 + NSv22_aIII_t13 + NSv22_aIII_t14 + NSv22_aIII_t15 + NSv22_aIII_t16 + NSv22_aIII_t17 + NSv22_aIII_t18 + NSv22_aIII_t19 + NSv22_aIII_t20 + NSv22_aIII_t21 + NSv22_aIII_t22 + NSv22_aIII_t24 + NSv22_aIII_t25 + NSv22_aIII_t26 + NSv22_aIII_t27 + NSv22_aIII_t28 + NSv22_aIII_t6 + NSv22_aIII_t7 + NSv22_aIII_t8 + NSv22_aIII_t9</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv22_aI_t1"/>
+      <daobs:parameter id="NSv22_aI_t12"/>
+      <daobs:parameter id="NSv22_aI_t23"/>
+      <daobs:parameter id="NSv22_aI_t29"/>
+      <daobs:parameter id="NSv22_aI_t30"/>
+      <daobs:parameter id="NSv22_aI_t31"/>
+      <daobs:parameter id="NSv22_aI_t32"/>
+      <daobs:parameter id="NSv22_aI_t33"/>
+      <daobs:parameter id="NSv22_aI_t34"/>
+      <daobs:parameter id="NSv22_aII_t2"/>
+      <daobs:parameter id="NSv22_aII_t3"/>
+      <daobs:parameter id="NSv22_aII_t4"/>
+      <daobs:parameter id="NSv22_aII_t5"/>
+      <daobs:parameter id="NSv22_aIII_t6"/>
+      <daobs:parameter id="NSv22_aIII_t7"/>
+      <daobs:parameter id="NSv22_aIII_t8"/>
+      <daobs:parameter id="NSv22_aIII_t9"/>
+      <daobs:parameter id="NSv22_aIII_t10"/>
+      <daobs:parameter id="NSv22_aIII_t11"/>
+      <daobs:parameter id="NSv22_aIII_t13"/>
+      <daobs:parameter id="NSv22_aIII_t14"/>
+      <daobs:parameter id="NSv22_aIII_t15"/>
+      <daobs:parameter id="NSv22_aIII_t16"/>
+      <daobs:parameter id="NSv22_aIII_t17"/>
+      <daobs:parameter id="NSv22_aIII_t18"/>
+      <daobs:parameter id="NSv22_aIII_t19"/>
+      <daobs:parameter id="NSv22_aIII_t20"/>
+      <daobs:parameter id="NSv22_aIII_t21"/>
+      <daobs:parameter id="NSv22_aIII_t22"/>
+      <daobs:parameter id="NSv22_aIII_t24"/>
+      <daobs:parameter id="NSv22_aIII_t25"/>
+      <daobs:parameter id="NSv22_aIII_t26"/>
+      <daobs:parameter id="NSv22_aIII_t27"/>
+      <daobs:parameter id="NSv22_aIII_t28"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSv23" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for which a view and download service exists
+      </daobs:name>
+      <!--<daobs:query>+documentType:metadata +documentType:metadata +(resourceType:dataset resourceType:series) +recordOperatedByType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <!--<daobs:query>+documentType:metadata  {!child of=documentType:metadata} +documentType:metadata +resourceType:service +serviceType:view +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:expression>NSv23_aI_t1 + NSv23_aI_t12 + NSv23_aI_t23 + NSv23_aI_t29 + NSv23_aI_t30 + NSv23_aI_t31 + NSv23_aI_t32 + NSv23_aI_t33 + NSv23_aI_t34 + NSv23_aII_t2 + NSv23_aII_t3 + NSv23_aII_t4 + NSv23_aII_t5 + NSv23_aIII_t10 + NSv23_aIII_t11 + NSv23_aIII_t13 + NSv23_aIII_t14 + NSv23_aIII_t15 + NSv23_aIII_t16 + NSv23_aIII_t17 + NSv23_aIII_t18 + NSv23_aIII_t19 + NSv23_aIII_t20 + NSv23_aIII_t21 + NSv23_aIII_t22 + NSv23_aIII_t24 + NSv23_aIII_t25 + NSv23_aIII_t26 + NSv23_aIII_t27 + NSv23_aIII_t28 + NSv23_aIII_t6 + NSv23_aIII_t7 + NSv23_aIII_t8 + NSv23_aIII_t9</daobs:expression>
+      <daobs:parameters>
+        <daobs:parameter id="NSv23_aI_t1"/>
+        <daobs:parameter id="NSv23_aI_t12"/>
+        <daobs:parameter id="NSv23_aI_t23"/>
+        <daobs:parameter id="NSv23_aI_t29"/>
+        <daobs:parameter id="NSv23_aI_t30"/>
+        <daobs:parameter id="NSv23_aI_t31"/>
+        <daobs:parameter id="NSv23_aI_t32"/>
+        <daobs:parameter id="NSv23_aI_t33"/>
+        <daobs:parameter id="NSv23_aI_t34"/>
+        <daobs:parameter id="NSv23_aII_t2"/>
+        <daobs:parameter id="NSv23_aII_t3"/>
+        <daobs:parameter id="NSv23_aII_t4"/>
+        <daobs:parameter id="NSv23_aII_t5"/>
+        <daobs:parameter id="NSv23_aIII_t6"/>
+        <daobs:parameter id="NSv23_aIII_t7"/>
+        <daobs:parameter id="NSv23_aIII_t8"/>
+        <daobs:parameter id="NSv23_aIII_t9"/>
+        <daobs:parameter id="NSv23_aIII_t10"/>
+        <daobs:parameter id="NSv23_aIII_t11"/>
+        <daobs:parameter id="NSv23_aIII_t13"/>
+        <daobs:parameter id="NSv23_aIII_t14"/>
+        <daobs:parameter id="NSv23_aIII_t15"/>
+        <daobs:parameter id="NSv23_aIII_t16"/>
+        <daobs:parameter id="NSv23_aIII_t17"/>
+        <daobs:parameter id="NSv23_aIII_t18"/>
+        <daobs:parameter id="NSv23_aIII_t19"/>
+        <daobs:parameter id="NSv23_aIII_t20"/>
+        <daobs:parameter id="NSv23_aIII_t21"/>
+        <daobs:parameter id="NSv23_aIII_t22"/>
+        <daobs:parameter id="NSv23_aIII_t24"/>
+        <daobs:parameter id="NSv23_aIII_t25"/>
+        <daobs:parameter id="NSv23_aIII_t26"/>
+        <daobs:parameter id="NSv23_aIII_t27"/>
+        <daobs:parameter id="NSv23_aIII_t28"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <!-- Indicator added to take into account all INSPIRE themes of a dataset.
+     In such case, the dataset is duplicated for each themes. So the number
+     of datasets may be lover than the total number for those indicators. -->
+    <daobs:indicator id="NSv11" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets with metadata for which a discovery service exists (count a dataset as many time as its INSPIRE themes)
+      </daobs:name>
+      <daobs:expression>MDv11 + MDv12 + MDv13</daobs:expression>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +(inspireAnnex:i inspireAnnex:ii inspireAnnex:iii)</daobs:query>-->
+      <daobs:parameters> <daobs:parameter id="MDv11"/>
+      <daobs:parameter id="MDv12"/>
+      <daobs:parameter id="MDv13"/>
+      </daobs:parameters>
+      <daobs:comment>All records used to build the report are harvested, so all records are available through discovery service (ie. equivalent to DSv_Num).
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSv_Num1" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex I
+      </daobs:name>
+      <daobs:expression>MDv11</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv11"/>
+      </daobs:parameters>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:i</daobs:query>-->
+      <daobs:comment>The value is based on the harvested records. It may be underestimated if the number of spatial data set does not have metadata or if error occurred during harvesting.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSv_Num2" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex II
+      </daobs:name>
+      <daobs:expression>MDv12</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv12"/>
+      </daobs:parameters>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:ii</daobs:query>-->
+      <daobs:comment>The value is based on the harvested records. It may be underestimated if the number of spatial data set does not have metadata or if error occurred during harvesting.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSv_Num3" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for Annex III
+      </daobs:name>
+      <daobs:expression>MDv13</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv13"/>
+      </daobs:parameters>
+      <!--<daobs:query>+documentType:metadata +(resourceType:dataset resourceType:series) +inspireAnnex:iii</daobs:query>-->
+      <daobs:comment>The value is based on the harvested records. It may be underestimated if the number of spatial data set does not have metadata or if error occurred during harvesting.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSv_Num" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets for all Annexes
+      </daobs:name>
+      <daobs:expression>DSv_Num1 + DSv_Num2 + DSv_Num3</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv_Num1"/>
+      <daobs:parameter id="DSv_Num2"/>
+      <daobs:parameter id="DSv_Num3"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSv_NumAllServ" numberFormat="#">
+      <daobs:name>Number of all services</daobs:name>
+      <daobs:expression>NSv_NumDiscServ + NSv_NumViewServ + NSv_NumDownlServ + NSv_NumTransfServ + NSv_NumInvkServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv_NumDiscServ"/>
+      <daobs:parameter id="NSv_NumViewServ"/>
+      <daobs:parameter id="NSv_NumDownlServ"/>
+      <daobs:parameter id="NSv_NumTransfServ"/>
+      <daobs:parameter id="NSv_NumInvkServ"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDi11" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex I having metadata
+      </daobs:name>
+      <daobs:expression>MDv11 / DSv_Num1</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv11"/>
+      <daobs:parameter id="DSv_Num1"/>
+      </daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.
+      </daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="MDi12" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex II having metadata
+      </daobs:name>
+      <daobs:expression>MDv12 / DSv_Num2</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv12"/>
+      <daobs:parameter id="DSv_Num2"/>
+      </daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.
+      </daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="MDi13" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex II having metadata
+      </daobs:name>
+      <daobs:expression>MDv13 / DSv_Num3</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv13"/>
+      <daobs:parameter id="DSv_Num3"/>
+      </daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.
+      </daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="MDi14" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial services having metadata
+      </daobs:name>
+      <daobs:expression>MDv14 / SDSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv14"/>
+      <daobs:parameter id="SDSv_Num"/>
+      </daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.
+      </daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDi1" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets or services having metadata
+      </daobs:name>
+      <daobs:expression>(MDv11 + MDv12 + MDv13 + MDv14) / (DSv_Num + SDSv_Num)</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv11"/>
+      <daobs:parameter id="MDv12"/>
+      <daobs:parameter id="MDv13"/>
+      <daobs:parameter id="MDv14"/>
+      <daobs:parameter id="DSv_Num"/>
+      <daobs:parameter id="SDSv_Num"/>
+      </daobs:parameters>
+      <daobs:comment>Using only harvesting records, it should be 1.
+      </daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDv1_DS" numberFormat="#">
+      <daobs:name xml:lang="en">Number of spatial data sets that have metadata
+      </daobs:name>
+      <daobs:expression>MDv11 + MDv12 + MDv13</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv11"/>
+      <daobs:parameter id="MDv12"/>
+      <daobs:parameter id="MDv13"/>
+      </daobs:parameters>
+      <daobs:comment> Same remark as DSv_Num.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="MDv2_DS" numberFormat="#">
+      <daobs:name>Number of spatial data sets for all Annexes that have conformant metadata
+      </daobs:name>
+      <daobs:expression>MDv21 + MDv22 + MDv23</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv21"/>
+      <daobs:parameter id="MDv22"/>
+      <daobs:parameter id="MDv23"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="MDi21" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex I with conformant metadata
+      </daobs:name>
+      <daobs:expression>MDv21 / DSv_Num1</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv21"/>
+      <daobs:parameter id="DSv_Num1"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="MDi22" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex II with conformant metadata
+      </daobs:name>
+      <daobs:expression>MDv22 / DSv_Num2</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv22"/>
+      <daobs:parameter id="DSv_Num2"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="MDi23" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets for Annex III with conformant metadata
+      </daobs:name>
+      <daobs:expression>MDv23 / DSv_Num3</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv23"/>
+      <daobs:parameter id="DSv_Num3"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="MDi24" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data services with conformant metadata
+      </daobs:name>
+      <daobs:expression>MDv24 / SDSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv24"/>
+      <daobs:parameter id="SDSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="MDi2" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of spatial data sets and services with conformant metadata
+      </daobs:name>
+      <daobs:expression>(MDv21 + MDv22 + MDv23 + MDv24) / (DSv_Num + SDSv_Num)</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="MDv21"/>
+      <daobs:parameter id="MDv22"/>
+      <daobs:parameter id="MDv23"/>
+      <daobs:parameter id="MDv24"/>
+      <daobs:parameter id="SDSv_Num"/>
+      <daobs:parameter id="DSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="DSv2" numberFormat="#">
+      <daobs:name>Number of conformant spatial data sets with conformant metadata for all Annexes
+      </daobs:name>
+      <daobs:expression>DSv21 + DSv22 + DSv23</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv21"/>
+      <daobs:parameter id="DSv22"/>
+      <daobs:parameter id="DSv23"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="DSi21" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata for Annex I
+      </daobs:name>
+      <daobs:expression>DSv21 / DSv_Num1</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv21"/>
+      <daobs:parameter id="DSv_Num1"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="DSi22" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata for Annex II
+      </daobs:name>
+      <daobs:expression>DSv22 / DSv_Num2</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv22"/>
+      <daobs:parameter id="DSv_Num2"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="DSi23" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata for Annex III
+      </daobs:name>
+      <daobs:expression>DSv23 / DSv_Num3</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv23"/>
+      <daobs:parameter id="DSv_Num3"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="DSi2" numberFormat="#.00">
+      <daobs:name>%age of conformant spatial data sets with conformant metadata for all Annexes
+      </daobs:name>
+      <daobs:expression>DSv2 / DSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv2"/>
+      <daobs:parameter id="DSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSi11" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets with metadata, for which a discovery service exists
+      </daobs:name>
+      <daobs:expression>NSv11 / DSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv11"/>
+      <daobs:parameter id="DSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="NSi12" numberFormat="#.00">
+      <daobs:name>%age of spatial data services with metadata, for which a discovery service exists
+      </daobs:name>
+      <daobs:expression>NSv12 / SDSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv12"/>
+      <daobs:parameter id="SDSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi1" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets and services with metadata, for which a discovery service exists
+      </daobs:name>
+      <daobs:expression>(NSv11 + NSv12) / (DSv_Num + SDSv_Num)</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv11"/>
+      <daobs:parameter id="NSv12"/>
+      <daobs:parameter id="DSv_Num"/>
+      <daobs:parameter id="SDSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSi21" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets for which a view service exists
+      </daobs:name>
+      <daobs:expression>NSv21 / DSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv21"/>
+      <daobs:parameter id="DSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="NSi22" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets for which a download service exists
+      </daobs:name>
+      <daobs:expression>NSv22 / DSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv22"/>
+      <daobs:parameter id="DSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+    <daobs:indicator id="NSi2" numberFormat="#.00">
+      <daobs:name>%age of spatial data sets for which a view and download service exists
+      </daobs:name>
+      <daobs:expression>NSv23 / DSv_Num</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv23"/>
+      <daobs:parameter id="DSv_Num"/>
+      </daobs:parameters>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="DSv1_ActArea" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the actual areas of all the spatial data sets of all Annexes
+      </daobs:name>
+      <daobs:expression>DSv11_ActArea + DSv12_ActArea + DSv13_ActArea</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv11_ActArea"/>
+      <daobs:parameter id="DSv12_ActArea"/>
+      <daobs:parameter id="DSv13_ActArea"/>
+      </daobs:parameters>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSv1_RelArea" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the relevant areas of all the spatial data sets of all Annexes
+      </daobs:name>
+      <daobs:expression>DSv11_RelArea + DSv12_RelArea + DSv13_RelArea</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv11_RelArea"/>
+      <daobs:parameter id="DSv12_RelArea"/>
+      <daobs:parameter id="DSv13_RelArea"/>
+      </daobs:parameters>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="DSi11" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of actual/relative area for spatial data sets for Annex I
+      </daobs:name>
+      <daobs:expression>DSv11_ActArea / DSv11_RelArea</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv11_ActArea"/>
+      <daobs:parameter id="DSv11_RelArea"/>
+      </daobs:parameters>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="DSi12" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of actual/relative area for spatial data sets for Annex II
+      </daobs:name>
+      <daobs:expression>DSv12_ActArea / DSv12_RelArea</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv12_ActArea"/>
+      <daobs:parameter id="DSv12_RelArea"/>
+      </daobs:parameters>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="DSi13" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of actual/relative area for spatial data sets for Annex III
+      </daobs:name>
+      <daobs:expression>DSv13_ActArea / DSv13_RelArea</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv13_ActArea"/>
+      <daobs:parameter id="DSv13_RelArea"/>
+      </daobs:parameters>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:indicator>
+    <daobs:indicator id="DSi1" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of actual/relative area for all spatial data sets
+      </daobs:name>
+      <daobs:expression>DSv1_ActArea / DSv1_RelArea</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="DSv1_ActArea"/>
+      <daobs:parameter id="DSv1_RelArea"/>
+      </daobs:parameters>
+      <daobs:comment>Computed from ancillary information if provided.
+      </daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSv3" numberFormat="#">
+      <daobs:name xml:lang="en">Sum of the annual number of network service request for all services
+      </daobs:name>
+      <daobs:expression>NSv31 + NSv32 + NSv33 + NSv34 + NSv35</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv31"/>
+      <daobs:parameter id="NSv32"/>
+      <daobs:parameter id="NSv33"/>
+      <daobs:parameter id="NSv34"/>
+      <daobs:parameter id="NSv35"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSv4" numberFormat="#">
+      <daobs:name xml:lang="en">Number of all conformant network services
+      </daobs:name>
+      <daobs:expression>NSv41 + NSv42 + NSv43 + NSv44 + NSv45</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv41"/>
+      <daobs:parameter id="NSv42"/>
+      <daobs:parameter id="NSv43"/>
+      <daobs:parameter id="NSv44"/>
+      <daobs:parameter id="NSv45"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSi31" numberFormat="#">
+      <daobs:name xml:lang="en">Average number of requests per discovery services
+      </daobs:name>
+      <daobs:expression>NSv31 / NSv_NumDiscServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv31"/>
+      <daobs:parameter id="NSv_NumDiscServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi32" numberFormat="#">
+      <daobs:name xml:lang="en">Average number of requests per view services
+      </daobs:name>
+      <daobs:expression>NSv32 / NSv_NumViewServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv32"/>
+      <daobs:parameter id="NSv_NumViewServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi33" numberFormat="#">
+      <daobs:name xml:lang="en">Average number of requests per download services
+      </daobs:name>
+      <daobs:expression>NSv33 / NSv_NumDownlServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv33"/>
+      <daobs:parameter id="NSv_NumDownlServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi34" numberFormat="#">
+      <daobs:name xml:lang="en">Average number of requests per transformation services
+      </daobs:name>
+      <daobs:expression>NSv34 / NSv_NumTransfServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv34"/>
+      <daobs:parameter id="NSv_NumTransfServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi35" numberFormat="#.00">
+      <daobs:name xml:lang="en">Average number of requests per invoke services
+      </daobs:name>
+      <daobs:expression>NSv35 / NSv_NumInvkServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv35"/>
+      <daobs:parameter id="NSv_NumInvkServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi3" numberFormat="#">
+      <daobs:name xml:lang="en">Average number of requests per services
+      </daobs:name>
+      <daobs:expression>NSv3 / NSv_NumAllServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv3"/>
+      <daobs:parameter id="NSv_NumAllServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+
+    <daobs:indicator id="NSi41" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant discovery services
+      </daobs:name>
+      <daobs:expression>NSv41 / NSv_NumDiscServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv41"/>
+      <daobs:parameter id="NSv_NumDiscServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi42" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant view services</daobs:name>
+      <daobs:expression>NSv42 / NSv_NumViewServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv42"/>
+      <daobs:parameter id="NSv_NumViewServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi43" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant download services
+      </daobs:name>
+      <daobs:expression>NSv43 / NSv_NumDownlServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv43"/>
+      <daobs:parameter id="NSv_NumDownlServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi44" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant transformation services
+      </daobs:name>
+      <daobs:expression>NSv44 / NSv_NumTransfServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv44"/>
+      <daobs:parameter id="NSv_NumTransfServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi45" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant invoke services</daobs:name>
+      <daobs:expression>NSv45 / NSv_NumInvkServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv45"/>
+      <daobs:parameter id="NSv_NumInvkServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+    <daobs:indicator id="NSi4" numberFormat="#.00">
+      <daobs:name xml:lang="en">%age of conformant services</daobs:name>
+      <daobs:expression>NSv4 / NSv_NumAllServ</daobs:expression>
+      <daobs:parameters> <daobs:parameter id="NSv4"/>
+      <daobs:parameter id="NSv_NumAllServ"/>
+      </daobs:parameters>
+      <daobs:comment></daobs:comment>
+    </daobs:indicator>
+
+  </daobs:indicators>
+
+</daobs:reporting>

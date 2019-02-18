@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Copyright 2014-2016 European Environment Agency
+
+    Licensed under the EUPL, Version 1.1 or – as soon
+    they will be approved by the European Commission -
+    subsequent versions of the EUPL (the "Licence");
+    You may not use this work except in compliance
+    with the Licence.
+    You may obtain a copy of the Licence at:
+
+    https://joinup.ec.europa.eu/community/eupl/og_page/eupl
+
+    Unless required by applicable law or agreed to in
+    writing, software distributed under the Licence is
+    distributed on an "AS IS" basis,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    either express or implied.
+    See the Licence for the specific language governing
+    permissions and limitations under the Licence.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:row="http://inspire.jrc.ec.europa.eu/monitoringreporting/rowdata"
+           xmlns:basictype="http://inspire.jrc.ec.europa.eu/monitoringreporting/basictype"
+           xmlns:mrmd="http://inspire.jrc.ec.europa.eu/monitoringreporting/monitoringmd"
+           xmlns:ind2019="http://inspire.jrc.ec.europa.eu/monitoringreporting/indicators2019"
+           xmlns="http://inspire.jrc.ec.europa.eu/monitoringreporting/monitoring"
+           targetNamespace="http://inspire.jrc.ec.europa.eu/monitoringreporting/monitoring">
+  <xs:import
+    namespace="http://inspire.jrc.ec.europa.eu/monitoringreporting/monitoringmd"
+    schemaLocation="../monitoring.xsd/monitoringmd.xsd"/>
+  <xs:import
+    namespace="http://inspire.jrc.ec.europa.eu/monitoringreporting/basictype"
+    schemaLocation="../monitoring.xsd/basictype.xsd"/>
+  <xs:import
+    namespace="http://inspire.jrc.ec.europa.eu/monitoringreporting/indicators"
+    schemaLocation="indicators.xsd"/>
+  <xs:import
+    namespace="http://inspire.jrc.ec.europa.eu/monitoringreporting/rowdata"
+    schemaLocation="../monitoring.xsd/rowdata.xsd"/>
+  <xs:element name="Monitoring" type="Monitoring"/>
+  <xs:complexType name="Monitoring">
+    <xs:sequence>
+      <xs:element name="documentYear" type="basictype:Date"/>
+      <xs:element name="memberState" type="basictype:CountryCode"/>
+      <xs:element name="MonitoringMD" type="mrmd:MonitoringMD"/>
+      <xs:element name="Indicators" type="ind2019:Indicators"/>
+      <xs:element name="RowData" type="row:RowData"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

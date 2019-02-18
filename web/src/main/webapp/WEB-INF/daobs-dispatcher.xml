@@ -74,6 +74,7 @@
     <property name="viewNames">
       <array>
         <value>reporting-xslt-inspire</value>
+        <value>reporting-xslt-inspire2019</value>
         <value>reporting-xslt-inspire-first-theme-only</value>
         <value>reporting-xslt-inspire2019-first-theme-only</value>
       </array>
