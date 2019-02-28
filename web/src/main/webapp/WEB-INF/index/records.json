@@ -974,6 +974,14 @@
           }
         },
         {
+          "tagPriorityDataset": {
+            "match": "tagPriorityDataset*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
           "measure": {
             "match": "measure_*",
             "mapping": {
@@ -1057,7 +1065,7 @@
         },
         "document": {
           "type" : "text",
-          "index" : "no",
+          "index" : "false",
           "doc_values": false
         },
         "documentStandard": {
@@ -1227,6 +1235,15 @@
         "tag": {
           "type": "keyword"
         },
+        "tagSpatialLevel": {
+          "type": "keyword"
+        },
+        "tagRegional": {
+          "type": "keyword"
+        },
+        "tagNational": {
+          "type": "keyword"
+        },
         "scope": {
           "type": "keyword"
         },
@@ -1239,7 +1256,7 @@
         },
         "validReport": {
           "type" : "text",
-          "index" : "no",
+          "index" : "false",
           "doc_values": false
         },
         "schemaValidDate": {

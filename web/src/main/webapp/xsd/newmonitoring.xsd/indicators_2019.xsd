@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://inspire.jrc.ec.europa.eu/monitoringreporting/indicators2019"
+           targetNamespace="http://inspire.jrc.ec.europa.eu/monitoringreporting/indicators2019"
+           elementFormDefault="unqualified">
+	<xs:complexType name="ViewDownloadAccessibility">
+		<xs:sequence>
+			<xs:element name="NSv21" type="xs:int"/>
+			<xs:element name="NSv22" type="xs:int"/>
+			<xs:element name="NSv23" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SdsConformantIndicators">
+		<xs:sequence>
+			<xs:element name="DSi21" type="xs:double"/>
+			<xs:element name="DSi22" type="xs:double"/>
+			<xs:element name="DSi23" type="xs:double"/>
+			<xs:element name="DSi2" type="xs:double"/>
+			<xs:element name="SdsConformant" type="SdsConformant"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MetadataConformityIndicators">
+		<xs:sequence>
+			<xs:element name="MDi21" type="xs:double"/>
+			<xs:element name="MDi22" type="xs:double"/>
+			<xs:element name="MDi23" type="xs:double"/>
+			<xs:element name="MDi24" type="xs:double"/>
+			<xs:element name="MDi2" type="xs:double"/>
+			<xs:element name="MetadataConformity" type="MetadataConformity"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SpatialDataAndService">
+		<xs:sequence>
+			<xs:element name="DSv_Num1" type="xs:int"/>
+			<xs:element name="DSv_Num2" type="xs:int"/>
+			<xs:element name="DSv_Num3" type="xs:int"/>
+			<xs:element name="DSv_Num" type="xs:int"/>
+			<xs:element name="SDSv_Num" type="xs:int"/>
+			<xs:element name="NSv_NumDiscServ" type="xs:int"/>
+			<xs:element name="NSv_NumViewServ" type="xs:int"/>
+			<xs:element name="NSv_NumDownServ" type="xs:int"/>
+			<xs:element name="NSv_NumInvkServ" type="xs:int"/>
+			<xs:element name="NSv_NumAllServ" type="xs:int"/>
+			<xs:element name="NSv_NumTransfServ" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ViewDownloadAccessibilityIndicators">
+		<xs:sequence>
+			<xs:element name="NSi21" type="xs:double"/>
+			<xs:element name="NSi22" type="xs:double"/>
+			<xs:element name="NSi2" type="xs:double"/>
+			<xs:element name="ViewDownloadAccessibility" type="ViewDownloadAccessibility"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MetadataExistence">
+		<xs:sequence>
+			<xs:element name="MDv11" type="xs:int"/>
+			<xs:element name="MDv12" type="xs:int"/>
+			<xs:element name="MDv13" type="xs:int"/>
+			<xs:element name="MDv1_DS" type="xs:int"/>
+			<xs:element name="MDv14" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SdsConformant">
+		<xs:sequence>
+			<xs:element name="DSv21" type="xs:int"/>
+			<xs:element name="DSv22" type="xs:int"/>
+			<xs:element name="DSv23" type="xs:int"/>
+			<xs:element name="DSv2" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DiscoveryMetadataIndicators">
+		<xs:sequence>
+			<xs:element name="NSi11" type="xs:double"/>
+			<xs:element name="NSi12" type="xs:double"/>
+			<xs:element name="NSi1" type="xs:double"/>
+			<xs:element name="DiscoveryMetadata" type="DiscoveryMetadata"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MetadataExistenceIndicators">
+		<xs:sequence>
+			<xs:element name="MDi11" type="xs:double"/>
+			<xs:element name="MDi12" type="xs:double"/>
+			<xs:element name="MDi13" type="xs:double"/>
+			<xs:element name="MDi14" type="xs:double"/>
+			<xs:element name="MDi1" type="xs:double"/>
+			<xs:element name="MetadataExistence" type="MetadataExistence"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NnConformity">
+		<xs:sequence>
+			<xs:element name="NSv41" type="xs:int"/>
+			<xs:element name="NSv42" type="xs:int"/>
+			<xs:element name="NSv43" type="xs:int"/>
+			<xs:element name="NSv44" type="xs:int"/>
+			<xs:element name="NSv45" type="xs:int"/>
+			<xs:element name="NSv4" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UseNNindicators">
+		<xs:sequence>
+			<xs:element name="NSi31" type="xs:double"/>
+			<xs:element name="NSi32" type="xs:double"/>
+			<xs:element name="NSi33" type="xs:double"/>
+			<xs:element name="NSi34" type="xs:double"/>
+			<xs:element name="NSi35" type="xs:double"/>
+			<xs:element name="NSi3" type="xs:double"/>
+			<xs:element name="UseNN" type="UseNN"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UseNN">
+		<xs:sequence>
+			<xs:element name="NSv31" type="xs:int"/>
+			<xs:element name="NSv32" type="xs:int"/>
+			<xs:element name="NSv33" type="xs:int"/>
+			<xs:element name="NSv34" type="xs:int"/>
+			<xs:element name="NSv35" type="xs:int"/>
+			<xs:element name="NSv3" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GeoCoverageIndicators">
+		<xs:sequence>
+			<xs:element name="DSi11" type="xs:double"/>
+			<xs:element name="DSi12" type="xs:double"/>
+			<xs:element name="DSi13" type="xs:double"/>
+			<xs:element name="DSi1" type="xs:double"/>
+			<xs:element name="GeoCoverageSDS" type="GeoCoverageSDS"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GeoCoverageSDS">
+		<xs:sequence>
+			<xs:element name="DSv11_ActArea" type="xs:double"/>
+			<xs:element name="DSv12_ActArea" type="xs:double"/>
+			<xs:element name="DSv13_ActArea" type="xs:double"/>
+			<xs:element name="DSv1_ActArea" type="xs:double"/>
+			<xs:element name="DSv11_RelArea" type="xs:double"/>
+			<xs:element name="DSv12_RelArea" type="xs:double"/>
+			<xs:element name="DSv13_RelArea" type="xs:double"/>
+			<xs:element name="DSv1_RelArea" type="xs:double"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NnConformityIndicators">
+		<xs:sequence>
+			<xs:element name="NSi41" type="xs:double"/>
+			<xs:element name="NSi42" type="xs:double"/>
+			<xs:element name="NSi43" type="xs:double"/>
+			<xs:element name="NSi44" type="xs:double"/>
+			<xs:element name="NSi45" type="xs:double"/>
+			<xs:element name="NSi4" type="xs:double"/>
+			<xs:element name="NnConformity" type="NnConformity"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MetadataConformity">
+		<xs:sequence>
+			<xs:element name="MDv21" type="xs:int"/>
+			<xs:element name="MDv22" type="xs:int"/>
+			<xs:element name="MDv23" type="xs:int"/>
+			<xs:element name="MDv2_DS" type="xs:int"/>
+			<xs:element name="MDv24" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Indicators">
+		<xs:sequence>
+			<xs:element name="NnConformityIndicators" type="NnConformityIndicators"/>
+			<xs:element name="GeoCoverageIndicators" type="GeoCoverageIndicators"/>
+			<xs:element name="UseNNindicators" type="UseNNindicators"/>
+			<xs:element name="MetadataExistenceIndicators" type="MetadataExistenceIndicators"/>
+			<xs:element name="DiscoveryMetadataIndicators" type="DiscoveryMetadataIndicators"/>
+			<xs:element name="ViewDownloadAccessibilityIndicators" type="ViewDownloadAccessibilityIndicators"/>
+			<xs:element name="SpatialDataAndService" type="SpatialDataAndService"/>
+			<xs:element name="MetadataConformityIndicators" type="MetadataConformityIndicators"/>
+			<xs:element name="SdsConformantIndicators" type="SdsConformantIndicators"/>
+			<xs:element name="Indicators2019" type="Indicators2019"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DiscoveryMetadata">
+		<xs:sequence>
+			<xs:element name="NSv11" type="xs:int"/>
+			<xs:element name="NSv12" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="Indicators2019">
+		<xs:sequence>
+			<xs:element name="DSi13.2019" type="xs:int"/>
+			<xs:element name="DSi14.2019" type="xs:int"/>
+			<xs:element name="DSi15.2019" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -34,7 +34,7 @@
 
 
 
-    <daobs:variable id="DSi13.2019">
+    <daobs:variable id="DSi13.2019" numberFormat="#">
       <daobs:name>The number of spatial data set metadata records that contain a keyword for priority list of spatial data sets (2019)</daobs:name>
       <daobs:query>+documentType:metadata +thesaurus:"INSPIRE priority data set"</daobs:query>
       <daobs:comment>
@@ -45,7 +45,7 @@
     </daobs:variable>
 
 
-    <daobs:variable id="DSi14.2019">
+    <daobs:variable id="DSi14.2019" numberFormat="#">
       <daobs:name>The number of spatial data set metadata records that contain a keyword "Regional" (2019)</daobs:name>
       <daobs:query>+documentType:metadata +tag:Regional</daobs:query>
       <daobs:comment>
@@ -55,7 +55,7 @@
     </daobs:variable>
 
 
-    <daobs:variable id="DSi15.2019">
+    <daobs:variable id="DSi15.2019" numberFormat="#">
       <daobs:name>The number of spatial data set metadata records that contain a keyword "National" (2019)</daobs:name>
       <daobs:query>+documentType:metadata +tag:National</daobs:query>
       <daobs:comment>

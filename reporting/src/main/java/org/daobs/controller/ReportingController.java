@@ -1325,7 +1325,8 @@ public class ReportingController {
       "inspireAnnex", "inspireTheme", "inspireConformResource",
       "recordOperatedByType", "recordOperatedByTypeview", "recordOperatedByTypedownload",
       "OrgForResource", "custodianOrgForResource", "ownerOrgForResource",
-      "pointOfContactOrgForResource", "harvesterUuid"
+      "pointOfContactOrgForResource", "harvesterUuid", "tagPriorityDataset",
+      "tagRegional", "tagNational"
   };
 
   public static final String[] SPATIALDATASERVICE_QUERY_URL = new String[]{
@@ -1333,7 +1334,8 @@ public class ReportingController {
       "inspireAnnex", "inspireTheme", "inspireConformResource",
       "serviceType", "linkUrl", "link",
       "OrgForResource", "custodianOrgForResource", "ownerOrgForResource",
-      "pointOfContactOrgForResource", "harvesterUuid"
+      "pointOfContactOrgForResource", "harvesterUuid", "tagPriorityDataset",
+      "tagRegional", "tagNational"
   };
 
   public static final List<String> BOOLEAN_PARAMETERS = new ArrayList<>(

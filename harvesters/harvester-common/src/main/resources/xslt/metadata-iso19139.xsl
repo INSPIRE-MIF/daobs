@@ -29,6 +29,8 @@
                 xmlns:srv="http://www.isotc211.org/2005/srv"
                 xmlns:gmx="http://www.isotc211.org/2005/gmx"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:gn="http://www.fao.org/geonetwork"
                 xmlns:daobs="http://daobs.org"
                 xmlns:index="java:org.daobs.index.EsRequestBean"
@@ -39,6 +41,48 @@
 
   <xsl:import href="metadata-inspire-constant.xsl"/>
   <xsl:include href="metadata-iso19139-medsea.xsl"/>
+
+
+
+  <xsl:variable name="priorityDatasets"
+                select="document('httpinspireeceuropaeumetadatacodelistPriorityDataset-PriorityDataset.rdf')"/>
+
+
+  <xsl:function name="daobs:buildPriorityDatasetPath" as="xs:string">
+    <xsl:param name="value" as="xs:string"/>
+    <xsl:param name="pathSeparator" as="xs:string"/>
+    <xsl:param name="priorityDatasets" as="node()"/>
+
+    <xsl:variable name="concept"
+                  select="$priorityDatasets//skos:Concept[skos:prefLabel = $value]"/>
+
+    <xsl:choose>
+      <xsl:when test="$concept/skos:broader">
+
+        <xsl:variable name="broader"
+                      select="$priorityDatasets//skos:Concept[@rdf:about = $concept/skos:broader/@rdf:resource]"/>
+        <xsl:value-of select="concat(
+                          daobs:buildPriorityDatasetPath(
+                              normalize-space($broader/skos:prefLabel[@xml:lang = 'en']/text()),
+                              $pathSeparator,
+                              $priorityDatasets),
+                          $pathSeparator,
+                          $value
+                          )"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$value"/>
+      </xsl:otherwise>
+    </xsl:choose>
+
+  </xsl:function>
+
+
+
+
+
+
+
 
   <xsl:template match="gmi:MI_Metadata|gmd:MD_Metadata"
                 mode="extract-uuid">
@@ -399,6 +443,8 @@
                       select="*/gmd:MD_Keywords/
                                 gmd:keyword/gco:CharacterString|
                               */gmd:MD_Keywords/
+                                gmd:keyword/gmx:Anchor|
+                              */gmd:MD_Keywords/
                                 gmd:keyword/gmd:PT_FreeText/gmd:textGroup/
                                   gmd:LocalisedCharacterString"/>
 
@@ -411,6 +457,49 @@
             <xsl:value-of select="text()"/>
           </tag>
         </xsl:for-each>
+
+        <xsl:if test="count(*/gmd:MD_Keywords[
+                gmd:thesaurusName/*/gmd:title/(gco:CharacterString|gmx:Anchor) =
+                    'INSPIRE priority data set']/gmd:keyword[* != '']) > 0">
+          <tagPriorityDataset>true</tagPriorityDataset>
+
+          <xsl:for-each select="*/gmd:MD_Keywords[
+                gmd:thesaurusName/*/gmd:title/(gco:CharacterString|gmx:Anchor) =
+                    'INSPIRE priority data set']/gmd:keyword[* != '']">
+            <xsl:variable name="priorityDatasetPath"
+                          select="daobs:buildPriorityDatasetPath(normalize-space(.), '#', $priorityDatasets)"/>
+            <tagPriorityDatasetValue>
+              <xsl:value-of select="normalize-space(.)"/>
+            </tagPriorityDatasetValue>
+            <tagPriorityDatasetPath>
+              <xsl:value-of select="$priorityDatasetPath"/>
+            </tagPriorityDatasetPath>
+
+            <xsl:for-each select="tokenize($priorityDatasetPath, '#')">
+              <xsl:element name="tagPriorityDatasetPath{position()}">
+                <xsl:value-of select="."/>
+              </xsl:element>
+            </xsl:for-each>
+          </xsl:for-each>
+        </xsl:if>
+
+
+
+        <xsl:if test="count(*/gmd:MD_Keywords/gmd:keyword[* = 'National']) > 0">
+          <tagNational>true</tagNational>
+        </xsl:if>
+        <xsl:if test="count(*/gmd:MD_Keywords/gmd:keyword[* = 'Regional']) > 0">
+          <tagRegional>true</tagRegional>
+        </xsl:if>
+        <tagSpatialLevel>
+          <xsl:value-of select="if (count(*/gmd:MD_Keywords/gmd:keyword[* = 'National']) > 0)
+                                then 'National'
+                                else if (count(*/gmd:MD_Keywords/gmd:keyword[* = 'Regional']) > 0)
+                                then 'Regional'
+                                else ''"/>
+        </tagSpatialLevel>
+
+
 
         <xsl:variable name="isOpenData">
           <xsl:for-each select="$keywords">
