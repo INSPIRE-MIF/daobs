@@ -396,7 +396,7 @@ Service metadata  http://geoportal.nipp.hr/hr/application/find#|f22afe64-49dd-49
     <daobs:scope>DE</daobs:scope>
     <daobs:folder>DE</daobs:folder>
     <daobs:name>GeoDatenKatalog.De (BKG)</daobs:name>
-    <daobs:url>http://gdk.gdi-de.org/gdi-de/srv/eng/csw</daobs:url>
+    <daobs:url>https://gdk.gdi-de.org/gdi-de/srv/eng/csw</daobs:url>
     <daobs:filter>
       <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
         <ogc:PropertyIsLike escapeChar="\" singleChar="?" wildCard="*">
