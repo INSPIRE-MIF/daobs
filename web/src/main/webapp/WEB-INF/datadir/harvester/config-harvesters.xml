@@ -400,7 +400,7 @@ Service metadata  http://geoportal.nipp.hr/hr/application/find#|f22afe64-49dd-49
     <daobs:filter>
       <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
         <ogc:PropertyIsLike escapeChar="\" singleChar="?" wildCard="*">
-          <ogc:PropertyName>AnyText</ogc:PropertyName>
+          <ogc:PropertyName>apiso:subject</ogc:PropertyName>
           <ogc:Literal>inspireidentifiziert</ogc:Literal>
         </ogc:PropertyIsLike>
       </ogc:Filter>
