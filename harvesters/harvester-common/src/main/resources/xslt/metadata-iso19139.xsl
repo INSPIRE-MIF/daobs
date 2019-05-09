@@ -570,10 +570,10 @@
             </xsl:choose>
           </xsl:variable>
 
-          <xsl:if test="normalize-space($key) != ''">
-            <!-- Index keyword characterString including multilingual ones
+          <!--<xsl:if test="normalize-space($key) != ''">
+            &lt;!&ndash; Index keyword characterString including multilingual ones
              and element like gmx:Anchor including the href attribute
-             which may contains keyword identifier. -->
+             which may contains keyword identifier. &ndash;&gt;
             <xsl:for-each select="*[normalize-space() != '']|
                                   */@xlink:href[normalize-space() != '']|
                                   gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[normalize-space() != '']">
@@ -581,7 +581,7 @@
                 <xsl:value-of select="normalize-space(.)"/>
               </xsl:element>
             </xsl:for-each>
-          </xsl:if>
+          </xsl:if>-->
         </xsl:for-each>
 
 
