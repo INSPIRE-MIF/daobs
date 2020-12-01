@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/INSPIRE-MIF/daobs.svg?branch=daobs-1.0.x)](https://travis-ci.org/INSPIRE-MIF/daobs)
 
+# Version 2.1
+
+This version is a read only version of the Daobs project which runs on Elasticsearch 6.8.13.
+
 
 # Overview
 
@@ -36,8 +40,8 @@ The guide for user installing and configuring the application.
 * Git
 * Java 8
 * Maven 3.1.0+
-* Elasticsearch 5.x
-* Kibana 5.x
+* Elasticsearch 6.8.13
+* Kibana 6.8.13
 * A modern web browser. 
 
 

@@ -438,21 +438,6 @@
     </plugins>
   </build>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.5</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.9</version>
-      </plugin>
-    </plugins>
-  </reporting>
-
   <modules>
     <module>core</module>
     <module>logging-deps</module>
@@ -539,10 +524,9 @@
     <!-- Define one or more groups allowed for ES authorization -->
     <ldap.groups.allowed>"extranet","extranet-inspire-reporter","extranet-inspire-dashboard"</ldap.groups.allowed>
 
-    <lucene.version>6.6.1</lucene.version>
+    <lucene.version>7.7.3</lucene.version>
 
-    <es.version>5.6.7</es.version>
-    <es.version.md5>244ec9fbd89e817302329b696842f5a1</es.version.md5>
+    <es.version>6.8.13</es.version>
     <ror.version>1.16.16_es${es.version}</ror.version>
     <es.port>9200</es.port>
     <es.host>localhost</es.host>
@@ -569,7 +553,6 @@
     <es.scrollSize>100</es.scrollSize>
 
 
-    <kb.version.sha512>92c3a8e912d98835c66b3de95821150d184d04bbfd0e9b60d1dcce627158fa361476b9ac8c47ac436dd3973992efab806072a5d306becfa12f382c556ee2bf89</kb.version.sha512>
     <kb.protocol>${es.protocol}</kb.protocol>
     <kb.port>5601</kb.port>
     <kb.host>localhost</kb.host>

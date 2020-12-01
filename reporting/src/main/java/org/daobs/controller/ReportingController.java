@@ -40,7 +40,9 @@ import org.elasticsearch.ResourceNotFoundException;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.support.WriteRequest;
+import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.jdom2.Element;
 import org.jdom2.transform.JDOMResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1164,7 +1166,7 @@ public class ReportingController {
 
 
             bulkRequestBuilder.add(
-                client.getClient().prepareIndex("indicators", "indicators", id).setSource(json)
+                client.getClient().prepareIndex("indicators", "indicators", id).setSource(json, XContentType.JSON)
             );
             counter++;
 
@@ -1267,6 +1269,14 @@ public class ReportingController {
     }
   }
 
+  private boolean isArrayField(List<Element> children, String name) {
+    long count = children
+      .stream()
+      .filter(e -> name.equals(e.getAttributeValue("name")))
+      .count();
+
+    return count > 1;
+  }
 
   /**
    * Convert Element to JSON.
@@ -1276,16 +1286,39 @@ public class ReportingController {
       XContentBuilder xcb = jsonBuilder()
           .startObject();
 
-      List childNodes = xml.getChildren();
+      List<Element> childNodes = xml.getChildren();
+      List<String> arrayNodes = new ArrayList<>();
 
       if (childNodes != null) {
         childNodes.forEach(o -> {
           if (o instanceof Element) {
             Element element = (Element) o;
+            String name = element.getAttributeValue("name");
+            boolean isArray = isArrayField(childNodes, name);
             try {
-              xcb.field(
-                  element.getAttributeValue("name"),
+              if (isArray) {
+                if (!arrayNodes.contains(name)) {
+                  arrayNodes.add(name);
+                  xcb.startArray(name);
+                  childNodes.forEach(s -> {
+                    if (s instanceof Element) {
+                      Element sibling = (Element) s;
+                      if (name.equals(sibling.getAttributeValue("name"))) {
+                        try {
+                          xcb.value(sibling.getTextNormalize());
+                        } catch (IOException ioException) {
+                          ioException.printStackTrace();
+                        }
+                      }
+                    }
+                  });
+                  xcb.endArray();
+                }
+              } else {
+                xcb.field(
+                  name,
                   element.getTextNormalize());
+              }
             } catch (IOException e1) {
               e1.printStackTrace();
             }
@@ -1293,7 +1326,7 @@ public class ReportingController {
         });
       }
       xcb.endObject();
-      return xcb.string();
+      return Strings.toString(xcb);
     } catch (IOException ex) {
       ex.printStackTrace();
     }

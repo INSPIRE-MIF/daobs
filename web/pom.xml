@@ -470,7 +470,7 @@
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.3.11.v20160721</version>
+        <version>9.4.27.v20200227</version>
         <configuration>
           <contextXml>${basedir}/jetty-context.xml</contextXml>
           <webAppSourceDirectory>${project.build.directory}/${war.name}</webAppSourceDirectory>

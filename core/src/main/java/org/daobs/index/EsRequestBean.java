@@ -28,17 +28,12 @@ import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
-import org.elasticsearch.action.fieldstats.FieldStatsResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequestBuilder;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.common.xcontent.NamedXContentRegistry;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.common.xcontent.XContentParser;
-import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.common.xcontent.*;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -91,7 +86,7 @@ public class EsRequestBean {
         XContentBuilder builder = XContentFactory.jsonBuilder().prettyPrint();
         try (XContentParser p = XContentFactory
             .xContent(XContentType.JSON)
-            .createParser(NamedXContentRegistry.EMPTY, json)) {
+            .createParser(NamedXContentRegistry.EMPTY, null, json)) {
           builder.copyCurrentStructure(p);
         }
         client.getClient().admin().indices().prepareCreate(indexName)
@@ -239,10 +234,10 @@ public class EsRequestBean {
     arrayFields.add("inspireConformResource");
     for (SearchHit h : hits.getHits()) {
       Node doc = xmlDoc.createElement("doc");
-      Iterator<String> iterator = h.getSource().keySet().iterator();
+      Iterator<String> iterator = h.getSourceAsMap().keySet().iterator();
       while (iterator.hasNext()) {
         String key = iterator.next();
-        Object values = h.getSource().get(key);
+        Object values = h.getSourceAsMap().get(key);
 
         boolean isArray = arrayFields.contains(key);
         boolean isBoolean = booleanFields.contains(key);
@@ -326,23 +321,25 @@ public class EsRequestBean {
       String collection, String query,
       String[] filterQuery, String statsField, String stats) {
 
-    EsClientBean client = EsClientBean.get();
-    try {
-      FieldStatsResponse response = client.getClient()
-          .prepareFieldStats()
-          .setFields(statsField)
-          .setIndices(collection == null ? client.getDefaultIndex() : collection)
-          //        .setQuery(QueryBuilders.queryStringQuery(query))
-          //        .setPostFilter(QueryBuilders.simpleQueryStringQuery(filterQuery[0]))
-          .execute()
-          .actionGet();
-      // TODO: Subset to filter - We should probably use aggregates
+    throw new UnsupportedOperationException("Field statistics are not available.");
 
-      // TODO: Return correct stat info
-      return (double)response.getAllFieldStats().get(statsField).getMaxValue();
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
+    //    EsClientBean client = EsClientBean.get();
+    //    try {
+    //      FieldStatsResponse response = client.getClient()
+    //          .prepareFieldStats()
+    //          .setFields(statsField)
+    //          .setIndices(collection == null ? client.getDefaultIndex() : collection)
+    //          //        .setQuery(QueryBuilders.queryStringQuery(query))
+    //          //        .setPostFilter(QueryBuilders.simpleQueryStringQuery(filterQuery[0]))
+    //          .execute()
+    //          .actionGet();
+    //      // TODO: Subset to filter - We should probably use aggregates
+    //
+    //      // TODO: Return correct stat info
+    //      return (double)response.getAllFieldStats().get(statsField).getMaxValue();
+    //    } catch (Exception ex) {
+    //      ex.printStackTrace();
+    //    }
 
     //        if ("min".equals(stats)) {
     //          return (Double) fieldStatsInfo.getMin();
@@ -361,7 +358,7 @@ public class EsRequestBean {
     //        } else if ("countDistinct".equals(stats)) {
     //          return fieldStatsInfo.getCountDistinct().doubleValue();
     //        }
-    return null;
+    //    return null;
   }
 
   @Deprecated
