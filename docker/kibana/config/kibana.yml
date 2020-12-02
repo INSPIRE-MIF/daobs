@@ -18,7 +18,7 @@ regionmap:
           - name: "ISO_A3"
             description: "ISO 3 letters code"
 
-elasticsearch.url: http://elasticsearch:9200
+elasticsearch.url: http://localhost:9200
 
 xpack.security.enabled: false
 xpack.monitoring.enabled: false
@@ -32,4 +32,4 @@ server.ssl.key: /etc/pki/tls/private/server.key
 #elasticsearch.ssl.certificateAuthorities: [ "/path/to/your/ca/cacert.pem" ]
 
 elasticsearch.username: kibana_server
-elasticsearch.password: KIBANA_SRV_PASSWORD
+elasticsearch.password: password

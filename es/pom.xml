@@ -37,22 +37,6 @@
             </configuration>
           </execution>
           <execution>
-            <id>copy-ror-to-docker-folder</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.basedir}/../docker/elasticsearch</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>${project.basedir}/readonlyrest</directory>
-                  <filtering>false</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
             <id>copy-es-config-to-es-folder</id>
             <phase>process-resources</phase>
             <goals>
@@ -65,7 +49,6 @@
                   <directory>${project.basedir}/config</directory>
                   <includes>
                     <include>elasticsearch.yml</include>
-                    <include>readonlyrest.yml</include>
                   </includes>
                   <filtering>true</filtering>
                 </resource>
@@ -114,33 +97,6 @@
       </build>
     </profile>
     <profile>
-      <id>es-readonlyrest-install</id>
-      <activation>
-        <property>
-          <name>es-readonlyrest-install</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.8</version>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <target>
-                <ant antfile="build.xml">
-                  <target name="installReadOnlyRest"/>
-                </ant>
-              </target>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>es-start</id>
       <activation>
         <property>
@@ -179,6 +135,5 @@
     <es.executable>elasticsearch</es.executable>
     <es.plugin.executable>elasticsearch-plugin</es.plugin.executable>
     <file.protocol>file://</file.protocol>
-    <readonlyrest.filename>readonlyrest-${ror.version}.zip</readonlyrest.filename>
   </properties>
 </project>

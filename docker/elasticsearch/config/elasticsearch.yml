@@ -26,5 +26,6 @@ discovery.zen.minimum_master_nodes: MINIMUM_MASTER_NODE
 #
 node.data: NODE_DATA
 node.master: NODE_MASTER
+# discovery.type: single-node
 
 

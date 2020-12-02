@@ -13,7 +13,6 @@ Start ES.
 Maven could take care of the installation steps:
 * download
 * initialize collection
-* Install Readonlyrest plugin
 * start
 
 Use the following commands:
@@ -21,7 +20,6 @@ Use the following commands:
 ```bash
 cd es
 mvn install -Pes-download
-mvn antrun:run -Des-readonlyrest-install
 mvn exec:exec -Des-start
 ```
 

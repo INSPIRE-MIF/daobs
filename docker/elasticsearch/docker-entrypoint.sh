@@ -8,7 +8,6 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 cp /elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
-cp /readonlyrest.yml /usr/share/elasticsearch/config/readonlyrest.yml
 
 # Replace node name and discovery hosts
 sed "s#NODE_NAME#$NODE_NAME#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
@@ -16,9 +15,6 @@ sed "s#NODE_MASTER#$NODE_MASTER#g" -i /usr/share/elasticsearch/config/elasticsea
 sed "s#MINIMUM_MASTER_NODE#$MINIMUM_MASTER_NODE#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
 sed "s#NODE_DATA#$NODE_DATA#g" -i /usr/share/elasticsearch/config/elasticsearch.yml
 #sed "s#debug#info#g" -i /usr/share/elasticsearch/config/log4j2.properties
-
-sed "s#KIBANA_SRV_PASSWORD#$KIBANA_SRV_PASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
-sed "s#ADMINPASSWORD#$ADMINPASSWORD#g" -i /usr/share/elasticsearch/config/readonlyrest.yml
 
 if [ -z "$DISCOVERY_ZEN" ]
 then
@@ -43,15 +39,6 @@ then
   # that cgroup statistics are available for the container this process
   # will run in.
   export ES_JAVA_OPTS="-Des.cgroups.hierarchy.override=/ $ES_JAVA_OPTS"
-
-  cat /readonlyrest.yml >> /usr/share/elasticsearch/config/elasticsearch.yml
-
-  export TESTREADONLYREST=$(/usr/share/elasticsearch/bin/elasticsearch-plugin list | grep readonlyrest)
-  if [ -z "$TESTREADONLYREST" ]
-  then
-    bin/elasticsearch-plugin install file:/usr/share/elasticsearch/readonlyrest.zip
-  fi
-  export TESTREADONLYREST=''
 
   export SERVERNAME=localhost
 
