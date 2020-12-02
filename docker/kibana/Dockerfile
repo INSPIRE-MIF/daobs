@@ -1,4 +1,4 @@
-FROM docker.elastic.co/kibana/kibana:5.6.7
+FROM docker.elastic.co/kibana/kibana:6.8.13
 
 MAINTAINER doublebyte <joana.simoes@geocat.net>
 

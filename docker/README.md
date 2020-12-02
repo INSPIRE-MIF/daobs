@@ -50,6 +50,7 @@ mvn clean install -Peea-inspire-official -Drelax -DskipTests
 
 # Build images: this will build & tag the sandbox-dashboard, official-dashboard, elasticsearch, kibana, nginx & cerebro images
 cd docker
+echo $(git ls-remote git://github.com/INSPIRE-MIF/daobs.git |    grep -v "refs/heads/2.0.x-readonly" | grep refs/heads/2.0.x | cut -f 1) > VERSION
 docker-compose -f docker-compose-build.yml build
 
 # Start compositions
