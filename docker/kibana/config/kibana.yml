@@ -18,7 +18,7 @@ regionmap:
           - name: "ISO_A3"
             description: "ISO 3 letters code"
 
-elasticsearch.url: http://elasticsearch:9200
+elasticsearch.url: http://nginx:9200
 
 xpack.security.enabled: false
 xpack.monitoring.enabled: false

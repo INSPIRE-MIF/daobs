@@ -675,7 +675,7 @@ node.master: NODE_MASTER]]></es.single-node.discovery>
         <authentication.mode>ba</authentication.mode>
         <etf.installation.path>/var/local/etf</etf.installation.path>
         <data.dir>/daobs-data-dir/datadir</data.dir>
-        <es.host>elasticsearch</es.host>
+        <es.host>nginx</es.host>
         <es.discovery.zen.minimum_master_nodes>MINIMUM_MASTER_NODE</es.discovery.zen.minimum_master_nodes>
         <es.single-node.discovery><![CDATA[
 node.data: NODE_DATA

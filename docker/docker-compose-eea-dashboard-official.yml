@@ -30,11 +30,6 @@ services:
       - network-dashboard-official
     container_name: official-es2
 
-  cerebro:
-    networks:
-      - network-dashboard-official
-    container_name: official-cerebro
-
   kibana:
     #environment:
     #  - REGIONMAP_LAYERS_URL=/official/assets/data/europe.geojson
@@ -45,8 +40,9 @@ services:
 
   nginx:
     ports:
-      #- "80:80"
+#      - "80:80"
       - "443:443"
+      - "9200:9200"
     environment:
       - DASHBOARD_URL=http://dashboard:8080
       - ES_URL=http://official-es0:9200

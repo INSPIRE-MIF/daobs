@@ -7,6 +7,8 @@ if [ "${1:0:1}" = '-' ]; then
   set -- elasticsearch "$@"
 fi
 
+
+
 cp /elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 
 # Replace node name and discovery hosts
