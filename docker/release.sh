@@ -4,7 +4,7 @@
 #git pull
 
 # Write githash into file
-echo $(git ls-remote git://github.com/INSPIRE-MIF/daobs.git |    grep -v "refs/heads/2.0.x-security" | grep refs/heads/2.0.x | cut -f 1) > VERSION
+echo $(git log --format="%H" -n 1) > VERSION
 
 # copy version to subdirs
 cp VERSION ./cerebro/
