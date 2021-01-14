@@ -44,11 +44,11 @@
 
         $scope.dashboardBaseURL = cfg.SERVICES.dashboardBaseURL;
         $http.post(cfg.SERVICES.esdashboardCore +
-          '/dashboard/_search?size=1000', {
+          '/_search?size=1000', {
           "query" : {
             "bool" : {
               "filter" : {
-                "term" : {"_type": "dashboard"}
+                "term" : {"type": "dashboard"}
               }
             }
           // },
