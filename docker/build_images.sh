@@ -5,7 +5,7 @@ set -ex
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-echo $(git ls-remote git://github.com/INSPIRE-MIF/daobs.git |    grep -v "refs/heads/2.0.x-readonly" | grep refs/heads/2.0.x | cut -f 1) > VERSION
+echo $(git log --format="%H" -n 1) > VERSION
 # copy version to subdirs
 cp VERSION ./cerebro/
 cp VERSION ./kibana
