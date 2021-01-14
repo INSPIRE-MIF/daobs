@@ -63,7 +63,7 @@
             data-ng-repeat="d in dashboards | filter:startsWithInspire | orderBy:sortByTitle">
           <a href=""
              data-ng-href="#/dashboard?url={{(dashboardBaseURL + '#/dashboard/' + d._id + dashboardParams + (getUser().authenticated ? '' : '&embed')) | encodeURIComponent}}">
-            {{d._source.title}}
+            {{d._source.dashboard.title}}
           </a>
         </li>
       </ul>
@@ -78,7 +78,7 @@
             data-ng-repeat="d in dashboards | filter:notStartsWithInspire | orderBy:sortByTitle">
           <a href=""
              data-ng-href="#/dashboard?url={{(dashboardBaseURL + '#/dashboard/' + d._id + dashboardParams + (getUser().authenticated ? '' : '&embed')) | encodeURIComponent}}">
-          {{d._source.title}}
+          {{d._source.dashboard.title}}
           </a>
         </li>
       </ul>

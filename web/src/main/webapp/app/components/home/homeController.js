@@ -76,7 +76,7 @@
       };
 
       $scope.sortByTitle = function(d) {
-        return d._source.title;
+        return d._source.dashboard.title;
       };
 
       // TODO: Move to dashboard service
@@ -91,7 +91,7 @@
       };
 
       $scope.startsWithInspire = function (e) {
-        var lowerStr = (e._source.title + "").toLowerCase();
+        var lowerStr = (e._source.dashboard.title + "").toLowerCase();
         return lowerStr.startsWith('inspire');
       };
       $scope.notStartsWithInspire = function (e) {
