@@ -43,14 +43,6 @@ then
   export ES_JAVA_OPTS="-Des.cgroups.hierarchy.override=/ $ES_JAVA_OPTS"
 
   export SERVERNAME=localhost
-
-  rm -rf /tmp/ssl
-  mkdir -p /tmp/ssl
-  keytool -genkey -keyalg RSA -noprompt -alias $SERVERNAME -dname "CN=$SERVERNAME,OU=IDM,O=EEA,L=IDM1,C=DK" -keystore /tmp/ssl/self.jks -storepass $KIBANA_SRV_PASSWORD -keypass $KIBANA_SRV_PASSWORD
-  keytool -keystore  /tmp/ssl/self.jks -alias $SERVERNAME -export -file  /tmp/ssl/self.cert
-
-  chmod 400 /tmp/ssl/*
-
 fi
 
 # Drop root privileges if we are running elasticsearch
