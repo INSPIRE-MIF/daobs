@@ -541,7 +541,7 @@
 
     <lucene.version>6.6.1</lucene.version>
 
-    <es.version>5.6.7</es.version>
+    <es.version>6.8.15</es.version>
     <es.version.md5>244ec9fbd89e817302329b696842f5a1</es.version.md5>
     <ror.version>1.16.16_es${es.version}</ror.version>
     <es.port>9200</es.port>
